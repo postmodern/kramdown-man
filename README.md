@@ -31,7 +31,7 @@ Define rake tasks to render all `*.md` files within the `man/` directory:
 
 ## Requirements
 
-* [kramdown] ~> 1.0.0
+* [kramdown] ~> 1.0
 
 ## Install
 
