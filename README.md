@@ -39,7 +39,7 @@ Define rake tasks to render all `*.md` files within the `man/` directory:
 
 ## Copyright
 
-Copyright (c) 2013 Postmodern
+Copyright (c) 2013 Hal Brodigan
 
 See {file:LICENSE.txt} for details.
 
