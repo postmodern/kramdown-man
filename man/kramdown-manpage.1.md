@@ -1,6 +1,10 @@
 # example 1 "April 2013" Example "User Manuals"
 
-## SYNOPSIS
+## DESCRIPTION
+
+A [Kramdown][kramdown] convert for converting Markdown files into man pages.
+
+## EXAMPLE
 
     require 'kramdown'
     require 'kramdown/manpage'
@@ -9,13 +13,9 @@
     File.write('man/kramdown-manpage.1',doc.to_manpage)
     system 'man', 'man/kramdown-manpage.1'
 
-## DESCRIPTION
+## SYNTAX
 
-A [Kramdown][kramdown] convert for converting Markdown files into man pages.
-
-## Syntax
-
-### Lists
+### LISTS
 
 * one
 * two
@@ -29,16 +29,16 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 
    extra paragraph
 
-### Horizontal Rule
+### HORIZONTAL RULE
 
 -------------------------------------------------------------------------------
 
-### Blockquotes
+### BLOCKQUOTES
 
 > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
 > -- Antoine de Saint-Exupéry
 
-### Code blocks
+### CODE BLOCKS
 
     #include <stdio.h>
 
