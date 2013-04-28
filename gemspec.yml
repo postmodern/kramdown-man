@@ -1,0 +1,15 @@
+name: kramdown-manpage
+summary: Converts markdown to man pages
+description: A Kramdown converter for converting Markdown files into man pages.
+license: MIT
+authors: Postmodern
+email: postmodern.mod3@gmail.com
+homepage: https://github.com/postmodern/kramdown-manpage#readme
+
+dependencies:
+  kramdown: ~> 1.0.0
+
+development_dependencies:
+  rspec: ~> 2.4
+  rubygems-tasks: ~> 0.2
+  yard: ~> 0.8
