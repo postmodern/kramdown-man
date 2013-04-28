@@ -47,7 +47,7 @@ module Kramdown
       end
 
       def convert_hr(hr)
-        ".br"
+        "\n.ti 0\n\\l'\\n(.lu'\n"
       end
 
       def convert_ul(ul)
