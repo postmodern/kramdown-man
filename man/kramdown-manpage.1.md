@@ -29,6 +29,10 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 
    extra paragraph
 
+### Horizontal Rule
+
+-------------------------------------------------------------------------------
+
 ### Blockquotes
 
 > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
