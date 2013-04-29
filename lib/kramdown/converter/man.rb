@@ -173,7 +173,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_hr(hr)
-        "\n.ti 0\n\\l'\\n(.lu'\n"
+        ".ti 0\n\\l'\\n(.lu'"
       end
 
       #
