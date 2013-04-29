@@ -8,9 +8,9 @@ require 'kramdown/man'
 
 case ARGV[0]
 when '-h', '--help'
-  $stderr.puts "usage: #{File.dirname($0)} <INPUT.md >OUTPUT"
+  warn "usage: #{File.dirname($0)} <INPUT.md >OUTPUT"
   exit
 end
 
-doc = Kramdown::Document.new($stdin.read)
+doc = Kramdown::Document.new(ARGF.read)
 puts doc.to_man
