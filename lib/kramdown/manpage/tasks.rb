@@ -5,6 +5,10 @@ require 'rake/tasklib'
 
 module Kramdown
   module Manpage
+    #
+    # Defines a `man` rake task that generates man-pages within the `man/`
+    # directory from `.md` files.
+    #
     class Tasks < Rake::TaskLib
 
       # Markdown file glob pattern
