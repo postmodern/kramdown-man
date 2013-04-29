@@ -39,7 +39,7 @@ Render a man page from a markdown file:
 
     system 'man', 'man/kramdown-man.1'
 
-Define a `man` and file rake tasks which render all `*.md` files within the
+Define a `man` and file tasks which render all `*.md` files within the
 `man/` directory:
 
     require 'kramdown/man/tasks'
