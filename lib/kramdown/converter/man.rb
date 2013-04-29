@@ -304,7 +304,7 @@ module Kramdown
       #
       def convert_comment(comment)
         comment.value.lines.map { |line|
-          "\\\" #{line}"
+          ".\\\" #{line}"
         }.join("\n")
       end
 
