@@ -28,7 +28,7 @@ module Kramdown
       def initialize(options={})
         @options  = options
         @markdown = FileList[FILES]
-        @manpages = @markdown.pathmap('%X')
+        @man_pages = @markdown.pathmap('%X')
 
         define
       end
@@ -40,28 +40,28 @@ module Kramdown
       #
       def define
         desc 'Build UNIX manual pages from Markdown files in man/'
-        task 'man' => @manpages
+        task 'man' => @man_pages
 
-        @markdown.zip(@manpages).each do |markdown,manpage|
-          file(manpage => markdown) do
-            render(markdown,manpage)
+        @markdown.zip(@man_pages).each do |markdown,man_page|
+          file(man_page => markdown) do
+            render(markdown,man_page)
           end
         end
       end
 
       #
-      # Renders a manpage from a markdown file.
+      # Renders a man_page from a markdown file.
       #
       # @param [String] markdown
       #   The path to the input markdown file.
       #
-      # @param [String] manpage
-      #   The path to the output manpage file.
+      # @param [String] man_page
+      #   The path to the output man_page file.
       #
-      def render(markdown,manpage)
+      def render(markdown,man_page)
         doc = Kramdown::Document.new(File.read(markdown),@options)
 
-        File.open(manpage,'w') do |output|
+        File.open(man_page,'w') do |output|
           output.write doc.to_man
         end
       end
