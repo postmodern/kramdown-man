@@ -192,24 +192,6 @@ module Kramdown
       end
 
       #
-      # Converts a `kd:ol` element.
-      #
-      # @param [Kramdown::Element] ol
-      #   A `kd:ol` element.
-      #
-      # @return [String]
-      #   The roff output.
-      #
-      def convert_ol(ol)
-        @ol_index += 1
-
-        header  = ".nr step#{@ol_index} 0 1"
-        content = ol.children.map { |li| convert_ol_li(li) }.join("\n")
-
-        return "#{header}\n.RS\n#{content}\n.RE"
-      end
-
-      #
       # Converts a `kd:li` element within a `kd:ul` list.
       #
       # @param [Kramdown::Element] li
@@ -226,6 +208,24 @@ module Kramdown
           else               ".IP \\( 2\n#{content}"
           end
         }.join("\n")
+      end
+
+      #
+      # Converts a `kd:ol` element.
+      #
+      # @param [Kramdown::Element] ol
+      #   A `kd:ol` element.
+      #
+      # @return [String]
+      #   The roff output.
+      #
+      def convert_ol(ol)
+        @ol_index += 1
+
+        header  = ".nr step#{@ol_index} 0 1"
+        content = ol.children.map { |li| convert_ol_li(li) }.join("\n")
+
+        return "#{header}\n.RS\n#{content}\n.RE"
       end
 
       #
