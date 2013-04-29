@@ -90,7 +90,9 @@ module Kramdown
       end
 
       def convert_blockquote(blockquote)
-        ".PP\n.RS\n#{convert_children(blockquote.children)}\n.RE"
+        blockquote.children.select { |child| child.type == :p }.map { |child|
+          ".PP\n.RS\n#{convert_children(child.children)}\n.RE"
+        }.join("\n")
       end
 
       def convert_codeblock(codeblock)
