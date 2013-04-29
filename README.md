@@ -44,6 +44,12 @@ Define rake tasks to render all `*.md` files within the `man/` directory:
 
     $ gem install kramdown-manpage
 
+## Alternatives
+
+* [Redcarpet::Render::ManPage](http://rubydoc.info/gems/redcarpet/Redcarpet/Render/ManPage)
+* [ronn](https://github.com/rtomayko/ronn#readme)
+* [md2man](https://github.com/sunaku/md2man#readme)
+
 ## Copyright
 
 Copyright (c) 2013 Hal Brodigan
