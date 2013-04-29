@@ -32,6 +32,10 @@ module Kramdown
         send(method,el) if respond_to?(method)
       end
 
+      def convert_blank(el)
+        '.br'
+      end
+
       def convert_text(el)
         el.value
       end
