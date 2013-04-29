@@ -33,7 +33,7 @@ module Kramdown
       end
 
       def convert_blank(el)
-        '.br'
+        '.LP'
       end
 
       def convert_text(el)
@@ -90,9 +90,14 @@ module Kramdown
       end
 
       def convert_blockquote(blockquote)
-        blockquote.children.select { |child| child.type == :p }.map { |child|
-          ".PP\n.RS\n#{convert_children(child.children)}\n.RE"
+        content = blockquote.children.map { |child|
+          case child.type
+          when :p then convert_children(child.children)
+          else         convert_element(child)
+          end
         }.join("\n")
+
+        return ".PP\n.RS\n#{content}\n.RE"
       end
 
       def convert_codeblock(codeblock)
