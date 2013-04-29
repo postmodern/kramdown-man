@@ -11,7 +11,7 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 
 ## Features
 
-* Converts markdown to [roff].
+* Converts markdown to [roff]:
   * Supports codespans, emphasis and strong fonts.
   * Supports normal and tagged paragraphs.
   * Supports bullet and dashed lists.
