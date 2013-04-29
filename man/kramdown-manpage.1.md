@@ -15,6 +15,14 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 
 ## SYNTAX
 
+### FORMATTING
+
+`code`
+
+*emphasis*
+
+**strong**
+
 ### PARAGRAPHS
 
 Normal paragraph.
