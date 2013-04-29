@@ -37,7 +37,7 @@ module Kramdown
       end
 
       def convert_text(el)
-        el.value
+        escape(el.value)
       end
 
       def convert_header(el)
