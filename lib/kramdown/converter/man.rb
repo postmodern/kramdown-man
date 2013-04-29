@@ -202,12 +202,14 @@ module Kramdown
       #
       def convert_ul_li(li)
         li.children.each_with_index.map { |child,index|
-          content = convert_children(child.children)
+          if child.type == :p
+            content = convert_children(child.children)
 
-          if index == 0 then ".IP \\(bu 2\n#{content}"
-          else               ".IP \\( 2\n#{content}"
+            if index == 0 then ".IP \\(bu 2\n#{content}"
+            else               ".IP \\( 2\n#{content}"
+            end
           end
-        }.join("\n")
+        }.compact.join("\n")
       end
 
       #
@@ -239,12 +241,14 @@ module Kramdown
       #
       def convert_ol_li(li)
         li.children.each_with_index.map { |child,index|
-          content = convert_children(child.children)
+          if child.type == :p
+            content = convert_children(child.children)
 
-          if index == 0 then ".IP \\n+[step#{@ol_index}]\n#{content}"
-          else               ".IP \\n\n#{content}"
+            if index == 0 then ".IP \\n+[step#{@ol_index}]\n#{content}"
+            else               ".IP \\n\n#{content}"
+            end
           end
-        }.join("\n")
+        }.compact.join("\n")
       end
 
       #
