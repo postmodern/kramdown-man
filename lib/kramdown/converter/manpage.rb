@@ -104,6 +104,12 @@ module Kramdown
         ".nf\n#{escape(codeblock.value)}\n.fi"
       end
 
+      def convert_comment(comment)
+        comment.value.lines.map { |line|
+          "\\\" #{line}"
+        }.join("\n")
+      end
+
       def convert_p(p)
         children = p.children
 
