@@ -34,7 +34,7 @@ Render a manpage from a markdown file:
 Define rake tasks to render all `*.md` files within the `man/` directory:
 
     require 'kramdown/markdown/tasks'
-    Kramdown::Markdown::Tasks.new
+    Kramdown::Manpage::Tasks.new
 
 ## Requirements
 
