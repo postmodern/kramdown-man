@@ -26,8 +26,8 @@ module Kramdown
       #   Additional options.
       #
       def initialize(options={})
-        @options  = options
-        @markdown = FileList[FILES]
+        @options   = options
+        @markdown  = FileList[FILES]
         @man_pages = @markdown.pathmap('%X')
 
         define
