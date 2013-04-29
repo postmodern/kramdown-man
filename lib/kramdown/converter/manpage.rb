@@ -126,7 +126,7 @@ module Kramdown
       end
 
       def convert_strong(strong)
-        "\\fB#{convert_children(em.children)}\\fP"
+        "\\fB#{convert_children(strong.children)}\\fP"
       end
 
       def convert_codespan(codespan)
