@@ -7,11 +7,11 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 ## EXAMPLE
 
     require 'kramdown'
-    require 'kramdown/manpage'
+    require 'kramdown/man'
 
-    doc = Kramdown::Document.new(File.read('man/kramdown-manpage.1.md'))
-    File.write('man/kramdown-manpage.1',doc.to_manpage)
-    system 'man', 'man/kramdown-manpage.1'
+    doc = Kramdown::Document.new(File.read('man/kramdown-man.1.md'))
+    File.write('man/kramdown-man.1',doc.to_man)
+    system 'man', 'man/kramdown-man.1'
 
 ## SYNTAX
 

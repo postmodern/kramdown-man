@@ -1,10 +1,10 @@
 require 'kramdown'
-require 'kramdown/converter/manpage'
+require 'kramdown/converter/man'
 
 require 'rake/tasklib'
 
 module Kramdown
-  module Manpage
+  module Man
     #
     # Defines a `man` rake task that generates man-pages within the `man/`
     # directory from `.md` files.
@@ -62,7 +62,7 @@ module Kramdown
         doc = Kramdown::Document.new(File.read(markdown),@options)
 
         File.open(manpage,'w') do |output|
-          output.write doc.to_manpage
+          output.write doc.to_man
         end
       end
     end

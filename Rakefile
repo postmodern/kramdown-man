@@ -41,5 +41,5 @@ task :doc => :yard
 
 $LOAD_PATH.unshift(File.expand_path('lib'))
 
-require 'kramdown/manpage/tasks'
-Kramdown::Manpage::Tasks.new
+require 'kramdown/man/tasks'
+Kramdown::Man::Tasks.new

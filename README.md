@@ -1,8 +1,8 @@
-# kramdown-manpage
+# kramdown-man
 
-* [Homepage](https://github.com/postmodern/kramdown-manpage#readme)
-* [Issues](https://github.com/postmodern/kramdown-manpage/issues)
-* [Documentation](http://rubydoc.info/gems/kramdown-manpage/frames)
+* [Homepage](https://github.com/postmodern/kramdown-man#readme)
+* [Issues](https://github.com/postmodern/kramdown-man/issues)
+* [Documentation](http://rubydoc.info/gems/kramdown-man/frames)
 * [Email](mailto:postmodern.mod3 at gmail.com)
 
 ## Description
@@ -17,21 +17,21 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
   * Supports bullet and dashed lists.
   * Supports multi-paragraph list items and blockquotes.
   * Supports horizontal rules.
-  * Supports converting `[bash](man:bash(1))` links into man-page references.
-* Provides rake tasks for converting `man/*.md` into man-pages.
+  * Supports converting `[bash](man:bash(1))` links into man page references.
+* Provides rake tasks for converting `man/*.md` into man pages.
 * Uses the pure-Ruby [Kramdown][kramdown] markdown parser.
 * Supports [Ruby] 1.8.x, 1.9.x, 2.0.x, [JRuby], [Rubinius].
 
 ## Examples
 
-Render a manpage from a markdown file:
+Render a man page from a markdown file:
 
-    require 'kramdown/manpage'
+    require 'kramdown/man'
 
-    doc = Kramdown::Document.new(File.read('man/kramdown-manpage.1.md'))
-    File.write('man/kramdown-manpage.1',doc.to_manpage)
+    doc = Kramdown::Document.new(File.read('man/kramdown-man.1.md'))
+    File.write('man/kramdown-man.1',doc.to_man)
 
-    system 'man', 'man/kramdown-manpage.1'
+    system 'man', 'man/kramdown-man.1'
 
 Define rake tasks to render all `*.md` files within the `man/` directory:
 
@@ -44,7 +44,7 @@ Define rake tasks to render all `*.md` files within the `man/` directory:
 
 ## Install
 
-    $ gem install kramdown-manpage
+    $ gem install kramdown-man
 
 ## Alternatives
 

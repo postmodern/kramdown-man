@@ -1,5 +1,5 @@
 gem 'rspec', '~> 2.4'
 require 'rspec'
-require 'kramdown/manpage/version'
+require 'kramdown/man/version'
 
 include Kramdown::Manpage
