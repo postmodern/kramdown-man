@@ -15,9 +15,9 @@ A Kramdown
 require 'kramdown'
 require 'kramdown/manpage'
 
-doc = Kramdown::Document.new(File.read('man/kramdown-manpage.1.md'))
-File.write('man/kramdown-manpage.1',doc.to_manpage)
-system 'man', 'man/kramdown-manpage.1'
+doc = Kramdown::Document.new(File.read('man/kramdown\-manpage.1.md'))
+File.write('man/kramdown\-manpage.1',doc.to_manpage)
+system 'man', 'man/kramdown\-manpage.1'
 
 .fi
 .LP
@@ -65,7 +65,7 @@ extra paragraph
 .RS
 Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
 .LP
-Antoine de Saint-Exupéry
+Antoine de Saint\-Exupéry
 .RE
 .LP
 .SS CODE BLOCKS

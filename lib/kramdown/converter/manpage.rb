@@ -156,7 +156,7 @@ module Kramdown
       end
 
       def escape(text)
-        text.gsub('\\','\&\&')
+        text.gsub('\\','\&\&').gsub('-','\\-')
       end
 
     end
