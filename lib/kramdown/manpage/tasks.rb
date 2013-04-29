@@ -56,7 +56,10 @@ module Kramdown
       #
       def render(markdown,manpage)
         doc = Kramdown::Document.new(File.read(markdown),@options)
-        File.write(manpage,doc.to_manpage)
+
+        File.open(manpage,'w') do |output|
+          output.write doc.to_manpage
+        end
       end
     end
   end
