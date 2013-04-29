@@ -15,6 +15,21 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 
 ## SYNTAX
 
+### PARAGRAPHS
+
+Normal paragraph.
+
+`--tagged`
+  Paragraph
+
+### LINKS
+
+[website](http://example.com/)
+
+[bash](man:bash(1))
+
+Email <bob@example.com>
+
 ### LISTS
 
 * one
