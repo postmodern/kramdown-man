@@ -22,6 +22,12 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 * Uses the pure-Ruby [Kramdown][kramdown] markdown parser.
 * Supports [Ruby] 1.8.x, 1.9.x, 2.0.x, [JRuby], [Rubinius].
 
+## Synopsis
+
+Render a man page from markdown:
+
+    $ kramdown-man <man/myprog.1.md >man/myprog.1
+
 ## Examples
 
 Render a man page from a markdown file:

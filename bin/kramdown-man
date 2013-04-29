@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+lib_dir = File.expand_path('../lib',File.dirname(__FILE__))
+$LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
+
+require 'kramdown'
+require 'kramdown/man'
+
+case ARGV[0]
+when '-h', '--help'
+  $stderr.puts "usage: #{File.dirname($0)} <INPUT.md >OUTPUT"
+  exit
+end
+
+doc = Kramdown::Document.new($stdin.read)
+puts doc.to_man
