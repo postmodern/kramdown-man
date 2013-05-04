@@ -25,11 +25,26 @@ system 'man', 'man/kramdown\-man.1'
 .LP
 .SS FORMATTING
 .LP
+.nf
+`code`
+
+.fi
+.LP
 .PP
 \fB\fCcode\fR
 .LP
+.nf
+*emphasis*
+
+.fi
+.LP
 .PP
 \fIemphasis\fP
+.LP
+.nf
+**strong**
+
+.fi
 .LP
 .PP
 \fBstrong\fP
@@ -39,19 +54,40 @@ system 'man', 'man/kramdown\-man.1'
 .PP
 Normal paragraph.
 .LP
+.nf
+`\-\-tagged`
+  Text here.
+
+.fi
+.LP
 .TP
 \fB\fC--tagged\fR
-Paragraph
+Text here.
 .LP
 .SS LINKS
+.LP
+.nf
+[website](http://example.com/)
+
+.fi
 .LP
 .PP
 website
 .UR http://example.com/
 .UE
 .LP
+.nf
+[bash](man:bash(1))
+
+.fi
+.LP
 .PP
 .BR bash (1)
+.LP
+.nf
+Email <bob@example.com>
+
+.fi
 .LP
 .PP
 Email 
@@ -59,6 +95,15 @@ Email
 .ME
 .LP
 .SS LISTS
+.LP
+.nf
+* one
+* two
+* three
+
+  extra paragraph
+
+.fi
 .LP
 .RS
 .IP \(bu 2
@@ -85,10 +130,22 @@ extra paragraph
 .LP
 .SS HORIZONTAL RULE
 .LP
+.nf
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+
+.fi
+.LP
 .ti 0
 \l'\n(.lu'
 .LP
 .SS BLOCKQUOTES
+.LP
+.nf
+> Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
+>
+> \-\-Antoine de Saint\-Exupéry
+
+.fi
 .LP
 .PP
 .RS
@@ -100,6 +157,14 @@ Perfection is achieved, not when there is nothing more to add, but when there is
 .SS CODE BLOCKS
 .LP
 .nf
+    #include <stdio.h>
+
+    int main()
+    {
+	    printf("hello world\\n");
+	    return 0;
+    }
+
 #include <stdio.h>
 
 int main()

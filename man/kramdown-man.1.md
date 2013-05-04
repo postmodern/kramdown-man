@@ -17,9 +17,15 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 
 ### FORMATTING
 
+    `code`
+
 `code`
 
+    *emphasis*
+
 *emphasis*
+
+    **strong**
 
 **strong**
 
@@ -27,18 +33,34 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 
 Normal paragraph.
 
+    `--tagged`
+      Text here.
+
 `--tagged`
-  Paragraph
+  Text here.
 
 ### LINKS
 
+    [website](http://example.com/)
+
 [website](http://example.com/)
 
+    [bash](man:bash(1))
+
 [bash](man:bash(1))
+
+    Email <bob@example.com>
 
 Email <bob@example.com>
 
 ### LISTS
+
+    * one
+    * two
+    * three
+    
+      extra paragraph
+    
 
 * one
 * two
@@ -46,6 +68,12 @@ Email <bob@example.com>
 
   extra paragraph
 
+    1. one
+    2. two
+    3. three
+    
+       extra paragraph
+    
 1. one
 2. two
 3. three
@@ -54,15 +82,29 @@ Email <bob@example.com>
 
 ### HORIZONTAL RULE
 
+    -------------------------------------------------------------------------------
+
 -------------------------------------------------------------------------------
 
 ### BLOCKQUOTES
+
+    > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
+    >
+    > --Antoine de Saint-Exupéry
 
 > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
 >
 > --Antoine de Saint-Exupéry
 
 ### CODE BLOCKS
+
+        #include <stdio.h>
+    
+        int main()
+        {
+    	    printf("hello world\n");
+    	    return 0;
+        }
 
     #include <stdio.h>
 
