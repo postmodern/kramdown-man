@@ -8,6 +8,17 @@ describe Kramdown::Converter::Man do
 
   subject { described_class.send(:new,root,{}) }
 
+  describe "#convert_abbreviation" do
+    let(:acronym)      { 'HTML' }
+    let(:definition)   { 'Hyper Text Markup Language' }
+    let(:doc)          { Kramdown::Document.new("This is an #{acronym} example.\n\n*[#{acronym}]: #{definition}") }
+    let(:abbreviation) { doc.root.children[0].children[1] }
+
+    it "should convert abbreviation elements into their text" do
+      subject.convert_abbreviation(abbreviation).should == acronym
+    end
+  end
+
   describe "#convert_blockquote" do
     let(:text)       { "Some quote." }
     let(:doc)        { Kramdown::Document.new("> #{text}") }
