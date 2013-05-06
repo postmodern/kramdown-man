@@ -1,3 +1,7 @@
+### 0.1.1 / 2013-05-05
+
+* Renamed `Kramdown::Man::Tasks` to {Kramdown::Man::Task}.
+
 ### 0.1.0 / 2013-05-05
 
 * Initial release:
