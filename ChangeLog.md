@@ -1,3 +1,9 @@
+### 0.1.4 / 2013-05-05
+
+* Improve detection of tagged paragraphs.
+* Support emitted a hanging paragraph (`.HP`) for command synopsis lines.
+* Strip leading whitespace from each line of emitted text.
+
 ### 0.1.3 / 2013-05-05
 
 * Initial release:
