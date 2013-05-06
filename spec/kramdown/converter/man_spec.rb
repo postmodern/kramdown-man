@@ -8,6 +8,26 @@ describe Kramdown::Converter::Man do
 
   subject { described_class.send(:new,root,{}) }
 
+  describe "#convert_p" do
+    let(:text) { "Hello world." }
+    let(:doc)  { Kramdown::Document.new(text) }
+    let(:p)    { doc.root.children[0] }
+
+    it "should convert p elements into '.PP\\ntext'" do
+      subject.convert_p(p).should == ".PP\n#{text}"
+    end
+
+    context "when the second line is indented" do
+      let(:option) { '--foo' }
+      let(:text)   { 'Foo bar baz' }
+      let(:doc)    { Kramdown::Document.new("`#{option}`\n  #{text}") }
+
+      it "should convert p elements into '.TP\\n\\fB\\fC--option\\fR\\ntext...'" do
+        subject.convert_p(p).should == ".TP\n\\fB\\fC#{option}\\fR\n#{text}"
+      end
+    end
+  end
+
   describe "#convert_em" do
     let(:text) { "hello world" }
     let(:doc)  { Kramdown::Document.new("*#{text}*") }
