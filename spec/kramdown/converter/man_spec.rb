@@ -27,6 +27,13 @@ describe Kramdown::Converter::Man do
   end
 
   describe "#convert_text" do
+    let(:content) { 'Foo bar' }
+    let(:doc)     { Kramdown::Document.new(content) }
+    let(:text)   { doc.root.children[0].children[0] }
+
+    it "should convert text elements" do
+      subject.convert_text(text).should == content
+    end
   end
 
   describe "#convert_typographic_sym" do
