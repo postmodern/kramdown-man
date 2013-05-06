@@ -185,6 +185,12 @@ Hello world.
   end
 
   describe "#convert_hr" do
+    let(:doc) { Kramdown::Document.new('------------------------------------') }
+    let(:hr)  { doc.root.children[0] }
+
+    it "should convert hr elements into '.ti 0\\n\\\\l'\\\\n(.lu\\''" do
+      subject.convert_hr(hr).should == ".ti 0\n\\l'\\n(.lu'"
+    end
   end
 
   describe "#convert_ul" do
