@@ -31,6 +31,8 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 
 ### PARAGRAPHS
 
+    Normal paragraph.
+
 Normal paragraph.
 
     `--tagged`
