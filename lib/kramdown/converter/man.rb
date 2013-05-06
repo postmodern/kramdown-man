@@ -324,15 +324,12 @@ module Kramdown
       def convert_p(p)
         children = p.children
 
-        if (children.length >= 2) &&
-           (children[0].type == :em   || children[0].type == :codespan) &&
-           (children[1].type == :text && children[1].value =~ /^(  |\t)/)
+        if (children[0].type == :em || children[0].type == :codespan)
           [
             '.TP',
             convert_element(children[0]),
-            convert_text(children[1]).lstrip,
-            convert_children(children[2..-1])
-          ].join("\n").rstrip
+            convert_children(children[1..-1]).strip
+          ].join("\n")
         else
           ".PP\n#{convert_children(children)}"
         end
