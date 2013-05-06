@@ -18,6 +18,12 @@ describe Kramdown::Converter::Man do
   end
 
   describe "#convert_blank" do
+    let(:doc)   { Kramdown::Document.new("foo\n\nbar") }
+    let(:blank) { doc.root.children[0].children[1] }
+
+    it "should convert blank elements to '.LP'" do
+      subject.convert_blank(blank).should == '.LP'
+    end
   end
 
   describe "#convert_text" do
