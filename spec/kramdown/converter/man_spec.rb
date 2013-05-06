@@ -51,7 +51,7 @@ describe Kramdown::Converter::Man do
       let(:doc) { Kramdown::Document.new("--- foo") }
       let(:sym) { doc.root.children[0].children[0]  }
 
-      it "should convert mdash symbols" do
+      it "should convert mdash symbols into '—'" do
         subject.convert_typographic_sym(sym).should == '—'
       end
     end
@@ -60,7 +60,7 @@ describe Kramdown::Converter::Man do
       let(:doc) { Kramdown::Document.new("... foo") }
       let(:sym) { doc.root.children[0].children[0]  }
 
-      it "should convert mdash symbols" do
+      it "should convert mdash symbols into '…'" do
         subject.convert_typographic_sym(sym).should == '…'
       end
     end
@@ -69,7 +69,7 @@ describe Kramdown::Converter::Man do
       let(:doc) { Kramdown::Document.new("<< foo") }
       let(:sym) { doc.root.children[0].children[0]  }
 
-      it "should convert mdash symbols" do
+      it "should convert mdash symbols into '«'" do
         subject.convert_typographic_sym(sym).should == '«'
       end
     end
@@ -78,7 +78,7 @@ describe Kramdown::Converter::Man do
       let(:doc) { Kramdown::Document.new("foo >> bar") }
       let(:sym) { doc.root.children[0].children[1]  }
 
-      it "should convert mdash symbols" do
+      it "should convert mdash symbols into '»'" do
         subject.convert_typographic_sym(sym).should == '»'
       end
     end
