@@ -427,7 +427,7 @@ module Kramdown
       #   The escaped text.
       #
       def escape(text)
-        text.gsub('\\',"\\\\").gsub('-','\\-')
+        text.gsub('\\','\&\&').gsub('-','\\-')
       end
 
     end
