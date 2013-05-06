@@ -5,6 +5,8 @@
 * [Documentation](http://rubydoc.info/gems/kramdown-man/frames)
 * [Email](mailto:postmodern.mod3 at gmail.com)
 
+[![Build Status](https://secure.travis-ci.org/postmodern/kramdown-man.png?branch=master)](https://travis-ci.org/postmodern/kramdown-man)
+
 ## Description
 
 A [Kramdown][kramdown] convert for converting Markdown files into man pages.
