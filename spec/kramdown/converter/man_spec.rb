@@ -368,10 +368,20 @@ Hello world.
       subject.convert_p(p).should == ".PP\n#{text}"
     end
 
-    context "when the second line is indented" do
+    context "when the second line is indented with two spaces" do
       let(:option) { '--foo' }
       let(:text)   { 'Foo bar baz' }
       let(:doc)    { Kramdown::Document.new("`#{option}`\n  #{text}") }
+
+      it "should convert p elements into '.TP\\n\\fB\\fC--option\\fR\\ntext...'" do
+        subject.convert_p(p).should == ".TP\n\\fB\\fC#{option}\\fR\n#{text}"
+      end
+    end
+
+    context "when the second line is indented with a tab" do
+      let(:option) { '--foo' }
+      let(:text)   { 'Foo bar baz' }
+      let(:doc)    { Kramdown::Document.new("`#{option}`\n\t#{text}") }
 
       it "should convert p elements into '.TP\\n\\fB\\fC--option\\fR\\ntext...'" do
         subject.convert_p(p).should == ".TP\n\\fB\\fC#{option}\\fR\n#{text}"
