@@ -212,7 +212,7 @@ describe Kramdown::Converter::Man do
     let(:doc)  { Kramdown::Document.new("*#{text}*") }
     let(:em)   { doc.root.children[0].children[0] }
 
-    it "should convert em into '\\fItext\\fP'" do
+    it "should convert em elements into '\\fItext\\fP'" do
       subject.convert_em(em).should == "\\fI#{text}\\fP"
     end
   end
@@ -222,7 +222,7 @@ describe Kramdown::Converter::Man do
     let(:doc)    { Kramdown::Document.new("**#{text}**") }
     let(:strong) { doc.root.children[0].children[0] }
 
-    it "should convert strong into '\\fBtext\\fP'" do
+    it "should convert strong elements into '\\fBtext\\fP'" do
       subject.convert_strong(strong).should == "\\fB#{text}\\fP"
     end
   end
@@ -232,7 +232,7 @@ describe Kramdown::Converter::Man do
     let(:doc)      { Kramdown::Document.new("`#{code}`") }
     let(:codespan) { doc.root.children[0].children[0] }
 
-    it "should convert codespans into '\\fB\\fCcode\\fR'" do
+    it "should convert codespan elements into '\\fB\\fCcode\\fR'" do
       subject.convert_codespan(codespan).should == "\\fB\\fC#{code}\\fR"
     end
   end
@@ -243,7 +243,7 @@ describe Kramdown::Converter::Man do
     let(:doc)  { Kramdown::Document.new("[#{text}](#{href})") }
     let(:link) { doc.root.children[0].children[0] }
 
-    it "should convert a link into 'text\\n.UR href\\n.UE'" do
+    it "should convert a link elements into 'text\\n.UR href\\n.UE'" do
       subject.convert_a(link).should == "#{text}\n.UR #{href}\n.UE"
     end
 
@@ -252,7 +252,7 @@ describe Kramdown::Converter::Man do
       let(:email) { 'bob@example.com' }
       let(:doc)   { Kramdown::Document.new("[#{text}](mailto:#{email})") }
 
-      it "should convert the link into '.MT email\\n.ME'" do
+      it "should convert the link elements into '.MT email\\n.ME'" do
         subject.convert_a(link).should == "#{text}\n.MT #{email}\n.ME"
       end
 
@@ -260,7 +260,7 @@ describe Kramdown::Converter::Man do
         let(:email) { 'bob@example.com' }
         let(:doc)   { Kramdown::Document.new("<#{email}>") }
 
-        it "should convert the link into '.MT email\\n.ME'" do
+        it "should convert the link elements into '.MT email\\n.ME'" do
           subject.convert_a(link).should == "\n.MT #{email}\n.ME"
         end
       end
@@ -270,7 +270,7 @@ describe Kramdown::Converter::Man do
       let(:man)  { 'bash' }
       let(:doc)  { Kramdown::Document.new("[#{man}](man:#{man})") }
 
-      it "should convert the link into '.BR man'" do
+      it "should convert the link elements into '.BR man'" do
         subject.convert_a(link).should == ".BR #{man}"
       end
 
@@ -278,7 +278,7 @@ describe Kramdown::Converter::Man do
         let(:section) { '1' }
         let(:doc)     { Kramdown::Document.new("[#{man}](man:#{man}(#{section}))") }
 
-        it "should convert the link into '.BR man (section)'" do
+        it "should convert the link elements into '.BR man (section)'" do
           subject.convert_a(link).should == ".BR #{man} (#{section})"
         end
       end
