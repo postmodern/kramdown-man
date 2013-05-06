@@ -18,7 +18,6 @@ require 'kramdown/man'
 doc = Kramdown::Document.new(File.read('man/kramdown\-man.1.md'))
 File.write('man/kramdown\-man.1',doc.to_man)
 system 'man', 'man/kramdown\-man.1'
-
 .fi
 .LP
 .SH SYNTAX
@@ -27,7 +26,6 @@ system 'man', 'man/kramdown\-man.1'
 .LP
 .nf
 `code`
-
 .fi
 .LP
 .PP
@@ -35,7 +33,6 @@ system 'man', 'man/kramdown\-man.1'
 .LP
 .nf
 *emphasis*
-
 .fi
 .LP
 .PP
@@ -43,7 +40,6 @@ system 'man', 'man/kramdown\-man.1'
 .LP
 .nf
 **strong**
-
 .fi
 .LP
 .PP
@@ -57,7 +53,6 @@ Normal paragraph.
 .nf
 `\-\-tagged`
   Text here.
-
 .fi
 .LP
 .TP
@@ -68,7 +63,6 @@ Text here.
 .LP
 .nf
 [website](http://example.com/)
-
 .fi
 .LP
 .PP
@@ -78,7 +72,6 @@ website
 .LP
 .nf
 [bash](man:bash(1))
-
 .fi
 .LP
 .PP
@@ -86,7 +79,6 @@ website
 .LP
 .nf
 Email <bob@example.com>
-
 .fi
 .LP
 .PP
@@ -102,7 +94,6 @@ Email
 * three
 
   extra paragraph
-
 .fi
 .LP
 .RS
@@ -132,7 +123,6 @@ extra paragraph
 .LP
 .nf
 \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
-
 .fi
 .LP
 .ti 0
@@ -144,14 +134,13 @@ extra paragraph
 > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
 >
 > \-\-Antoine de Saint\-Exupéry
-
 .fi
 .LP
 .PP
 .RS
 Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
 .LP
-–Antoine de Saint\-Exupéry
+--Antoine de Saint\-Exupéry
 .RE
 .LP
 .SS CODE BLOCKS
@@ -172,7 +161,6 @@ int main()
     printf("hello world\\n");
     return 0;
 }
-
 .fi
 .LP
 .SH AUTHOR
