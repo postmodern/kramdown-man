@@ -8,6 +8,45 @@ describe Kramdown::Converter::Man do
 
   subject { described_class.send(:new,root,{}) }
 
+  describe "#convert" do
+  end
+
+  describe "#convert_root" do
+  end
+
+  describe "#convert_element" do
+  end
+
+  describe "#convert_blank" do
+  end
+
+  describe "#convert_text" do
+  end
+
+  describe "#convert_typographic_sym" do
+  end
+
+  describe "#convert_smart_quote" do
+  end
+
+  describe "#convert_header" do
+  end
+
+  describe "#convert_hr" do
+  end
+
+  describe "#convert_ul" do
+  end
+
+  describe "#convert_ul_li" do
+  end
+
+  describe "#convert_ol" do
+  end
+
+  describe "#convert_ol_li" do
+  end
+
   describe "#convert_abbreviation" do
     let(:acronym)      { 'HTML' }
     let(:definition)   { 'Hyper Text Markup Language' }
