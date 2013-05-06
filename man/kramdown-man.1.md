@@ -1,4 +1,4 @@
-# example 1 "April 2013" Example "User Manuals"
+# kramdown-man.1 "April 2013" kramdown-man "User Manuals"
 
 ## DESCRIPTION
 
