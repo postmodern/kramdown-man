@@ -9,7 +9,7 @@ module Kramdown
     # Defines a `man` rake task that generates man-pages within the `man/`
     # directory from `.md` files.
     #
-    class Tasks < Rake::TaskLib
+    class Task < Rake::TaskLib
 
       # Markdown file glob pattern
       FILES = 'man/{**/}*.{markdown,mkd,md}'

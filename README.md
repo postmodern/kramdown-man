@@ -44,8 +44,8 @@ Render a man page from a markdown file:
 Define a `man` and file tasks which render all `*.md` files within the
 `man/` directory:
 
-    require 'kramdown/man/tasks'
-    Kramdown::Man::Tasks.new
+    require 'kramdown/man/task'
+    Kramdown::Man::Task.new
 
 ## Syntax
 
