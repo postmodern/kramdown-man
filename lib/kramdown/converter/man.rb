@@ -400,8 +400,8 @@ module Kramdown
         when /^man:/
           match = href.match(/man:([A-Za-z0-9_-]+)(?:\((\d[a-z]?)\))?/)
 
-          if match[2] then ".BR #{match[1]} (#{match[2]})"
-          else             ".BR #{match[1]}"
+          if match[2] then "\n.BR #{match[1]} (#{match[2]})"
+          else             "\n.BR #{match[1]}"
           end
         else
           "#{text}\n.UR #{href}\n.UE"

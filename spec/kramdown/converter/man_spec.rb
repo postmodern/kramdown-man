@@ -443,7 +443,7 @@ Hello world.
       let(:doc)  { Kramdown::Document.new("[#{man}](man:#{man})") }
 
       it "should convert the link elements into '.BR man'" do
-        subject.convert_a(link).should == ".BR #{man}"
+        subject.convert_a(link).should == "\n.BR #{man}"
       end
 
       context "when a section number is specified" do
@@ -451,7 +451,7 @@ Hello world.
         let(:doc)     { Kramdown::Document.new("[#{man}](man:#{man}(#{section}))") }
 
         it "should convert the link elements into '.BR man (section)'" do
-          subject.convert_a(link).should == ".BR #{man} (#{section})"
+          subject.convert_a(link).should == "\n.BR #{man} (#{section})"
         end
       end
     end
