@@ -8,6 +8,16 @@ describe Kramdown::Converter::Man do
 
   subject { described_class.send(:new,root,{}) }
 
+  describe "#convert_strong" do
+    let(:text)   { "hello world" }
+    let(:doc)    { Kramdown::Document.new("**#{text}**") }
+    let(:strong) { doc.root.children[0].children[0] }
+
+    it "should convert strong into '\\fBtext\\fP'" do
+      subject.convert_strong(strong).should == "\\fB#{text}\\fP"
+    end
+  end
+
   describe "#convert_codespan" do
     let(:code)     { "puts 'hello world'" }
     let(:doc)      { Kramdown::Document.new("`#{code}`") }
