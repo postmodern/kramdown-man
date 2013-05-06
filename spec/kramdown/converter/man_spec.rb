@@ -8,6 +8,16 @@ describe Kramdown::Converter::Man do
 
   subject { described_class.send(:new,root,{}) }
 
+  describe "#convert_codeblock" do
+    let(:code)      { "puts 'hello world'" }
+    let(:doc)       { Kramdown::Document.new("    #{code}\n") }
+    let(:codeblock) { doc.root.children[0] }
+
+    it "should convert codeblock elements into '.nf\\ntext...\\n.fi'" do
+      subject.convert_codeblock(codeblock).should == ".nf\n#{code}\n.fi"
+    end
+  end
+
   describe "#convert_comment" do
     let(:text)    { "Copyright (c) 2013" }
     let(:doc)     { Kramdown::Document.new("{::comment}\n#{text}\n{:/comment}") }
