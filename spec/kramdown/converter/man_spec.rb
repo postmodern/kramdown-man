@@ -126,9 +126,21 @@ Hello world.
     end
 
     context "laquo_space" do
+      let(:doc) { Kramdown::Document.new(" << foo") }
+      let(:sym) { doc.root.children[0].children[0]  }
+
+      it "should convert mdash symbols into '«'" do
+        subject.convert_typographic_sym(sym).should == '«'
+      end
     end
 
     context "raquo_space" do
+      let(:doc) { Kramdown::Document.new("foo  >> bar") }
+      let(:sym) { doc.root.children[0].children[1]  }
+
+      it "should convert mdash symbols into '»'" do
+        subject.convert_typographic_sym(sym).should == '»'
+      end
     end
   end
 
