@@ -91,6 +91,41 @@ describe Kramdown::Converter::Man do
   end
 
   describe "#convert_smart_quote" do
+    context "lsquo" do
+      let(:doc)   { Kramdown::Document.new("'hello world'") }
+      let(:quote) { doc.root.children[0].children.first }
+
+      it "should convert lsquo quotes into '‘'" do
+        subject.convert_smart_quote(quote).should == '‘'
+      end
+    end
+
+    context "rsquo" do
+      let(:doc)   { Kramdown::Document.new("'hello world'") }
+      let(:quote) { doc.root.children[0].children.last }
+
+      it "should convert rsquo quotes into '’'" do
+        subject.convert_smart_quote(quote).should == '’'
+      end
+    end
+
+    context "ldquo" do
+      let(:doc)   { Kramdown::Document.new('"hello world"') }
+      let(:quote) { doc.root.children[0].children.first }
+
+      it "should convert lsquo quotes into '“'" do
+        subject.convert_smart_quote(quote).should == '“'
+      end
+    end
+
+    context "rdquo" do
+      let(:doc)   { Kramdown::Document.new('"hello world"') }
+      let(:quote) { doc.root.children[0].children.last }
+
+      it "should convert lsquo quotes into '”'" do
+        subject.convert_smart_quote(quote).should == '”'
+      end
+    end
   end
 
   describe "#convert_header" do
