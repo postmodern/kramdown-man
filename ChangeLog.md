@@ -1,12 +1,4 @@
-### 0.1.2 / 2013-05-05
-
-* Added {Kramdown::Man::Tasks} for backwards compatibility with 0.1.0.
-
-### 0.1.1 / 2013-05-05
-
-* Renamed `Kramdown::Man::Tasks` to {Kramdown::Man::Task}.
-
-### 0.1.0 / 2013-05-05
+### 0.1.3 / 2013-05-05
 
 * Initial release:
   * Converts markdown to [roff]:
