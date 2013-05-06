@@ -52,6 +52,12 @@ Hello world.
   end
 
   describe "#convert_element" do
+    let(:doc) { Kramdown::Document.new("    puts 'hello'") }
+    let(:el)  { doc.root.children[0] }
+
+    it "should convert the element based on it's type" do
+      subject.convert_element(el).should == subject.convert_codeblock(el)
+    end
   end
 
   describe "#convert_blank" do
