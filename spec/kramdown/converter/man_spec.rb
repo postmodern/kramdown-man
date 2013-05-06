@@ -425,7 +425,7 @@ Hello world.
       let(:text)   { 'Foo bar baz' }
       let(:doc)    { Kramdown::Document.new("*#{option}*\n\t#{text}") }
 
-      it "should convert p elements into '.TP\\n\\fB\\fC--option\\fR\\ntext...'" do
+      it "should convert p elements into '.TP\\n\\fI--option\\fP\\ntext...'" do
         subject.convert_p(p).should == ".TP\n\\fI#{option}\\fP\n#{text}"
       end
 
@@ -433,7 +433,7 @@ Hello world.
         let(:text)   { 'foo' }
         let(:doc)    { Kramdown::Document.new("*#{text}*") }
 
-        it "should convert p elements into '.PP\\n\\fB\\fC...\\fR'" do
+        it "should convert p elements into '.PP\\n\\fI...\\fP'" do
           subject.convert_p(p).should == ".PP\n\\fI#{text}\\fP"
         end
       end
