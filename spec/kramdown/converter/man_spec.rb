@@ -13,6 +13,24 @@ describe Kramdown::Converter::Man do
   end
 
   describe "#convert_root" do
+    let(:doc) do
+      Kramdown::Document.new(%{
+# Header
+
+Hello world.
+      }.strip)
+    end
+
+    let(:root) { doc.root }
+
+    it "should convert every element" do
+      subject.convert_root(root).should == [
+        ".TH Header",
+        ".LP",
+        ".PP",
+        "Hello world."
+      ].join("\n")
+    end
   end
 
   describe "#convert_element" do
