@@ -8,6 +8,16 @@ describe Kramdown::Converter::Man do
 
   subject { described_class.send(:new,root,{}) }
 
+  describe "#convert_codespan" do
+    let(:code)     { "puts 'hello world'" }
+    let(:doc)      { Kramdown::Document.new("`#{code}`") }
+    let(:codespan) { doc.root.children[0].children[0] }
+
+    it "should convert codespans into '\\fB\\fCcode\\fR'" do
+      subject.convert_codespan(codespan).should == "\\fB\\fC#{code}\\fR"
+    end
+  end
+
   describe "#convert_a" do
     let(:text) { 'example'             }
     let(:href) { 'http://example.com/' }
