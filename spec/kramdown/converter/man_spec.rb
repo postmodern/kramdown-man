@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 require 'kramdown/converter/man'
 
@@ -37,6 +38,56 @@ describe Kramdown::Converter::Man do
   end
 
   describe "#convert_typographic_sym" do
+    context "ndash" do
+      let(:doc) { Kramdown::Document.new("-- foo")     }
+      let(:sym) { doc.root.children[0].children[0] }
+
+      it "should convert ndash symbols back into '--'" do
+        subject.convert_typographic_sym(sym).should == '--'
+      end
+    end
+
+    context "mdash" do
+      let(:doc) { Kramdown::Document.new("--- foo") }
+      let(:sym) { doc.root.children[0].children[0]  }
+
+      it "should convert mdash symbols" do
+        subject.convert_typographic_sym(sym).should == '—'
+      end
+    end
+
+    context "hellip" do
+      let(:doc) { Kramdown::Document.new("... foo") }
+      let(:sym) { doc.root.children[0].children[0]  }
+
+      it "should convert mdash symbols" do
+        subject.convert_typographic_sym(sym).should == '…'
+      end
+    end
+
+    context "laquo" do
+      let(:doc) { Kramdown::Document.new("<< foo") }
+      let(:sym) { doc.root.children[0].children[0]  }
+
+      it "should convert mdash symbols" do
+        subject.convert_typographic_sym(sym).should == '«'
+      end
+    end
+
+    context "raquo" do
+      let(:doc) { Kramdown::Document.new("foo >> bar") }
+      let(:sym) { doc.root.children[0].children[1]  }
+
+      it "should convert mdash symbols" do
+        subject.convert_typographic_sym(sym).should == '»'
+      end
+    end
+
+    context "laquo_space" do
+    end
+
+    context "raquo_space" do
+    end
   end
 
   describe "#convert_smart_quote" do
