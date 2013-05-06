@@ -218,6 +218,21 @@ Hello world.
   end
 
   describe "#convert_ul" do
+    let(:text1) { 'foo' }
+    let(:text2) { 'bar' }
+    let(:doc)   { Kramdown::Document.new("* #{text1}\n* #{text2}") }
+    let(:ul)    { doc.root.children[0] }
+
+    it "should convert ul elements into '.RS\\n...\\n.RE'" do
+      subject.convert_ul(ul).should == [
+        ".RS",
+        ".IP \\(bu 2",
+        text1,
+        ".IP \\(bu 2",
+        text2,
+        ".RE"
+      ].join("\n")
+    end
   end
 
   describe "#convert_ul_li" do
@@ -246,6 +261,22 @@ Hello world.
   end
 
   describe "#convert_ol" do
+    let(:text1) { 'foo' }
+    let(:text2) { 'bar' }
+    let(:doc)   { Kramdown::Document.new("1. #{text1}\n2. #{text2}") }
+    let(:ol)    { doc.root.children[0] }
+
+    it "should convert ol elements into '.RS\\n...\\n.RE'" do
+      subject.convert_ol(ol).should == [
+        ".nr step1 0 1",
+        ".RS",
+        ".IP \\n+[step1]",
+        text1,
+        ".IP \\n+[step1]",
+        text2,
+        ".RE"
+      ].join("\n")
+    end
   end
 
   describe "#convert_ol_li" do
