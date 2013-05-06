@@ -324,8 +324,9 @@ module Kramdown
       def convert_p(p)
         children = p.children
 
-        if (children.length >= 2) &&
-           (children.first.type == :em || children.first.type == :codespan)
+        if ((children.length >= 2) && (children.first.type == :codespan ||
+                                       children.first.type == :em       ||
+                                       children.first.type == :strong))
           newline = children.find_index { |el|
             el.type == :text && el.value.start_with?("\n")
           }
