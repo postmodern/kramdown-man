@@ -221,6 +221,28 @@ Hello world.
   end
 
   describe "#convert_ul_li" do
+    let(:content) { 'hello world'                          }
+    let(:doc)     { Kramdown::Document.new("* #{content}") }
+    let(:li)      { doc.root.children[0].children[0]       }
+
+    it "should convert the first p element to '.IP \\\\(bu 2\\n...'" do
+      subject.convert_ul_li(li).should == ".IP \\(bu 2\n#{content}"
+    end
+
+    context "with multiple multiple paragraphs" do
+      let(:text1) { 'hello' }
+      let(:text2) { 'world' }
+      let(:doc)   { Kramdown::Document.new("* #{text1}\n\n  #{text2}") }
+
+      it "should convert the other p elements to '.IP \\\\( 2\\n...'" do
+        subject.convert_ul_li(li).should == [
+          ".IP \\(bu 2",
+          text1,
+          ".IP \\( 2",
+          text2
+        ].join("\n")
+      end
+    end
   end
 
   describe "#convert_ol" do
