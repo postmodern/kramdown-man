@@ -35,6 +35,10 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 
 Normal paragraph.
 
+    `command` [`--foo`] *FILE*
+
+`command` [`--foo`] *FILE*
+
     `--tagged`
       Text here.
 
