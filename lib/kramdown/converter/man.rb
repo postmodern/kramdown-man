@@ -392,7 +392,11 @@ module Kramdown
 
         case href
         when /^mailto:/
-          "\n.MT #{href[7..-1]}\n.ME"
+          email = href[7..-1]
+
+          unless text == email then "#{text}\n.MT #{email}\n.ME"
+          else                      ".MT #{email}\n.ME"
+          end
         when /^man:/
           match = href.match(/man:([A-Za-z0-9_-]+)(?:\((\d[a-z]?)\))/)
 
