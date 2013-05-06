@@ -8,6 +8,16 @@ describe Kramdown::Converter::Man do
 
   subject { described_class.send(:new,root,{}) }
 
+  describe "#convert_em" do
+    let(:text) { "hello world" }
+    let(:doc)  { Kramdown::Document.new("*#{text}*") }
+    let(:em)   { doc.root.children[0].children[0] }
+
+    it "should convert em into '\\fItext\\fP'" do
+      subject.convert_em(em).should == "\\fI#{text}\\fP"
+    end
+  end
+
   describe "#convert_strong" do
     let(:text)   { "hello world" }
     let(:doc)    { Kramdown::Document.new("**#{text}**") }
