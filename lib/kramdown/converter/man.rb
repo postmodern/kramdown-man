@@ -326,15 +326,18 @@ module Kramdown
 
         if (children.length >= 2) &&
            (children.first.type == :em || children.first.type == :codespan)
-          newline = children.find_index do |el|
+          newline = children.find_index { |el|
             el.type == :text && el.value.start_with?("\n")
-          end
+          }
 
-          [
-            '.TP',
-            convert_children(children[0...newline]),
-            convert_children(children[newline..-1]).strip
-          ].join("\n")
+          if newline
+            first_line = convert_children(children[0...newline])
+            rest       = convert_children(children[newline..-1]).strip
+
+            ".TP\n#{first_line}\n#{rest}"
+          else
+            ".HP\n#{convert_children(children)}"
+          end
         else
           ".PP\n#{convert_children(children)}"
         end

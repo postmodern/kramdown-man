@@ -395,6 +395,14 @@ Hello world.
         it "should convert p elements into '.TP\\n\\fB\\fC-o\\fR, \\fB\\fC--option\\fR\\ntext...'" do
           subject.convert_p(p).should == ".TP\n\\fB\\fC#{flag}\\fR, \\fB\\fC#{option}\\fR\n#{text}"
         end
+
+        context "when there is no newline" do
+          let(:doc) { Kramdown::Document.new("`#{flag}` `#{option}`") }
+
+          it "should convert the p element into a '.HP\\n...'" do
+            subject.convert_p(p).should == ".HP\n\\fB\\fC#{flag}\\fR \\fB\\fC#{option}\\fR"
+          end
+        end
       end
     end
 
@@ -424,6 +432,14 @@ Hello world.
 
         it "should convert p elements into '.TP\\n\\fI-o\\fP, \\fI--option\\fP\\ntext...'" do
           subject.convert_p(p).should == ".TP\n\\fI\\#{flag}\\fP, \\fI#{option}\\fP\n#{text}"
+        end
+
+        context "when there is no newline" do
+          let(:doc) { Kramdown::Document.new("*#{flag}* *#{option}*") }
+
+          it "should convert the p element into a '.HP\\n...'" do
+            subject.convert_p(p).should == ".HP\n\\fI\\#{flag}\\fP \\fI#{option}\\fP"
+          end
         end
       end
     end
