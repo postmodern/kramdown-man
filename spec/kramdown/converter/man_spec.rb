@@ -8,6 +8,16 @@ describe Kramdown::Converter::Man do
 
   subject { described_class.send(:new,root,{}) }
 
+  describe "#convert_comment" do
+    let(:text)    { "Copyright (c) 2013" }
+    let(:doc)     { Kramdown::Document.new("{::comment}\n#{text}\n{:/comment}") }
+    let(:comment) { doc.root.children[0] }
+
+    it "should convert comment elements into '.\\\" text...'" do
+      subject.convert_comment(comment).should == ".\\\" #{text}"
+    end
+  end
+
   describe "#convert_p" do
     let(:text) { "Hello world." }
     let(:doc)  { Kramdown::Document.new(text) }
