@@ -368,6 +368,15 @@ Hello world.
       subject.convert_p(p).should == ".PP\n#{text}"
     end
 
+    context "when the paragraph is a single codespan element" do
+      let(:code) { 'code' }
+      let(:doc)  { Kramdown::Document.new("`#{code}`") }
+
+      it "should convert p elements into '.PP\\n\\fB\\fC...\\fR'" do
+        subject.convert_p(p).should == ".PP\n\\fB\\fC#{code}\\fR"
+      end
+    end
+
     context "when the paragraph starts with a codespan element" do
       let(:option) { '--foo' }
       let(:text)   { 'Foo bar baz' }
@@ -378,6 +387,26 @@ Hello world.
       end
     end
 
+    context "when the paragraph starts with multiple codespan elements" do
+      let(:flag)   { '-f'    }
+      let(:option) { '--foo' }
+      let(:text)   { 'Foo bar baz' }
+      let(:doc)    { Kramdown::Document.new("`#{flag}`, `#{option}`\n\t#{text}") }
+
+      it "should convert p elements into '.TP\\n\\fB\\fC-o\\fR, \\fB\\fC--option\\fR\\ntext...'" do
+        subject.convert_p(p).should == ".TP\n\\fB\\fC#{flag}\\fR, \\fB\\fC#{option}\\fR\n#{text}"
+      end
+    end
+
+    context "when the paragraph is a single em element" do
+      let(:text)   { 'foo' }
+      let(:doc)    { Kramdown::Document.new("*#{text}*") }
+
+      it "should convert p elements into '.PP\\n\\fB\\fC...\\fR'" do
+        subject.convert_p(p).should == ".PP\n\\fI#{text}\\fP"
+      end
+    end
+
     context "when the paragraph starts with a em element" do
       let(:option) { '--foo' }
       let(:text)   { 'Foo bar baz' }
@@ -385,6 +414,17 @@ Hello world.
 
       it "should convert p elements into '.TP\\n\\fB\\fC--option\\fR\\ntext...'" do
         subject.convert_p(p).should == ".TP\n\\fI#{option}\\fP\n#{text}"
+      end
+    end
+
+    context "when the paragraph starts with multiple em elements" do
+      let(:flag)    { '-f'    }
+      let(:option)  { '--foo' }
+      let(:text)    { 'Foo bar baz' }
+      let(:doc)     { Kramdown::Document.new("*#{flag}*, *#{option}*\n\t#{text}") }
+
+      it "should convert p elements into '.TP\\n\\fI-o\\fP, \\fI--option\\fP\\ntext...'" do
+        subject.convert_p(p).should == ".TP\n\\fI\\#{flag}\\fP, \\fI#{option}\\fP\n#{text}"
       end
     end
   end

@@ -324,11 +324,16 @@ module Kramdown
       def convert_p(p)
         children = p.children
 
-        if (children[0].type == :em || children[0].type == :codespan)
+        if (children.length >= 2) &&
+           (children.first.type == :em || children.first.type == :codespan)
+          newline = children.find_index do |el|
+            el.type == :text && el.value.start_with?("\n")
+          end
+
           [
             '.TP',
-            convert_element(children[0]),
-            convert_children(children[1..-1]).strip
+            convert_children(children[0...newline]),
+            convert_children(children[newline..-1]).strip
           ].join("\n")
         else
           ".PP\n#{convert_children(children)}"
