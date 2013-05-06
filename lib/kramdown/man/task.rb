@@ -66,5 +66,8 @@ module Kramdown
         end
       end
     end
+
+    # For backwards compatibility with 0.1.0
+    Tasks = Task
   end
 end
