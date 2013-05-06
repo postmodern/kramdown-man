@@ -77,6 +77,22 @@ Hello world.
     it "should convert text elements" do
       subject.convert_text(text).should == content
     end
+
+    context "when the text has two-space indentation" do
+      let(:content) { "Foo\n  bar\n  baz" }
+
+      it "should strip leading whitespace from each line" do
+        subject.convert_text(text).should == content.gsub("\n  ","\n")
+      end
+    end
+
+    context "when the text has tab indentation" do
+      let(:content) { "Foo\n\tbar\n\tbaz" }
+
+      it "should strip leading whitespace from each line" do
+        subject.convert_text(text).should == content.gsub("\n\t","\n")
+      end
+    end
   end
 
   describe "#convert_typographic_sym" do

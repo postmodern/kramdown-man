@@ -115,7 +115,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_text(text)
-        escape(text.value)
+        escape(text.value.gsub(/^(  +|\t)/,''))
       end
 
       #
