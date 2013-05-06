@@ -70,9 +70,9 @@ Hello world.
   end
 
   describe "#convert_text" do
-    let(:content) { 'Foo bar' }
-    let(:doc)     { Kramdown::Document.new(content) }
-    let(:text)   { doc.root.children[0].children[0] }
+    let(:content) { 'Foo bar'                        }
+    let(:doc)     { Kramdown::Document.new(content)  }
+    let(:text)    { doc.root.children[0].children[0] }
 
     it "should convert text elements" do
       subject.convert_text(text).should == content
@@ -236,12 +236,12 @@ Hello world.
   end
 
   describe "#convert_ul_li" do
-    let(:content) { 'hello world'                          }
-    let(:doc)     { Kramdown::Document.new("* #{content}") }
-    let(:li)      { doc.root.children[0].children[0]       }
+    let(:text) { 'hello world'                       }
+    let(:doc)  { Kramdown::Document.new("* #{text}") }
+    let(:li)   { doc.root.children[0].children[0]    }
 
     it "should convert the first p element to '.IP \\\\(bu 2\\n...'" do
-      subject.convert_ul_li(li).should == ".IP \\(bu 2\n#{content}"
+      subject.convert_ul_li(li).should == ".IP \\(bu 2\n#{text}"
     end
 
     context "with multiple multiple paragraphs" do
@@ -280,12 +280,12 @@ Hello world.
   end
 
   describe "#convert_ol_li" do
-    let(:content) { 'hello world'                           }
-    let(:doc)     { Kramdown::Document.new("1. #{content}") }
-    let(:li)      { doc.root.children[0].children[0]        }
+    let(:text) { 'hello world'                        }
+    let(:doc)  { Kramdown::Document.new("1. #{text}") }
+    let(:li)   { doc.root.children[0].children[0]     }
 
     it "should convert the first p element to '.IP \\\\n+[step0]\\n...'" do
-      subject.convert_ol_li(li).should == ".IP \\n+[step0]\n#{content}"
+      subject.convert_ol_li(li).should == ".IP \\n+[step0]\n#{text}"
     end
 
     context "with multiple multiple paragraphs" do
