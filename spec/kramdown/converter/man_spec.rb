@@ -147,6 +147,41 @@ Hello world.
   end
 
   describe "#convert_header" do
+    context "when level is 1" do
+      let(:doc)    { Kramdown::Document.new("# Header") }
+      let(:header) { doc.root.children[0] }
+
+      it "should convert level 1 headers into '.TH text'" do
+        subject.convert_header(header).should == ".TH Header"
+      end
+    end
+
+    context "when level is 2" do
+      let(:doc)    { Kramdown::Document.new("## Header") }
+      let(:header) { doc.root.children[0] }
+
+      it "should convert level 2 headers into '.SH text'" do
+        subject.convert_header(header).should == ".SH Header"
+      end
+    end
+
+    context "when level is 3" do
+      let(:doc)    { Kramdown::Document.new("### Header") }
+      let(:header) { doc.root.children[0] }
+
+      it "should convert level 2 headers into '.SS text'" do
+        subject.convert_header(header).should == ".SS Header"
+      end
+    end
+
+    context "when level is 4 or greater" do
+      let(:doc)    { Kramdown::Document.new("#### Header") }
+      let(:header) { doc.root.children[0] }
+
+      it "should convert level 2 headers into '.SS text'" do
+        subject.convert_header(header).should == ".SS Header"
+      end
+    end
   end
 
   describe "#convert_hr" do
