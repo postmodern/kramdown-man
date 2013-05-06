@@ -8,6 +8,16 @@ describe Kramdown::Converter::Man do
 
   subject { described_class.send(:new,root,{}) }
 
+  describe "#convert_blockquote" do
+    let(:text)       { "Some quote." }
+    let(:doc)        { Kramdown::Document.new("> #{text}") }
+    let(:blockquote) { doc.root.children[0] }
+
+    it "should convert blockquote elements into '.PP\\n.RS\\ntext...\\n.RE'" do
+      subject.convert_blockquote(blockquote).should == ".PP\n.RS\n#{text}\n.RE"
+    end
+  end
+
   describe "#convert_codeblock" do
     let(:code)      { "puts 'hello world'" }
     let(:doc)       { Kramdown::Document.new("    #{code}\n") }
