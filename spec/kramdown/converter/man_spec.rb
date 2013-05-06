@@ -322,8 +322,6 @@ Hello world.
       let(:doc)   { Kramdown::Document.new("1. #{text1}\n\n   #{text2}") }
 
       it "should convert the other p elements to '.IP \\\\n\\n...'" do
-        p li
-
         subject.convert_ol_li(li).should == [
           ".IP \\n+[step0]",
           text1,
