@@ -10,6 +10,24 @@ describe Kramdown::Converter::Man do
   subject { described_class.send(:new,root,{}) }
 
   describe "#convert" do
+    let(:doc) do
+      Kramdown::Document.new(%{
+# Header
+
+Hello world.
+      }.strip)
+    end
+    let(:root) { doc.root }
+
+    it "should add the header" do
+      subject.convert(root).should == [
+        described_class::HEADER,
+        ".TH Header",
+        ".LP",
+        ".PP",
+        "Hello world."
+      ].join("\n")
+    end
   end
 
   describe "#convert_root" do
