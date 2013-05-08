@@ -387,16 +387,16 @@ Hello world.
       let(:text)   { 'Foo bar baz' }
       let(:doc)    { Kramdown::Document.new("`#{option}`\n\t#{text}") }
 
-      it "should convert p elements into '.TP\\n\\fC--option\\fR\\ntext...'" do
-        subject.convert_p(p).should == ".TP\n\\fC#{option}\\fR\n#{text}"
+      it "should convert p elements into '.TP\\n\\fB--option\\fR\\ntext...'" do
+        subject.convert_p(p).should == ".TP\n\\fB#{option}\\fR\n#{text}"
       end
 
       context "when there is only one codespan element" do
         let(:code) { 'code' }
         let(:doc)  { Kramdown::Document.new("`#{code}`") }
 
-        it "should convert p elements into '.PP\\n\\fC...\\fR'" do
-          subject.convert_p(p).should == ".PP\n\\fC#{code}\\fR"
+        it "should convert p elements into '.PP\\n\\fB...\\fR'" do
+          subject.convert_p(p).should == ".PP\n\\fB#{code}\\fR"
         end
       end
 
@@ -406,15 +406,15 @@ Hello world.
         let(:text)   { 'Foo bar baz' }
         let(:doc)    { Kramdown::Document.new("`#{flag}`, `#{option}`\n\t#{text}") }
 
-        it "should convert p elements into '.TP\\n\\fC-o\\fR, \\fC--option\\fR\\ntext...'" do
-          subject.convert_p(p).should == ".TP\n\\fC#{flag}\\fR, \\fC#{option}\\fR\n#{text}"
+        it "should convert p elements into '.TP\\n\\fB-o\\fR, \\fB--option\\fR\\ntext...'" do
+          subject.convert_p(p).should == ".TP\n\\fB#{flag}\\fR, \\fB#{option}\\fR\n#{text}"
         end
 
         context "when there is no newline" do
           let(:doc) { Kramdown::Document.new("`#{flag}` `#{option}`") }
 
           it "should convert the p element into a '.HP\\n...'" do
-            subject.convert_p(p).should == ".HP\n\\fC#{flag}\\fR \\fC#{option}\\fR"
+            subject.convert_p(p).should == ".HP\n\\fB#{flag}\\fR \\fB#{option}\\fR"
           end
         end
       end
@@ -491,8 +491,8 @@ Hello world.
     let(:doc)      { Kramdown::Document.new("`#{code}`") }
     let(:codespan) { doc.root.children[0].children[0] }
 
-    it "should convert codespan elements into '\\fCcode\\fR'" do
-      subject.convert_codespan(codespan).should == "\\fC#{code}\\fR"
+    it "should convert codespan elements into '\\fBcode\\fR'" do
+      subject.convert_codespan(codespan).should == "\\fB#{code}\\fR"
     end
   end
 
