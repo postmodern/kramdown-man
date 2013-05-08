@@ -545,6 +545,18 @@ Hello world.
   end
 
   describe "#escape" do
+    context "when a line begins with '.'" do
+      it "should prefix each newline with '\\&'" do
+        subject.escape(".hello\n.world").should == "\\&.hello\n\\&.world"
+      end
+    end
+
+    context "when a line begins with '\\''" do
+      it "should prefix each newline with '\\&'" do
+        subject.escape("'hello\n'world").should == "\\&'hello\n\\&'world"
+      end
+    end
+
     it "should escape '\\' as '\\e'" do
       subject.escape("hello\\ world").should == "hello\\e world"
     end

@@ -437,7 +437,7 @@ module Kramdown
       #   The escaped text.
       #
       def escape(text)
-        text.gsub('\\',"\\e").gsub('-','\\-')
+        text.gsub('\\',"\\e").gsub('-','\\-').gsub(/^[\.']/) { |m| "\\&#{m}" }
       end
 
     end
