@@ -545,8 +545,8 @@ Hello world.
   end
 
   describe "#escape" do
-    it "should escape '\\' as '\\\\'" do
-      subject.escape("hello\\ world").should == "hello\\\\ world"
+    it "should escape '\\' as '\\e'" do
+      subject.escape("hello\\ world").should == "hello\\e world"
     end
 
     it "should escape '-' as '\\-'" do
