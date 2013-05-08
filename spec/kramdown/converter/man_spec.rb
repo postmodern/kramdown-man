@@ -100,8 +100,8 @@ Hello world.
       let(:doc) { Kramdown::Document.new("-- foo")     }
       let(:sym) { doc.root.children[0].children[0] }
 
-      it "should convert ndash symbols back into '--'" do
-        subject.convert_typographic_sym(sym).should == '--'
+      it "should convert ndash symbols back into '\-\-'" do
+        subject.convert_typographic_sym(sym).should == "\\-\\-"
       end
     end
 
@@ -421,12 +421,16 @@ Hello world.
     end
 
     context "when the paragraph starts with a em element" do
-      let(:option) { '--foo' }
-      let(:text)   { 'Foo bar baz' }
-      let(:doc)    { Kramdown::Document.new("*#{option}*\n\t#{text}") }
+      let(:option)         { '--foo'       }
+      let(:escaped_option) { "\\-\\-foo"   }
+      let(:text)           { 'Foo bar baz' }
+
+      let(:doc) do
+        Kramdown::Document.new("*#{option}*\n\t#{text}")
+      end
 
       it "should convert p elements into '.TP\\n\\fI--option\\fP\\ntext...'" do
-        subject.convert_p(p).should == ".TP\n\\fI#{option}\\fP\n#{text}"
+        subject.convert_p(p).should == ".TP\n\\fI#{escaped_option}\\fP\n#{text}"
       end
 
       context "when there is only one em element" do
@@ -439,20 +443,23 @@ Hello world.
       end
 
       context "when there are more than one em element" do
-        let(:flag)    { '-f'    }
-        let(:option)  { '--foo' }
-        let(:text)    { 'Foo bar baz' }
-        let(:doc)     { Kramdown::Document.new("*#{flag}*, *#{option}*\n\t#{text}") }
+        let(:flag)           { '-f'          }
+        let(:escaped_flag)   { "\\-f"        }
+        let(:text)           { 'Foo bar baz' }
 
-        it "should convert p elements into '.TP\\n\\fI-o\\fP, \\fI--option\\fP\\ntext...'" do
-          subject.convert_p(p).should == ".TP\n\\fI\\#{flag}\\fP, \\fI#{option}\\fP\n#{text}"
+        let(:doc) do
+          Kramdown::Document.new("*#{flag}*, *#{option}*\n\t#{text}")
+        end
+
+        it "should convert p elements into '.TP\\n\\fI-o\\fP, \\fI\\-\\-option\\fP\\ntext...'" do
+          subject.convert_p(p).should == ".TP\n\\fI#{escaped_flag}\\fP, \\fI#{escaped_option}\\fP\n#{text}"
         end
 
         context "when there is no newline" do
           let(:doc) { Kramdown::Document.new("*#{flag}* *#{option}*") }
 
           it "should convert the p element into a '.HP\\n...'" do
-            subject.convert_p(p).should == ".HP\n\\fI\\#{flag}\\fP \\fI#{option}\\fP"
+            subject.convert_p(p).should == ".HP\n\\fI#{escaped_flag}\\fP \\fI#{escaped_option}\\fP"
           end
         end
       end

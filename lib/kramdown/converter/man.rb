@@ -18,7 +18,7 @@ module Kramdown
 
       # Typographic Symbols and their UTF8 chars
       TYPOGRAPHIC_SYMS = {
-        :ndash       => "--",
+        :ndash       => "\\-\\-",
         :mdash       => "—",
         :hellip      => "…",
         :laquo       => "«",
