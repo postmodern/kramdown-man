@@ -380,7 +380,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_codespan(codespan)
-        "\\fB\\fC#{codespan.value}\\fR"
+        "\\fC#{codespan.value}\\fR"
       end
 
       #
