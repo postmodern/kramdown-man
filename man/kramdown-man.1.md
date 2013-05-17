@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-A [Kramdown][kramdown] convert for converting Markdown files into man pages.
+A [Kramdown][kramdown] plugin for converting Markdown files into man pages.
 
 ## EXAMPLE
 
