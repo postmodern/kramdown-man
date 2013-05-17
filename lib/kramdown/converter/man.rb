@@ -398,6 +398,9 @@ module Kramdown
         '♢' => '\[u2662]'
       }
 
+      # Regular expression to convert unicode characters into glyphs
+      GLYPH_REGEXP = Regexp.union(GLYPHS.keys)
+
       #
       # Initializes the converter.
       #
@@ -800,7 +803,7 @@ module Kramdown
       #   The escaped text.
       #
       def escape(text)
-        text.gsub('\\',"\\e").gsub('-','\\-').gsub(/^[\.']/) { |m| "\\&#{m}" }
+        text.gsub(GLYPH_REGEXP) { |char| GLYPHS[char] }
       end
 
     end

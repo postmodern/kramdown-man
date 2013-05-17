@@ -25,7 +25,7 @@ Hello world.
         ".TH Header",
         ".LP",
         ".PP",
-        "Hello world."
+        'Hello world\.'
       ].join("\n")
     end
   end
@@ -46,7 +46,7 @@ Hello world.
         ".TH Header",
         ".LP",
         ".PP",
-        "Hello world."
+        'Hello world\.'
       ].join("\n")
     end
   end
@@ -344,22 +344,24 @@ Hello world.
   end
 
   describe "#convert_blockquote" do
-    let(:text)       { "Some quote." }
-    let(:doc)        { Kramdown::Document.new("> #{text}") }
-    let(:blockquote) { doc.root.children[0] }
+    let(:text)         { "Some quote." }
+    let(:escaped_text) { 'Some quote\.' }
+    let(:doc)          { Kramdown::Document.new("> #{text}") }
+    let(:blockquote)   { doc.root.children[0] }
 
     it "should convert blockquote elements into '.PP\\n.RS\\ntext...\\n.RE'" do
-      subject.convert_blockquote(blockquote).should == ".PP\n.RS\n#{text}\n.RE"
+      subject.convert_blockquote(blockquote).should == ".PP\n.RS\n#{escaped_text}\n.RE"
     end
   end
 
   describe "#convert_codeblock" do
-    let(:code)      { "puts 'hello world'" }
-    let(:doc)       { Kramdown::Document.new("    #{code}\n") }
-    let(:codeblock) { doc.root.children[0] }
+    let(:code)         { "puts 'hello world'" }
+    let(:escaped_code) { 'puts \(aqhello world\(aq' }
+    let(:doc)          { Kramdown::Document.new("    #{code}\n") }
+    let(:codeblock)    { doc.root.children[0] }
 
     it "should convert codeblock elements into '.nf\\ntext...\\n.fi'" do
-      subject.convert_codeblock(codeblock).should == ".nf\n#{code}\n.fi"
+      subject.convert_codeblock(codeblock).should == ".nf\n#{escaped_code}\n.fi"
     end
   end
 
@@ -374,12 +376,13 @@ Hello world.
   end
 
   describe "#convert_p" do
-    let(:text) { "Hello world." }
-    let(:doc)  { Kramdown::Document.new(text) }
-    let(:p)    { doc.root.children[0] }
+    let(:text)         { "Hello world." }
+    let(:escaped_text) { 'Hello world\.' }
+    let(:doc)          { Kramdown::Document.new(text) }
+    let(:p)            { doc.root.children[0] }
 
     it "should convert p elements into '.PP\\ntext'" do
-      subject.convert_p(p).should == ".PP\n#{text}"
+      subject.convert_p(p).should == ".PP\n#{escaped_text}"
     end
 
     context "when the paragraph starts with a codespan element" do
@@ -516,11 +519,12 @@ Hello world.
       end
 
       context "when link is <email>" do
-        let(:email) { 'bob@example.com' }
-        let(:doc)   { Kramdown::Document.new("<#{email}>") }
+        let(:email)         { 'bob@example.com' }
+        let(:escaped_email) { 'bob\[at]example\.com' }
+        let(:doc)           { Kramdown::Document.new("<#{email}>") }
 
         it "should convert the link elements into '.MT email\\n.ME'" do
-          subject.convert_a(link).should == "\n.MT #{email}\n.ME"
+          subject.convert_a(link).should == "\n.MT #{escaped_email}\n.ME"
         end
       end
     end
@@ -545,24 +549,12 @@ Hello world.
   end
 
   describe "#escape" do
-    context "when a line begins with '.'" do
-      it "should prefix each newline with '\\&'" do
-        subject.escape(".hello\n.world").should == "\\&.hello\n\\&.world"
+    let(:text) { "hello\nworld" }
+
+    described_class::GLYPHS.each do |char,glyph|
+      it "should convert #{char.dump} into #{glyph.dump}" do
+        subject.escape("#{text} #{char}").should == "#{text} #{glyph}"
       end
-    end
-
-    context "when a line begins with '\\''" do
-      it "should prefix each newline with '\\&'" do
-        subject.escape("'hello\n'world").should == "\\&'hello\n\\&'world"
-      end
-    end
-
-    it "should escape '\\' as '\\e'" do
-      subject.escape("hello\\ world").should == "hello\\e world"
-    end
-
-    it "should escape '-' as '\\-'" do
-      subject.escape("foo-bar").should == "foo\\-bar"
     end
   end
 end
