@@ -29,10 +29,10 @@ module Kramdown
 
       # Smart Quotes and their UTF8 chars
       SMART_QUOTES = {
-        :lsquo => "‘",
-        :rsquo => "’",
-        :ldquo => "“",
-        :rdquo => "”"
+        :lsquo => '\[oq]',
+        :rsquo => '\[cq]',
+        :ldquo => '\[lq]',
+        :rdquo => '\[rq]'
       }
 
       GLYPHS = {

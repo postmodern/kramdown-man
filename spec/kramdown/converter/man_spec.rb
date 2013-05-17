@@ -165,8 +165,8 @@ Hello world.
       let(:doc)   { Kramdown::Document.new("'hello world'") }
       let(:quote) { doc.root.children[0].children.first }
 
-      it "should convert lsquo quotes into '‘'" do
-        subject.convert_smart_quote(quote).should == '‘'
+      it "should convert lsquo quotes into '\[oq]'" do
+        subject.convert_smart_quote(quote).should == '\[oq]'
       end
     end
 
@@ -174,8 +174,8 @@ Hello world.
       let(:doc)   { Kramdown::Document.new("'hello world'") }
       let(:quote) { doc.root.children[0].children.last }
 
-      it "should convert rsquo quotes into '’'" do
-        subject.convert_smart_quote(quote).should == '’'
+      it "should convert rsquo quotes into '\[cq]'" do
+        subject.convert_smart_quote(quote).should == '\[cq]'
       end
     end
 
@@ -183,8 +183,8 @@ Hello world.
       let(:doc)   { Kramdown::Document.new('"hello world"') }
       let(:quote) { doc.root.children[0].children.first }
 
-      it "should convert lsquo quotes into '“'" do
-        subject.convert_smart_quote(quote).should == '“'
+      it "should convert lsquo quotes into '\[lq]'" do
+        subject.convert_smart_quote(quote).should == '\[lq]'
       end
     end
 
@@ -192,8 +192,8 @@ Hello world.
       let(:doc)   { Kramdown::Document.new('"hello world"') }
       let(:quote) { doc.root.children[0].children.last }
 
-      it "should convert lsquo quotes into '”'" do
-        subject.convert_smart_quote(quote).should == '”'
+      it "should convert lsquo quotes into '\[rq]'" do
+        subject.convert_smart_quote(quote).should == '\[rq]'
       end
     end
   end
