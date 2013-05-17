@@ -6,18 +6,18 @@
 .LP
 .PP
 A Kramdown
-.UR http://kramdown.rubyforge.org/
-.UE convert for converting Markdown files into man pages.
+.UR http:\[sl]\[sl]kramdown\.rubyforge\.org\[sl]
+.UE plugin for converting Markdown files into man pages\.
 .LP
 .SH EXAMPLE
 .LP
 .nf
-require 'kramdown'
-require 'kramdown/man'
+require \(aqkramdown\(aq
+require \(aqkramdown\[sl]man\(aq
 
-doc = Kramdown::Document.new(File.read('man/kramdown\-man.1.md'))
-File.write('man/kramdown\-man.1',doc.to_man)
-system 'man', 'man/kramdown\-man.1'
+doc \[eq] Kramdown::Document\.new(File\.read(\(aqman\[sl]kramdown\-man\.1\.md\(aq))
+File\.write(\(aqman\[sl]kramdown\-man\.1\(aq,doc\.to\[ru]man)
+system \(aqman\(aq, \(aqman\[sl]kramdown\-man\.1\(aq
 .fi
 .LP
 .SH SYNTAX
@@ -25,7 +25,7 @@ system 'man', 'man/kramdown\-man.1'
 .SS FORMATTING
 .LP
 .nf
-`code`
+\`code\`
 .fi
 .LP
 .PP
@@ -48,53 +48,53 @@ system 'man', 'man/kramdown\-man.1'
 .SS PARAGRAPHS
 .LP
 .nf
-Normal paragraph.
+Normal paragraph\.
 .fi
 .LP
 .PP
-Normal paragraph.
+Normal paragraph\.
 .LP
 .nf
-`command` [`\-\-foo`] *FILE*
+\`command\` \[lB]\`\-\-foo\`\[rB] *FILE*
 .fi
 .LP
 .HP
-\fBcommand\fR [\fB--foo\fR] \fIFILE\fP
+\fBcommand\fR \[lB]\fB--foo\fR\[rB] \fIFILE\fP
 .LP
 .nf
-`\-\-tagged`
-  Text here.
+\`\-\-tagged\`
+  Text here\.
 .fi
 .LP
 .TP
 \fB--tagged\fR
-Text here.
+Text here\.
 .LP
 .SS LINKS
 .LP
 .nf
-[website](http://example.com/)
+\[lB]website\[rB](http:\[sl]\[sl]example\.com\[sl])
 .fi
 .LP
 .PP
 website
-.UR http://example.com/
+.UR http:\[sl]\[sl]example\.com\[sl]
 .UE
 .LP
 .nf
-[bash](man:bash(1))
+\[lB]bash\[rB](man:bash(1))
 .fi
 .LP
 .PP
 .BR bash (1)
 .LP
 .nf
-Email <bob@example.com>
+Email <bob\[at]example\.com>
 .fi
 .LP
 .PP
 Email 
-.MT bob@example.com
+.MT bob\[at]example\.com
 .ME
 .LP
 .SS LISTS
@@ -142,42 +142,42 @@ extra paragraph
 .SS BLOCKQUOTES
 .LP
 .nf
-> Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
+> Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away\.
 >
-> \-\-Antoine de Saint\-Exupéry
+> \-\-Antoine de Saint\-Exup\['e]ry
 .fi
 .LP
 .PP
 .RS
-Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
+Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away\.
 .LP
-\-\-Antoine de Saint\-Exupéry
+\-\-Antoine de Saint\-Exup\['e]ry
 .RE
 .LP
 .SS CODE BLOCKS
 .LP
 .nf
-    #include <stdio.h>
+    \[sh]include <stdio\.h>
 
     int main()
-    {
-	    printf("hello world\en");
+    \[lC]
+	    printf(\[dq]hello world\en\[dq]);
 	    return 0;
-    }
+    \[rC]
 
-#include <stdio.h>
+\[sh]include <stdio\.h>
 
 int main()
-{
-    printf("hello world\en");
+\[lC]
+    printf(\[dq]hello world\en\[dq]);
     return 0;
-}
+\[rC]
 .fi
 .LP
 .SH AUTHOR
 .LP
 .PP
 Postmodern 
-.MT postmodern.mod3@gmail.com
+.MT postmodern\.mod3\[at]gmail\.com
 .ME
 .LP
