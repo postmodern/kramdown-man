@@ -18,13 +18,13 @@ module Kramdown
 
       # Typographic Symbols and their UTF8 chars
       TYPOGRAPHIC_SYMS = {
-        :ndash       => "\\-\\-",
-        :mdash       => "—",
-        :hellip      => "…",
-        :laquo       => "«",
-        :raquo       => "»",
-        :laquo_space => "«",
-        :raquo_space => "»"
+        :ndash       => '\-\-',
+        :mdash       => '\[em]',
+        :hellip      => '…',
+        :laquo       => '\[Fo]',
+        :raquo       => '\[Fc]',
+        :laquo_space => '\[Fo]',
+        :raquo_space => '\[Fc]'
       }
 
       # Smart Quotes and their UTF8 chars

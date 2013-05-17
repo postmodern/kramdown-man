@@ -109,8 +109,8 @@ Hello world.
       let(:doc) { Kramdown::Document.new("--- foo") }
       let(:sym) { doc.root.children[0].children[0]  }
 
-      it "should convert mdash symbols into '—'" do
-        subject.convert_typographic_sym(sym).should == '—'
+      it "should convert mdash symbols into '\[em]'" do
+        subject.convert_typographic_sym(sym).should == '\[em]'
       end
     end
 
@@ -127,8 +127,8 @@ Hello world.
       let(:doc) { Kramdown::Document.new("<< foo") }
       let(:sym) { doc.root.children[0].children[0]  }
 
-      it "should convert mdash symbols into '«'" do
-        subject.convert_typographic_sym(sym).should == '«'
+      it "should convert mdash symbols into '\[Fo]'" do
+        subject.convert_typographic_sym(sym).should == '\[Fo]'
       end
     end
 
@@ -136,8 +136,8 @@ Hello world.
       let(:doc) { Kramdown::Document.new("foo >> bar") }
       let(:sym) { doc.root.children[0].children[1]  }
 
-      it "should convert mdash symbols into '»'" do
-        subject.convert_typographic_sym(sym).should == '»'
+      it "should convert mdash symbols into '\[Fc]'" do
+        subject.convert_typographic_sym(sym).should == '\[Fc]'
       end
     end
 
@@ -145,8 +145,8 @@ Hello world.
       let(:doc) { Kramdown::Document.new(" << foo") }
       let(:sym) { doc.root.children[0].children[0]  }
 
-      it "should convert mdash symbols into '«'" do
-        subject.convert_typographic_sym(sym).should == '«'
+      it "should convert mdash symbols into '\[Fo]'" do
+        subject.convert_typographic_sym(sym).should == '\[Fo]'
       end
     end
 
@@ -154,8 +154,8 @@ Hello world.
       let(:doc) { Kramdown::Document.new("foo  >> bar") }
       let(:sym) { doc.root.children[0].children[1]  }
 
-      it "should convert mdash symbols into '»'" do
-        subject.convert_typographic_sym(sym).should == '»'
+      it "should convert mdash symbols into '\[Fc]'" do
+        subject.convert_typographic_sym(sym).should == '\[Fc]'
       end
     end
   end
