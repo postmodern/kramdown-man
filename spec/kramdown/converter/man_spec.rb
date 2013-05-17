@@ -500,28 +500,28 @@ Hello world.
   end
 
   describe "#convert_a" do
-    let(:text) { 'example'             }
-    let(:href) { 'http://example.com/' }
-    let(:doc)  { Kramdown::Document.new("[#{text}](#{href})") }
-    let(:link) { doc.root.children[0].children[0] }
+    let(:text)         { 'example'             }
+    let(:href)         { 'http://example.com/' }
+    let(:escaped_href) { 'http:\[sl]\[sl]example\.com\[sl]' }
+    let(:doc)          { Kramdown::Document.new("[#{text}](#{href})") }
+    let(:link)         { doc.root.children[0].children[0] }
 
     it "should convert a link elements into 'text\\n.UR href\\n.UE'" do
-      subject.convert_a(link).should == "#{text}\n.UR #{href}\n.UE"
+      subject.convert_a(link).should == "#{text}\n.UR #{escaped_href}\n.UE"
     end
 
     context "when the href begins with mailto:" do
-      let(:text)  { 'Bob'             }
-      let(:email) { 'bob@example.com' }
-      let(:doc)   { Kramdown::Document.new("[#{text}](mailto:#{email})") }
+      let(:text)          { 'Bob'             }
+      let(:email)         { 'bob@example.com' }
+      let(:escaped_email) { 'bob\[at]example\.com' }
+      let(:doc)           { Kramdown::Document.new("[#{text}](mailto:#{email})") }
 
       it "should convert the link elements into '.MT email\\n.ME'" do
-        subject.convert_a(link).should == "#{text}\n.MT #{email}\n.ME"
+        subject.convert_a(link).should == "#{text}\n.MT #{escaped_email}\n.ME"
       end
 
       context "when link is <email>" do
-        let(:email)         { 'bob@example.com' }
-        let(:escaped_email) { 'bob\[at]example\.com' }
-        let(:doc)           { Kramdown::Document.new("<#{email}>") }
+        let(:doc) { Kramdown::Document.new("<#{email}>") }
 
         it "should convert the link elements into '.MT email\\n.ME'" do
           subject.convert_a(link).should == "\n.MT #{escaped_email}\n.ME"

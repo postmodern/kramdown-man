@@ -759,7 +759,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_a(a)
-        href = a.attr['href']
+        href = escape(a.attr['href'])
         text = convert_children(a.children)
 
         case href
