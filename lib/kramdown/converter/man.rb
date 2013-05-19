@@ -20,7 +20,7 @@ module Kramdown
       TYPOGRAPHIC_SYMS = {
         :ndash       => '\-\-',
         :mdash       => '\[em]',
-        :hellip      => '…',
+        :hellip      => '...',
         :laquo       => '\[Fo]',
         :raquo       => '\[Fc]',
         :laquo_space => '\[Fo]',
