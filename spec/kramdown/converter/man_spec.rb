@@ -118,8 +118,8 @@ Hello world.
       let(:doc) { Kramdown::Document.new("... foo") }
       let(:sym) { doc.root.children[0].children[0]  }
 
-      it "should convert mdash symbols into '...'" do
-        subject.convert_typographic_sym(sym).should == '...'
+      it "should convert mdash symbols into '\\.\\.\\.'" do
+        subject.convert_typographic_sym(sym).should == '\.\.\.'
       end
     end
 
