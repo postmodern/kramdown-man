@@ -1,3 +1,13 @@
+### 0.1.5 / 2013-05-19
+
+* Translate unicode symbols into roff glyphs.
+* Convert typographic symbols and smart quotes into glyphs.
+* Simplify `\fB\fC` as `\fC` (Colin Watson).
+* Use `\fB` for codespans (Colin Watson).
+* Escape `--` as `\-\-` (Colin Watson).
+* Escape `\` as `\e` (Colin Watson).
+* Emit `.TP` or `.HP` if the paragraph begins with a strong element.
+
 ### 0.1.4 / 2013-05-05
 
 * Improve detection of tagged paragraphs.
