@@ -332,6 +332,24 @@ Hello world.
     end
   end
 
+  describe "#convert_dl" do
+    let(:text1) { 'foo' }
+    let(:text2) { 'bar' }
+    let(:doc)   { Kramdown::Document.new("#{text1}\n: #{text2}") }
+    let(:dl)    { doc.root.children[0] }
+
+    it "should convert dl elements into '.RS\\n...\\n.PD\\n.RE'" do
+      subject.convert_dl(dl).should == [
+        ".RS",
+        ".IP \"\\fB#{text1}\\fP\" 0.4i",
+        ".PD 0",
+        text2,
+        ".PD",
+        ".RE"
+      ].join("\n")
+    end
+  end
+
   describe "#convert_abbreviation" do
     let(:acronym)      { 'HTML' }
     let(:definition)   { 'Hyper Text Markup Language' }
