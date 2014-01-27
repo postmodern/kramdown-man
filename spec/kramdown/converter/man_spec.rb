@@ -256,8 +256,10 @@ Hello world.
         ".RS",
         ".IP \\(bu 2",
         text1,
+        ".PD 0",
         ".IP \\(bu 2",
         text2,
+        ".PD",
         ".RE"
       ].join("\n")
     end
@@ -294,14 +296,16 @@ Hello world.
     let(:doc)   { Kramdown::Document.new("1. #{text1}\n2. #{text2}") }
     let(:ol)    { doc.root.children[0] }
 
-    it "should convert ol elements into '.RS\\n...\\n.RE'" do
+    it "should convert ol elements into '.RS\\n...\\n.PD\n.RE'" do
       subject.convert_ol(ol).should == [
         ".nr step1 0 1",
         ".RS",
         ".IP \\n+[step1]",
         text1,
+        ".PD 0",
         ".IP \\n+[step1]",
         text2,
+        ".PD",
         ".RE"
       ].join("\n")
     end
@@ -329,6 +333,24 @@ Hello world.
           text2
         ].join("\n")
       end
+    end
+  end
+
+  describe "#convert_dl" do
+    let(:text1) { 'foo' }
+    let(:text2) { 'bar' }
+    let(:doc)   { Kramdown::Document.new("#{text1}\n: #{text2}") }
+    let(:dl)    { doc.root.children[0] }
+
+    it "should convert dl elements into '.RS\\n...\\n.PD\\n.RE'" do
+      subject.convert_dl(dl).should == [
+        ".RS",
+        ".IP \"\\fB#{text1}\\fP\" 0.4i",
+        ".PD 0",
+        text2,
+        ".PD",
+        ".RE"
+      ].join("\n")
     end
   end
 

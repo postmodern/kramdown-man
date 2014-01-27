@@ -552,9 +552,9 @@ module Kramdown
       #   The roff output.
       #
       def convert_ul(ul)
-        content = ul.children.map { |li| convert_ul_li(li) }.join("\n")
+        content = ul.children.map { |li| convert_ul_li(li) }.join("\n.PD 0\n")
 
-        return ".RS\n#{content}\n.RE"
+        return ".RS\n#{content}\n.PD\n.RE"
       end
 
       #
@@ -591,9 +591,9 @@ module Kramdown
         @ol_index += 1
 
         header  = ".nr step#{@ol_index} 0 1"
-        content = ol.children.map { |li| convert_ol_li(li) }.join("\n")
+        content = ol.children.map { |li| convert_ol_li(li) }.join("\n.PD 0\n")
 
-        return "#{header}\n.RS\n#{content}\n.RE"
+        return "#{header}\n.RS\n#{content}\n.PD\n.RE"
       end
 
       #
@@ -613,6 +613,64 @@ module Kramdown
             if index == 0 then ".IP \\n+[step#{@ol_index}]\n#{content}"
             else               ".IP \\n\n#{content}"
             end
+          end
+        }.compact.join("\n")
+      end
+
+      #
+      # Converts a `kd:dl` element.
+      #
+      # @param [Kramdown::Element] dl
+      #   A `kd:dl` element.
+      #
+      # @return [String]
+      #   The roff output.
+      #
+      def convert_dl(dl)
+        content = dl.children.each_with_index.map { |child,index|
+          case child.type
+          when :dt
+            content = convert_dl_dt(child, index)
+          when :dd
+            content = convert_dl_dd(child)
+          end
+        }.compact.join("\n")
+
+        return ".RS\n#{content}\n.PD\n.RE"
+      end
+
+      #
+      # Converts a `kd:dt` element within a `kd:dl` list.
+      #
+      # @param [Kramdown::Element] dt
+      #   A `kd:dt` element.
+      #
+      # @return [String]
+      #   The roff output.
+      #
+      def convert_dl_dt(dt, index)
+        content = convert_children(dt.children)
+        if index == 0 then
+            ".IP \"\\fB#{content}\\fP\" 0.4i\n.PD 0"
+        else
+            ".IP \"\\fB#{content}\\fP\"\n.PD 0"
+        end
+      end
+
+      #
+      # Converts a `kd:dd` element within a `kd:dd` list.
+      #
+      # @param [Kramdown::Element] dd
+      #   A `kd:dd` element.
+      #
+      # @return [String]
+      #   The roff output.
+      #
+      def convert_dl_dd(dd)
+        dd.children.each_with_index.map { |child,index|
+          if child.type == :p
+            content = convert_children(child.children)
+            "#{content}"
           end
         }.compact.join("\n")
       end
