@@ -552,9 +552,9 @@ module Kramdown
       #   The roff output.
       #
       def convert_ul(ul)
-        content = ul.children.map { |li| convert_ul_li(li) }.join("\n")
+        content = ul.children.map { |li| convert_ul_li(li) }.join("\n.PD 0\n")
 
-        return ".RS\n#{content}\n.RE"
+        return ".RS\n#{content}\n.PD\n.RE"
       end
 
       #
@@ -591,9 +591,9 @@ module Kramdown
         @ol_index += 1
 
         header  = ".nr step#{@ol_index} 0 1"
-        content = ol.children.map { |li| convert_ol_li(li) }.join("\n")
+        content = ol.children.map { |li| convert_ol_li(li) }.join("\n.PD 0\n")
 
-        return "#{header}\n.RS\n#{content}\n.RE"
+        return "#{header}\n.RS\n#{content}\n.PD\n.RE"
       end
 
       #
