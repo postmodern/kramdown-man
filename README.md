@@ -170,7 +170,7 @@ Email <bob@example.com>
 
 ## Copyright
 
-Copyright (c) 2013 Hal Brodigan
+Copyright (c) 2013-2015 Hal Brodigan
 
 See {file:LICENSE.txt} for details.
 
