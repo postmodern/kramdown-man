@@ -1,3 +1,7 @@
+### 0.1.6 / 2015-12-25
+
+* Commented out duplicate Hash entries that were causing warnings.
+
 ### 0.1.5 / 2013-05-19
 
 * Translate unicode symbols into roff glyphs.
