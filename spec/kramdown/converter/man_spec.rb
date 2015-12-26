@@ -20,13 +20,13 @@ Hello world.
     let(:root) { doc.root }
 
     it "should add the header" do
-      subject.convert(root).should == [
+      expect(subject.convert(root)).to eq([
         described_class::HEADER,
         ".TH Header",
         ".LP",
         ".PP",
         'Hello world\.'
-      ].join("\n")
+      ].join("\n"))
     end
   end
 
@@ -42,12 +42,12 @@ Hello world.
     let(:root) { doc.root }
 
     it "should convert every element" do
-      subject.convert_root(root).should == [
+      expect(subject.convert_root(root)).to eq([
         ".TH Header",
         ".LP",
         ".PP",
         'Hello world\.'
-      ].join("\n")
+      ].join("\n"))
     end
   end
 
@@ -56,7 +56,7 @@ Hello world.
     let(:el)  { doc.root.children[0] }
 
     it "should convert the element based on it's type" do
-      subject.convert_element(el).should == subject.convert_codeblock(el)
+      expect(subject.convert_element(el)).to eq(subject.convert_codeblock(el))
     end
   end
 
@@ -65,7 +65,7 @@ Hello world.
     let(:blank) { doc.root.children[0].children[1] }
 
     it "should convert blank elements to '.LP'" do
-      subject.convert_blank(blank).should == '.LP'
+      expect(subject.convert_blank(blank)).to eq('.LP')
     end
   end
 
@@ -75,14 +75,14 @@ Hello world.
     let(:text)    { doc.root.children[0].children[0] }
 
     it "should convert text elements" do
-      subject.convert_text(text).should == content
+      expect(subject.convert_text(text)).to eq(content)
     end
 
     context "when the text has two-space indentation" do
       let(:content) { "Foo\n  bar\n  baz" }
 
       it "should strip leading whitespace from each line" do
-        subject.convert_text(text).should == content.gsub("\n  ","\n")
+        expect(subject.convert_text(text)).to eq(content.gsub("\n  ","\n"))
       end
     end
 
@@ -90,7 +90,7 @@ Hello world.
       let(:content) { "Foo\n\tbar\n\tbaz" }
 
       it "should strip leading whitespace from each line" do
-        subject.convert_text(text).should == content.gsub("\n\t","\n")
+        expect(subject.convert_text(text)).to eq(content.gsub("\n\t","\n"))
       end
     end
   end
@@ -101,7 +101,7 @@ Hello world.
       let(:sym) { doc.root.children[0].children[0] }
 
       it "should convert ndash symbols back into '\-\-'" do
-        subject.convert_typographic_sym(sym).should == "\\-\\-"
+        expect(subject.convert_typographic_sym(sym)).to eq("\\-\\-")
       end
     end
 
@@ -110,7 +110,7 @@ Hello world.
       let(:sym) { doc.root.children[0].children[0]  }
 
       it "should convert mdash symbols into '\[em]'" do
-        subject.convert_typographic_sym(sym).should == '\[em]'
+        expect(subject.convert_typographic_sym(sym)).to eq('\[em]')
       end
     end
 
@@ -119,7 +119,7 @@ Hello world.
       let(:sym) { doc.root.children[0].children[0]  }
 
       it "should convert mdash symbols into '\\.\\.\\.'" do
-        subject.convert_typographic_sym(sym).should == '\.\.\.'
+        expect(subject.convert_typographic_sym(sym)).to eq('\.\.\.')
       end
     end
 
@@ -128,7 +128,7 @@ Hello world.
       let(:sym) { doc.root.children[0].children[0]  }
 
       it "should convert mdash symbols into '\[Fo]'" do
-        subject.convert_typographic_sym(sym).should == '\[Fo]'
+        expect(subject.convert_typographic_sym(sym)).to eq('\[Fo]')
       end
     end
 
@@ -137,7 +137,7 @@ Hello world.
       let(:sym) { doc.root.children[0].children[1]  }
 
       it "should convert mdash symbols into '\[Fc]'" do
-        subject.convert_typographic_sym(sym).should == '\[Fc]'
+        expect(subject.convert_typographic_sym(sym)).to eq('\[Fc]')
       end
     end
 
@@ -146,7 +146,7 @@ Hello world.
       let(:sym) { doc.root.children[0].children[0]  }
 
       it "should convert mdash symbols into '\[Fo]'" do
-        subject.convert_typographic_sym(sym).should == '\[Fo]'
+        expect(subject.convert_typographic_sym(sym)).to eq('\[Fo]')
       end
     end
 
@@ -155,7 +155,7 @@ Hello world.
       let(:sym) { doc.root.children[0].children[1]  }
 
       it "should convert mdash symbols into '\[Fc]'" do
-        subject.convert_typographic_sym(sym).should == '\[Fc]'
+        expect(subject.convert_typographic_sym(sym)).to eq('\[Fc]')
       end
     end
   end
@@ -166,7 +166,7 @@ Hello world.
       let(:quote) { doc.root.children[0].children.first }
 
       it "should convert lsquo quotes into '\[oq]'" do
-        subject.convert_smart_quote(quote).should == '\[oq]'
+        expect(subject.convert_smart_quote(quote)).to eq('\[oq]')
       end
     end
 
@@ -175,7 +175,7 @@ Hello world.
       let(:quote) { doc.root.children[0].children.last }
 
       it "should convert rsquo quotes into '\[cq]'" do
-        subject.convert_smart_quote(quote).should == '\[cq]'
+        expect(subject.convert_smart_quote(quote)).to eq('\[cq]')
       end
     end
 
@@ -184,7 +184,7 @@ Hello world.
       let(:quote) { doc.root.children[0].children.first }
 
       it "should convert lsquo quotes into '\[lq]'" do
-        subject.convert_smart_quote(quote).should == '\[lq]'
+        expect(subject.convert_smart_quote(quote)).to eq('\[lq]')
       end
     end
 
@@ -193,7 +193,7 @@ Hello world.
       let(:quote) { doc.root.children[0].children.last }
 
       it "should convert lsquo quotes into '\[rq]'" do
-        subject.convert_smart_quote(quote).should == '\[rq]'
+        expect(subject.convert_smart_quote(quote)).to eq('\[rq]')
       end
     end
   end
@@ -204,7 +204,7 @@ Hello world.
       let(:header) { doc.root.children[0] }
 
       it "should convert level 1 headers into '.TH text'" do
-        subject.convert_header(header).should == ".TH Header"
+        expect(subject.convert_header(header)).to eq(".TH Header")
       end
     end
 
@@ -213,7 +213,7 @@ Hello world.
       let(:header) { doc.root.children[0] }
 
       it "should convert level 2 headers into '.SH text'" do
-        subject.convert_header(header).should == ".SH Header"
+        expect(subject.convert_header(header)).to eq(".SH Header")
       end
     end
 
@@ -222,7 +222,7 @@ Hello world.
       let(:header) { doc.root.children[0] }
 
       it "should convert level 2 headers into '.SS text'" do
-        subject.convert_header(header).should == ".SS Header"
+        expect(subject.convert_header(header)).to eq(".SS Header")
       end
     end
 
@@ -231,7 +231,7 @@ Hello world.
       let(:header) { doc.root.children[0] }
 
       it "should convert level 2 headers into '.SS text'" do
-        subject.convert_header(header).should == ".SS Header"
+        expect(subject.convert_header(header)).to eq(".SS Header")
       end
     end
   end
@@ -241,7 +241,7 @@ Hello world.
     let(:hr)  { doc.root.children[0] }
 
     it "should convert hr elements into '.ti 0\\n\\\\l'\\\\n(.lu\\''" do
-      subject.convert_hr(hr).should == ".ti 0\n\\l'\\n(.lu'"
+      expect(subject.convert_hr(hr)).to eq(".ti 0\n\\l'\\n(.lu'")
     end
   end
 
@@ -252,14 +252,14 @@ Hello world.
     let(:ul)    { doc.root.children[0] }
 
     it "should convert ul elements into '.RS\\n...\\n.RE'" do
-      subject.convert_ul(ul).should == [
+      expect(subject.convert_ul(ul)).to eq([
         ".RS",
         ".IP \\(bu 2",
         text1,
         ".IP \\(bu 2",
         text2,
         ".RE"
-      ].join("\n")
+      ].join("\n"))
     end
   end
 
@@ -269,7 +269,7 @@ Hello world.
     let(:li)   { doc.root.children[0].children[0]    }
 
     it "should convert the first p element to '.IP \\\\(bu 2\\n...'" do
-      subject.convert_ul_li(li).should == ".IP \\(bu 2\n#{text}"
+      expect(subject.convert_ul_li(li)).to eq(".IP \\(bu 2\n#{text}")
     end
 
     context "with multiple multiple paragraphs" do
@@ -278,12 +278,12 @@ Hello world.
       let(:doc)   { Kramdown::Document.new("* #{text1}\n\n  #{text2}") }
 
       it "should convert the other p elements to '.IP \\\\( 2\\n...'" do
-        subject.convert_ul_li(li).should == [
+        expect(subject.convert_ul_li(li)).to eq([
           ".IP \\(bu 2",
           text1,
           ".IP \\( 2",
           text2
-        ].join("\n")
+        ].join("\n"))
       end
     end
   end
@@ -295,7 +295,7 @@ Hello world.
     let(:ol)    { doc.root.children[0] }
 
     it "should convert ol elements into '.RS\\n...\\n.RE'" do
-      subject.convert_ol(ol).should == [
+      expect(subject.convert_ol(ol)).to eq([
         ".nr step1 0 1",
         ".RS",
         ".IP \\n+[step1]",
@@ -303,7 +303,7 @@ Hello world.
         ".IP \\n+[step1]",
         text2,
         ".RE"
-      ].join("\n")
+      ].join("\n"))
     end
   end
 
@@ -313,7 +313,7 @@ Hello world.
     let(:li)   { doc.root.children[0].children[0]     }
 
     it "should convert the first p element to '.IP \\\\n+[step0]\\n...'" do
-      subject.convert_ol_li(li).should == ".IP \\n+[step0]\n#{text}"
+      expect(subject.convert_ol_li(li)).to eq(".IP \\n+[step0]\n#{text}")
     end
 
     context "with multiple multiple paragraphs" do
@@ -322,12 +322,12 @@ Hello world.
       let(:doc)   { Kramdown::Document.new("1. #{text1}\n\n   #{text2}") }
 
       it "should convert the other p elements to '.IP \\\\n\\n...'" do
-        subject.convert_ol_li(li).should == [
+        expect(subject.convert_ol_li(li)).to eq([
           ".IP \\n+[step0]",
           text1,
           ".IP \\n",
           text2
-        ].join("\n")
+        ].join("\n"))
       end
     end
   end
@@ -339,7 +339,7 @@ Hello world.
     let(:abbreviation) { doc.root.children[0].children[1] }
 
     it "should convert abbreviation elements into their text" do
-      subject.convert_abbreviation(abbreviation).should == acronym
+      expect(subject.convert_abbreviation(abbreviation)).to eq(acronym)
     end
   end
 
@@ -350,7 +350,7 @@ Hello world.
     let(:blockquote)   { doc.root.children[0] }
 
     it "should convert blockquote elements into '.PP\\n.RS\\ntext...\\n.RE'" do
-      subject.convert_blockquote(blockquote).should == ".PP\n.RS\n#{escaped_text}\n.RE"
+      expect(subject.convert_blockquote(blockquote)).to eq(".PP\n.RS\n#{escaped_text}\n.RE")
     end
   end
 
@@ -361,7 +361,7 @@ Hello world.
     let(:codeblock)    { doc.root.children[0] }
 
     it "should convert codeblock elements into '.nf\\ntext...\\n.fi'" do
-      subject.convert_codeblock(codeblock).should == ".nf\n#{escaped_code}\n.fi"
+      expect(subject.convert_codeblock(codeblock)).to eq(".nf\n#{escaped_code}\n.fi")
     end
   end
 
@@ -371,7 +371,7 @@ Hello world.
     let(:comment) { doc.root.children[0] }
 
     it "should convert comment elements into '.\\\" text...'" do
-      subject.convert_comment(comment).should == ".\\\" #{text}"
+      expect(subject.convert_comment(comment)).to eq(".\\\" #{text}")
     end
   end
 
@@ -382,7 +382,7 @@ Hello world.
     let(:p)            { doc.root.children[0] }
 
     it "should convert p elements into '.PP\\ntext'" do
-      subject.convert_p(p).should == ".PP\n#{escaped_text}"
+      expect(subject.convert_p(p)).to eq(".PP\n#{escaped_text}")
     end
 
     context "when the paragraph starts with a codespan element" do
@@ -391,7 +391,7 @@ Hello world.
       let(:doc)    { Kramdown::Document.new("`#{option}`\n\t#{text}") }
 
       it "should convert p elements into '.TP\\n\\fB--option\\fR\\ntext...'" do
-        subject.convert_p(p).should == ".TP\n\\fB#{option}\\fR\n#{text}"
+        expect(subject.convert_p(p)).to eq(".TP\n\\fB#{option}\\fR\n#{text}")
       end
 
       context "when there is only one codespan element" do
@@ -399,7 +399,7 @@ Hello world.
         let(:doc)  { Kramdown::Document.new("`#{code}`") }
 
         it "should convert p elements into '.PP\\n\\fB...\\fR'" do
-          subject.convert_p(p).should == ".PP\n\\fB#{code}\\fR"
+          expect(subject.convert_p(p)).to eq(".PP\n\\fB#{code}\\fR")
         end
       end
 
@@ -410,14 +410,14 @@ Hello world.
         let(:doc)    { Kramdown::Document.new("`#{flag}`, `#{option}`\n\t#{text}") }
 
         it "should convert p elements into '.TP\\n\\fB-o\\fR, \\fB--option\\fR\\ntext...'" do
-          subject.convert_p(p).should == ".TP\n\\fB#{flag}\\fR, \\fB#{option}\\fR\n#{text}"
+          expect(subject.convert_p(p)).to eq(".TP\n\\fB#{flag}\\fR, \\fB#{option}\\fR\n#{text}")
         end
 
         context "when there is no newline" do
           let(:doc) { Kramdown::Document.new("`#{flag}` `#{option}`") }
 
           it "should convert the p element into a '.HP\\n...'" do
-            subject.convert_p(p).should == ".HP\n\\fB#{flag}\\fR \\fB#{option}\\fR"
+            expect(subject.convert_p(p)).to eq(".HP\n\\fB#{flag}\\fR \\fB#{option}\\fR")
           end
         end
       end
@@ -433,7 +433,7 @@ Hello world.
       end
 
       it "should convert p elements into '.TP\\n\\fI--option\\fP\\ntext...'" do
-        subject.convert_p(p).should == ".TP\n\\fI#{escaped_option}\\fP\n#{text}"
+        expect(subject.convert_p(p)).to eq(".TP\n\\fI#{escaped_option}\\fP\n#{text}")
       end
 
       context "when there is only one em element" do
@@ -441,7 +441,7 @@ Hello world.
         let(:doc)    { Kramdown::Document.new("*#{text}*") }
 
         it "should convert p elements into '.PP\\n\\fI...\\fP'" do
-          subject.convert_p(p).should == ".PP\n\\fI#{text}\\fP"
+          expect(subject.convert_p(p)).to eq(".PP\n\\fI#{text}\\fP")
         end
       end
 
@@ -455,14 +455,14 @@ Hello world.
         end
 
         it "should convert p elements into '.TP\\n\\fI-o\\fP, \\fI\\-\\-option\\fP\\ntext...'" do
-          subject.convert_p(p).should == ".TP\n\\fI#{escaped_flag}\\fP, \\fI#{escaped_option}\\fP\n#{text}"
+          expect(subject.convert_p(p)).to eq(".TP\n\\fI#{escaped_flag}\\fP, \\fI#{escaped_option}\\fP\n#{text}")
         end
 
         context "when there is no newline" do
           let(:doc) { Kramdown::Document.new("*#{flag}* *#{option}*") }
 
           it "should convert the p element into a '.HP\\n...'" do
-            subject.convert_p(p).should == ".HP\n\\fI#{escaped_flag}\\fP \\fI#{escaped_option}\\fP"
+            expect(subject.convert_p(p)).to eq(".HP\n\\fI#{escaped_flag}\\fP \\fI#{escaped_option}\\fP")
           end
         end
       end
@@ -475,7 +475,7 @@ Hello world.
     let(:em)   { doc.root.children[0].children[0] }
 
     it "should convert em elements into '\\fItext\\fP'" do
-      subject.convert_em(em).should == "\\fI#{text}\\fP"
+      expect(subject.convert_em(em)).to eq("\\fI#{text}\\fP")
     end
   end
 
@@ -485,7 +485,7 @@ Hello world.
     let(:strong) { doc.root.children[0].children[0] }
 
     it "should convert strong elements into '\\fBtext\\fP'" do
-      subject.convert_strong(strong).should == "\\fB#{text}\\fP"
+      expect(subject.convert_strong(strong)).to eq("\\fB#{text}\\fP")
     end
   end
 
@@ -495,7 +495,7 @@ Hello world.
     let(:codespan) { doc.root.children[0].children[0] }
 
     it "should convert codespan elements into '\\fBcode\\fR'" do
-      subject.convert_codespan(codespan).should == "\\fB#{code}\\fR"
+      expect(subject.convert_codespan(codespan)).to eq("\\fB#{code}\\fR")
     end
   end
 
@@ -507,7 +507,7 @@ Hello world.
     let(:link)         { doc.root.children[0].children[0] }
 
     it "should convert a link elements into 'text\\n.UR href\\n.UE'" do
-      subject.convert_a(link).should == "#{text}\n.UR #{escaped_href}\n.UE"
+      expect(subject.convert_a(link)).to eq("#{text}\n.UR #{escaped_href}\n.UE")
     end
 
     context "when the href begins with mailto:" do
@@ -517,14 +517,14 @@ Hello world.
       let(:doc)           { Kramdown::Document.new("[#{text}](mailto:#{email})") }
 
       it "should convert the link elements into '.MT email\\n.ME'" do
-        subject.convert_a(link).should == "#{text}\n.MT #{escaped_email}\n.ME"
+        expect(subject.convert_a(link)).to eq("#{text}\n.MT #{escaped_email}\n.ME")
       end
 
       context "when link is <email>" do
         let(:doc) { Kramdown::Document.new("<#{email}>") }
 
         it "should convert the link elements into '.MT email\\n.ME'" do
-          subject.convert_a(link).should == "\n.MT #{escaped_email}\n.ME"
+          expect(subject.convert_a(link)).to eq("\n.MT #{escaped_email}\n.ME")
         end
       end
     end
@@ -534,7 +534,7 @@ Hello world.
       let(:doc)  { Kramdown::Document.new("[#{man}](man:#{man})") }
 
       it "should convert the link elements into '.BR man'" do
-        subject.convert_a(link).should == "\n.BR #{man}"
+        expect(subject.convert_a(link)).to eq("\n.BR #{man}")
       end
 
       context "when a section number is specified" do
@@ -542,7 +542,7 @@ Hello world.
         let(:doc)     { Kramdown::Document.new("[#{man}](man:#{man}(#{section}))") }
 
         it "should convert the link elements into '.BR man (section)'" do
-          subject.convert_a(link).should == "\n.BR #{man} (#{section})"
+          expect(subject.convert_a(link)).to eq("\n.BR #{man} (#{section})")
         end
       end
     end
@@ -553,7 +553,7 @@ Hello world.
 
     described_class::GLYPHS.each do |char,glyph|
       it "should convert #{char.dump} into #{glyph.dump}" do
-        subject.escape("#{text} #{char}").should == "#{text} #{glyph}"
+        expect(subject.escape("#{text} #{char}")).to eq("#{text} #{glyph}")
       end
     end
   end
