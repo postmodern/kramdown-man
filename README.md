@@ -174,7 +174,7 @@ Copyright (c) 2013-2015 Hal Brodigan
 
 See {file:LICENSE.txt} for details.
 
-[kramdown]: http://kramdown.rubyforge.org/
+[kramdown]: http://kramdown.gettalong.org/
 [roff]: http://en.wikipedia.org/wiki/Roff
 
 [Ruby]: http://www.ruby-lang.org/

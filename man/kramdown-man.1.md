@@ -124,4 +124,4 @@ Email <bob@example.com>
 
 Postmodern <postmodern.mod3@gmail.com>
 
-[kramdown]: http://kramdown.rubyforge.org/
+[kramdown]: http://kramdown.gettalong.org/
