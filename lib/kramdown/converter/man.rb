@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'kramdown/man/version'
+require_relative '../man/version'
 
 require 'kramdown/converter/base'
 
