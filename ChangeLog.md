@@ -1,3 +1,8 @@
+### 0.1.7 / 2020-07-14
+
+* Fixed a bug where kramdown's version of `kramdown/converter/man` was being
+  loaded instead of kramdown-man's version.
+
 ### 0.1.6 / 2015-12-25
 
 * Commented out duplicate Hash entries that were causing warnings.
