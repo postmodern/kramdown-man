@@ -809,11 +809,3 @@ module Kramdown
     end
   end
 end
-
-module Kramdown
-  class Document
-    def to_man
-      Kramdown::Man::Converter.convert(@root,@options)
-    end
-  end
-end
