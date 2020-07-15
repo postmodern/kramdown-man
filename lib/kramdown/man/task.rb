@@ -1,5 +1,5 @@
 require 'kramdown'
-require 'kramdown/converter/man'
+require_relative '../converter/man'
 
 require 'rake/tasklib'
 

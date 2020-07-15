@@ -1,4 +1,4 @@
 require 'kramdown'
 
-require 'kramdown/converter/man'
-require 'kramdown/man/version'
+require_relative './converter/man'
+require_relative './man/version'

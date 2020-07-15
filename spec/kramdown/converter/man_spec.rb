@@ -1,6 +1,6 @@
 # encoding: utf-8
-require 'spec_helper'
-require 'kramdown/converter/man'
+require_relative '../../spec_helper'
+require_relative '../../../lib/kramdown/converter/man'
 
 describe Kramdown::Converter::Man do
   let(:markdown) { File.read('man/kramdown-man.1.md') }
