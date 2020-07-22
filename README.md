@@ -22,7 +22,7 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
   * Supports converting `[bash](man:bash(1))` links into man page references.
 * Provides Rake task for converting `man/*.md` into man pages.
 * Uses the pure-Ruby [Kramdown][kramdown] markdown parser.
-* Supports [Ruby] 1.9.x, 2.0.x, 2.1.x, 2.2.x, [JRuby], [Rubinius].
+* Supports [Ruby] 2.0 and [JRuby].
 
 ## Synopsis
 
@@ -179,4 +179,3 @@ See {file:LICENSE.txt} for details.
 
 [Ruby]: http://www.ruby-lang.org/
 [JRuby]: http://jruby.org/
-[Rubinius]: http://rubini.us/
