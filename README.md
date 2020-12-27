@@ -154,7 +154,7 @@ Email <bob@example.com>
 
 ## Requirements
 
-* [kramdown] ~> 1.0
+* [kramdown] ~> 2.0
 
 ## Install
 
