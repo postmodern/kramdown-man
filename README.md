@@ -67,9 +67,9 @@ Define a `man` and file tasks which render all `*.md` files within the
 
 Normal paragraph.
 
-    `command` [`--foo`] *FILE*
+    `command` [`--foo`] **FILE**
 
-`command` [`--foo`] *FILE*
+`command` [`--foo`] **FILE**
 
     `--tagged`
       Text here.
