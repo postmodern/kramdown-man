@@ -35,9 +35,9 @@ A [Kramdown][kramdown] plugin for converting Markdown files into man pages.
 
 Normal paragraph.
 
-    `command` [`--foo`] _FILE_
+    `command` [`--foo`] *FILE*
 
-`command` [`--foo`] _FILE_
+`command` [`--foo`] *FILE*
 
     `--tagged`
       Text here.
