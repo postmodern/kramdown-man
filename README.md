@@ -15,7 +15,6 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
   * Supports normal and tagged paragraphs.
   * Supports bullet lists.
   * Supports multi-paragraph list items and blockquotes.
-  * Supports horizontal rules.
   * Supports converting `[bash](man:bash(1))` and `[bash](man:bash.1)` links
     into man page references.
 * Provides Rake task for converting `man/*.md` into man pages.
@@ -160,14 +159,6 @@ Email <bob@example.com>
 1. one
 2. two
 3. three
-
-### Horizontal Rule
-
-```markdown
--------------------------------------------------------------------------------
-```
-
--------------------------------------------------------------------------------
 
 ### Blockquotes
 

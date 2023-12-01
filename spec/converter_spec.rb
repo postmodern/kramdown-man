@@ -239,8 +239,8 @@ Hello world.
     let(:doc) { Kramdown::Document.new('------------------------------------') }
     let(:hr)  { doc.root.children[0] }
 
-    it "should convert hr elements into '.ti 0\\n\\\\l'\\\\n(.lu\\''" do
-      expect(subject.convert_hr(hr)).to eq(".ti 0\n\\l'\\n(.lu'")
+    it "must return nil" do
+      expect(subject.convert_hr(hr)).to be(nil)
     end
   end
 

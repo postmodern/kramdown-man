@@ -535,16 +535,14 @@ module Kramdown
       end
 
       #
-      # Converts a `kd:hr` element.
+      # Ignore `kd:hr` elements.
       #
       # @param [Kramdown::Element] hr
       #   A `kd:hr` element.
       #
-      # @return [String]
-      #   The roff output.
+      # @return [nil]
       #
       def convert_hr(hr)
-        ".ti 0\n\\l'\\n(.lu'"
       end
 
       #
