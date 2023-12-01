@@ -18,6 +18,8 @@ module Kramdown
     #
     # @since 1.0.0
     #
+    # @api public
+    #
     def to_man(options={})
       output, warnings = Kramdown::Man::Converter.convert(@root,options)
 
