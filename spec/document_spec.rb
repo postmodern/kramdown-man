@@ -3,7 +3,7 @@ require 'spec_helper'
 require 'kramdown/man'
 
 describe Kramdown::Document, :integration do
-  let(:man_dir)       { File.expand_path('../../man',__FILE__) }
+  let(:man_dir)       { File.expand_path('../../man',__dir__) }
   let(:markdown_path) { File.join(man_dir,'kramdown-man.1.md')    }
   let(:markdown)      { File.read(markdown_path)                  }
 
