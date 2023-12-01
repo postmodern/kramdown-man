@@ -9,6 +9,8 @@ module Kramdown
     #
     # Converts markdown into a roff man-page.
     #
+    # @since 1.0.0
+    #
     class Converter < Kramdown::Converter::Base
 
       # Comment header
