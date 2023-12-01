@@ -1,8 +1,25 @@
 # kramdown-man.1 "April 2013" kramdown-man "User Manuals"
 
+## SYNOPSIS
+
+`kramdown-man` [*options*] \<*INPUT* \>*OUTPUT*
+
 ## DESCRIPTION
 
 A [Kramdown][kramdown] plugin for converting Markdown files into man pages.
+
+## ARGUMENTS
+
+*INPUT*
+    The input markdown file to convert.
+
+*OUTPUT*
+    The output file for the man page.
+
+## OPTIONS
+
+`-h`, `--help`
+    Prints the usage for `kramdown-man`.
 
 ## EXAMPLE
 
