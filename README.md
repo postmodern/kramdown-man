@@ -53,7 +53,7 @@ Kramdown::Man::Task.new
 
 ## Syntax
 
-### Formatting
+### Code
 
 ```markdown
 `code`
@@ -61,11 +61,15 @@ Kramdown::Man::Task.new
 
 `code`
 
+### Emphasis
+
 ```markdown
 *emphasis*
 ```
 
 *emphasis*
+
+### Strong
 
 ```markdown
 **strong**
@@ -73,7 +77,7 @@ Kramdown::Man::Task.new
 
 **strong**
 
-### Paragraphs
+### Paragraph
 
 ```markdown
 Normal paragraph.
@@ -81,15 +85,29 @@ Normal paragraph.
 
 Normal paragraph.
 
+#### Usage String
+
 ```markdown
 `command` [`--foo`] **FILE**
 ```
 
 `command` [`--foo`] **FILE**
+
+#### Argument Definitions
+
+```markdown
+*ARG*
+  Description here.
+```
+
+*ARG*
+  Description here.
+
+#### Option Definitions
 
 ```markdown
 `--tagged`
-  Text here.
+  Description here.
 ```
 
 `--tagged`
@@ -103,11 +121,15 @@ Normal paragraph.
 
 [website](http://example.com/)
 
+#### Man Pages
+
 ```markdown
 [bash](man:bash(1))
 ```
 
 [bash](man:bash(1))
+
+#### Email Addresses
 
 ```markdown
 Email <bob@example.com>
@@ -121,30 +143,23 @@ Email <bob@example.com>
 * one
 * two
 * three
-
-  extra paragraph
 ```
-    
 
 * one
 * two
 * three
 
-  extra paragraph
+#### Numbered Lists
 
 ```markdown
 1. one
 2. two
 3. three
-
-   extra paragraph
 ```
     
 1. one
 2. two
 3. three
-
-   extra paragraph
 
 ### Horizontal Rule
 
@@ -175,9 +190,10 @@ Source code:
 
     int main()
     {
-	    printf("hello world\n");
-	    return 0;
+        printf("hello world\n");
+        return 0;
     }
+
 ```
 
 Source code:
@@ -186,10 +202,9 @@ Source code:
 
     int main()
     {
-        printf("hello world\n");
-        return 0;
+	    printf("hello world\n");
+	    return 0;
     }
-
 
 ## Requirements
 

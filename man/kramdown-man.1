@@ -43,7 +43,7 @@ system \(aqman\(aq, \(aqman\[sl]kramdown\-man\.1\(aq
 .LP
 .SH SYNTAX
 .LP
-.SS FORMATTING
+.SS Code
 .LP
 .nf
 \`code\`
@@ -52,12 +52,16 @@ system \(aqman\(aq, \(aqman\[sl]kramdown\-man\.1\(aq
 .PP
 \fBcode\fR
 .LP
+.SS Emphasis
+.LP
 .nf
 *emphasis*
 .fi
 .LP
 .PP
 \fIemphasis\fP
+.LP
+.SS Strong
 .LP
 .nf
 **strong**
@@ -66,7 +70,7 @@ system \(aqman\(aq, \(aqman\[sl]kramdown\-man\.1\(aq
 .PP
 \fBstrong\fP
 .LP
-.SS PARAGRAPHS
+.SS Paragraph
 .LP
 .nf
 Normal paragraph\.
@@ -74,6 +78,8 @@ Normal paragraph\.
 .LP
 .PP
 Normal paragraph\.
+.LP
+.SS Usage String
 .LP
 .nf
 \`command\` \[lB]\`\-\-foo\`\[rB] **FILE**
@@ -82,6 +88,19 @@ Normal paragraph\.
 .PP
 \fBcommand\fR \[lB]\fB--foo\fR\[rB] \fBFILE\fP
 .LP
+.SS Argument Definitions
+.LP
+.nf
+*ARG*
+  Description here\.
+.fi
+.LP
+.TP
+\fIARG\fP
+Description here\.
+.LP
+.SS Option Definitions
+.LP
 .nf
 \`\-\-tagged\`
   Text here\.
@@ -89,9 +108,9 @@ Normal paragraph\.
 .LP
 .TP
 \fB--tagged\fR
-Text here\.
+Description here\.
 .LP
-.SS LINKS
+.SS Links
 .LP
 .nf
 \[lB]website\[rB](http:\[sl]\[sl]example\.com\[sl])
@@ -102,12 +121,16 @@ website
 .UR http:\[sl]\[sl]example\.com\[sl]
 .UE
 .LP
+.SS Man Pages
+.LP
 .nf
 \[lB]bash\[rB](man:bash(1))
 .fi
 .LP
 .PP
 .BR bash (1)
+.LP
+.SS Email Addresses
 .LP
 .nf
 Email <bob\[at]example\.com>
@@ -118,7 +141,7 @@ Email
 .MT bob\[at]example\.com
 .ME
 .LP
-.SS LISTS
+.SS Lists
 .LP
 .nf
 * one
@@ -135,6 +158,14 @@ two
 three
 .RE
 .LP
+.SS Numbered Lists
+.LP
+.nf
+1\. one
+2\. two
+3\. three
+.fi
+.LP
 .nr step1 0 1
 .RS
 .IP \n+[step1]
@@ -145,7 +176,7 @@ two
 three
 .RE
 .LP
-.SS HORIZONTAL RULE
+.SS Horizontal Rule
 .LP
 .nf
 \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
@@ -154,7 +185,7 @@ three
 .ti 0
 \l'\n(.lu'
 .LP
-.SS BLOCKQUOTES
+.SS Blockquotes
 .LP
 .nf
 > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away\.
@@ -169,7 +200,7 @@ Perfection is achieved, not when there is nothing more to add, but when there is
 \-\-Antoine de Saint\-Exup\['e]ry
 .RE
 .LP
-.SS CODE BLOCKS
+.SS Code Blocks
 .LP
 .nf
 Source code:

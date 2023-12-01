@@ -32,51 +32,71 @@ A [Kramdown][kramdown] plugin for converting Markdown files into man pages.
 
 ## SYNTAX
 
-### FORMATTING
+### Code
 
     `code`
 
 `code`
 
+### Emphasis
+
     *emphasis*
 
 *emphasis*
+
+### Strong
 
     **strong**
 
 **strong**
 
-### PARAGRAPHS
+### Paragraph
 
     Normal paragraph.
 
 Normal paragraph.
 
+#### Usage String
+
     `command` [`--foo`] **FILE**
 
 `command` [`--foo`] **FILE**
+
+#### Argument Definitions
+
+    *ARG*
+      Description here.
+
+*ARG*
+  Description here.
+
+#### Option Definitions
 
     `--tagged`
       Text here.
 
 `--tagged`
-  Text here.
+  Description here.
 
-### LINKS
+### Links
 
     [website](http://example.com/)
 
 [website](http://example.com/)
 
+#### Man Pages
+
     [bash](man:bash(1))
 
 [bash](man:bash(1))
+
+#### Email Addresses
 
     Email <bob@example.com>
 
 Email <bob@example.com>
 
-### LISTS
+### Lists
 
     * one
     * two
@@ -86,21 +106,23 @@ Email <bob@example.com>
 * two
 * three
 
+#### Numbered Lists
+
     1. one
     2. two
     3. three
-    
+
 1. one
 2. two
 3. three
 
-### HORIZONTAL RULE
+### Horizontal Rule
 
     -------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
 
-### BLOCKQUOTES
+### Blockquotes
 
     > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
     >
@@ -110,7 +132,7 @@ Email <bob@example.com>
 >
 > --Antoine de Saint-Exupéry
 
-### CODE BLOCKS
+### Code Blocks
 
     Source code:
 
