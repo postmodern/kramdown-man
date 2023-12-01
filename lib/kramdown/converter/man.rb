@@ -768,8 +768,10 @@ module Kramdown
         when 'mailto'
           email = path
 
-          unless text == email then "#{text}\n.MT #{email}\n.ME"
-          else                      "\n.MT #{email}\n.ME"
+          unless text == email
+            "#{text}\n.MT #{email}\n.ME"
+          else
+            "\n.MT #{email}\n.ME"
           end
         when 'man'
           if (match = path.match(/\A([A-Za-z0-9_-]+)(?:\((\d[a-z]?)\))\z/))
