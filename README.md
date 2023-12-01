@@ -3,7 +3,6 @@
 * [Homepage](https://github.com/postmodern/kramdown-man#readme)
 * [Issues](https://github.com/postmodern/kramdown-man/issues)
 * [Documentation](http://rubydoc.info/gems/kramdown-man/frames)
-* [Email](mailto:postmodern.mod3 at gmail.com)
 
 ## Description
 
