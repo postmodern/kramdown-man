@@ -1,9 +1,7 @@
 require 'spec_helper'
+require 'kramdown/man/converter'
 
-# HACK: load our version of kramdown/converter/man.rb and not kramdown's
-require_relative '../../lib/kramdown/converter/man'
-
-describe Kramdown::Converter::Man do
+describe Kramdown::Man::Converter do
   let(:markdown) { File.read('man/kramdown-man.1.md') }
   let(:doc)      { Kramdown::Document.new(markdown) }
   let(:root)     { doc.root }

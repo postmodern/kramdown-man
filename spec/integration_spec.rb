@@ -11,7 +11,7 @@ describe Kramdown::Document, :integration do
 
   describe "#to_man" do
     it "must return the same output as Kramdown::Converter::Man" do
-      output, warnings = Kramdown::Converter::Man.convert(subject.root)
+      output, warnings = Kramdown::Man::Converter.convert(subject.root)
 
       expect(subject.to_man).to be == output
     end
