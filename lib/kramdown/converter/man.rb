@@ -704,7 +704,7 @@ module Kramdown
 
             ".TP\n#{first_line}\n#{rest}"
           else
-            ".HP\n#{convert_children(children)}"
+            ".PP\n#{convert_children(children)}"
           end
         else
           ".PP\n#{convert_children(children)}"

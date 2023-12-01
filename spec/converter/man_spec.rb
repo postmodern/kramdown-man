@@ -417,8 +417,8 @@ Hello world.
         context "when there is no newline" do
           let(:doc) { Kramdown::Document.new("`#{flag}` `#{option}`") }
 
-          it "should convert the p element into a '.HP\\n...'" do
-            expect(subject.convert_p(p)).to eq(".HP\n\\fB#{flag}\\fR \\fB#{option}\\fR")
+          it "should convert the p element into a '.PP\\n...'" do
+            expect(subject.convert_p(p)).to eq(".PP\n\\fB#{flag}\\fR \\fB#{option}\\fR")
           end
         end
       end
@@ -462,8 +462,8 @@ Hello world.
         context "when there is no newline" do
           let(:doc) { Kramdown::Document.new("*#{flag}* *#{option}*") }
 
-          it "should convert the p element into a '.HP\\n...'" do
-            expect(subject.convert_p(p)).to eq(".HP\n\\fI#{escaped_flag}\\fP \\fI#{escaped_option}\\fP")
+          it "should convert the p element into a '.PP\\n...'" do
+            expect(subject.convert_p(p)).to eq(".PP\n\\fI#{escaped_flag}\\fP \\fI#{escaped_option}\\fP")
           end
         end
       end
