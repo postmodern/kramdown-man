@@ -361,8 +361,8 @@ Hello world.
     let(:doc)          { Kramdown::Document.new("    #{code}\n") }
     let(:codeblock)    { doc.root.children[0] }
 
-    it "should convert codeblock elements into '.nf\\ntext...\\n.fi'" do
-      expect(subject.convert_codeblock(codeblock)).to eq(".nf\n#{escaped_code}\n.fi")
+    it "should convert codeblock elements into '.EX\\ntext...\\n.EE'" do
+      expect(subject.convert_codeblock(codeblock)).to eq(".EX\n#{escaped_code}\n.EE")
     end
   end
 

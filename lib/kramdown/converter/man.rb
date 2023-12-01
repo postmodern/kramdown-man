@@ -661,7 +661,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_codeblock(codeblock)
-        ".nf\n#{escape(codeblock.value).rstrip}\n.fi"
+        ".EX\n#{escape(codeblock.value).rstrip}\n.EE"
       end
 
       #

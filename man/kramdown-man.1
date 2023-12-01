@@ -32,14 +32,14 @@ Prints the usage for \fBkramdown-man\fR\.
 .LP
 .SH EXAMPLE
 .LP
-.nf
+.EX
 require \(aqkramdown\(aq
 require \(aqkramdown\[sl]man\(aq
 
 doc \[eq] Kramdown::Document\.new(File\.read(\(aqman\[sl]kramdown\-man\.1\.md\(aq))
 File\.write(\(aqman\[sl]kramdown\-man\.1\(aq,doc\.to\[ru]man)
 system \(aqman\(aq, \(aqman\[sl]kramdown\-man\.1\(aq
-.fi
+.EE
 .LP
 .SS RAKE TASK
 .LP
@@ -47,64 +47,64 @@ system \(aqman\(aq, \(aqman\[sl]kramdown\-man\.1\(aq
 Define a \fBman\fR and files tasks which render all \fB*.md\fR files within the
 \fBman/\fR directory:
 .LP
-.nf
+.EX
 require \(aqkramdown\[sl]man\[sl]task\(aq
 Kramdown::Man::Task\.new
-.fi
+.EE
 .LP
 .SH SYNTAX
 .LP
 .SS Code
 .LP
-.nf
+.EX
 \`code\`
-.fi
+.EE
 .LP
 .PP
 \fBcode\fR
 .LP
 .SS Emphasis
 .LP
-.nf
+.EX
 *emphasis*
-.fi
+.EE
 .LP
 .PP
 \fIemphasis\fP
 .LP
 .SS Strong
 .LP
-.nf
+.EX
 **strong**
-.fi
+.EE
 .LP
 .PP
 \fBstrong\fP
 .LP
 .SS Paragraph
 .LP
-.nf
+.EX
 Normal paragraph\.
-.fi
+.EE
 .LP
 .PP
 Normal paragraph\.
 .LP
 .SS Usage String
 .LP
-.nf
+.EX
 \`command\` \[lB]\`\-\-foo\`\[rB] **FILE**
-.fi
+.EE
 .LP
 .PP
 \fBcommand\fR \[lB]\fB--foo\fR\[rB] \fBFILE\fP
 .LP
 .SS Argument Definitions
 .LP
-.nf
+.EX
 *ARG*
   Description here\.
-.fi
+.EE
 .LP
 .TP
 \fIARG\fP
@@ -112,10 +112,10 @@ Description here\.
 .LP
 .SS Option Definitions
 .LP
-.nf
+.EX
 \`\-\-tagged\`
   Text here\.
-.fi
+.EE
 .LP
 .TP
 \fB--tagged\fR
@@ -123,9 +123,9 @@ Description here\.
 .LP
 .SS Links
 .LP
-.nf
+.EX
 \[lB]website\[rB](http:\[sl]\[sl]example\.com\[sl])
-.fi
+.EE
 .LP
 .PP
 website
@@ -134,18 +134,18 @@ website
 .LP
 .SS Man Pages
 .LP
-.nf
+.EX
 \[lB]bash\[rB](man:bash(1))
-.fi
+.EE
 .LP
 .PP
 .BR bash (1)
 .LP
 .SS Email Addresses
 .LP
-.nf
+.EX
 Email <bob\[at]example\.com>
-.fi
+.EE
 .LP
 .PP
 Email 
@@ -154,11 +154,11 @@ Email
 .LP
 .SS Lists
 .LP
-.nf
+.EX
 * one
 * two
 * three
-.fi
+.EE
 .LP
 .RS
 .IP \(bu 2
@@ -171,11 +171,11 @@ three
 .LP
 .SS Numbered Lists
 .LP
-.nf
+.EX
 1\. one
 2\. two
 3\. three
-.fi
+.EE
 .LP
 .nr step1 0 1
 .RS
@@ -189,20 +189,20 @@ three
 .LP
 .SS Horizontal Rule
 .LP
-.nf
+.EX
 \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
-.fi
+.EE
 .LP
 .ti 0
 \l'\n(.lu'
 .LP
 .SS Blockquotes
 .LP
-.nf
+.EX
 > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away\.
 >
 > \-\-Antoine de Saint\-Exup\['e]ry
-.fi
+.EE
 .LP
 .PP
 .RS
@@ -213,7 +213,7 @@ Perfection is achieved, not when there is nothing more to add, but when there is
 .LP
 .SS Code Blocks
 .LP
-.nf
+.EX
 Source code:
 
     \[sh]include <stdio\.h>
@@ -223,12 +223,12 @@ Source code:
         printf(\[dq]hello world\en\[dq]);
         return 0;
     \[rC]
-.fi
+.EE
 .LP
 .PP
 Source code:
 .LP
-.nf
+.EX
 \[sh]include <stdio\.h>
 
 int main()
@@ -236,7 +236,7 @@ int main()
     printf(\[dq]hello world\en\[dq]);
     return 0;
 \[rC]
-.fi
+.EE
 .LP
 .SH AUTHOR
 .LP
