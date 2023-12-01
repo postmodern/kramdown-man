@@ -1,7 +1,7 @@
-require_relative '../../spec_helper'
+require 'spec_helper'
 
 # HACK: load our version of kramdown/converter/man.rb and not kramdown's
-require_relative '../../../lib/kramdown/converter/man'
+require_relative '../../lib/kramdown/converter/man'
 
 describe Kramdown::Converter::Man do
   let(:markdown) { File.read('man/kramdown-man.1.md') }
