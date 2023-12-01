@@ -6,6 +6,12 @@ authors: Postmodern
 email: postmodern.mod3@gmail.com
 homepage: https://github.com/postmodern/kramdown-man#readme
 
+metadata:
+  documentation_uri: https://rubydoc.info/gems/kramdown-man
+  source_code_uri:   https://github.com/postmodern/kramdown-man
+  bug_tracker_uri:   https://github.com/postmodern/kramdown-man/issues
+  changelog_uri:     https://github.com/postmodern/kramdown-man/blob/master/ChangeLog.md
+
 dependencies:
   kramdown: ~> 2.0
 
