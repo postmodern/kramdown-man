@@ -538,11 +538,20 @@ Hello world.
         expect(subject.convert_a(link)).to eq("\n.BR #{man}")
       end
 
-      context "when a section number is specified" do
+      context "and when the path is of the form 'page(section)'" do
         let(:section) { '1' }
         let(:doc)     { Kramdown::Document.new("[#{man}](man:#{man}(#{section}))") }
 
-        it "should convert the link elements into '.BR man (section)'" do
+        it "should convert the link elements into '.BR page (section)'" do
+          expect(subject.convert_a(link)).to eq("\n.BR #{man} (#{section})")
+        end
+      end
+
+      context "and when the path is of the form 'page.section'" do
+        let(:section) { '1' }
+        let(:doc)     { Kramdown::Document.new("[#{man}](man:#{man}.#{section})") }
+
+        it "should convert the link elements into '.BR page (section)'" do
           expect(subject.convert_a(link)).to eq("\n.BR #{man} (#{section})")
         end
       end

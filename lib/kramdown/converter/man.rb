@@ -775,8 +775,11 @@ module Kramdown
             "\n.MT #{email}\n.ME"
           end
         when 'man'
-          if (match = path.match(/\A([A-Za-z0-9_-]+)(?:\((\d[a-z]?)\))\z/))
-            "\n.BR #{match[1]} (#{match[2]})"
+          if (match = path.match(/\A(?<page>[A-Za-z0-9_-]+)(?:\((?<section>\d[a-z]?)\)|\\\.(?<section>\d[a-z]?))\z/))
+            page    = match[:page]
+            section = match[:section]
+
+            "\n.BR #{page} (#{section})"
           else
             "\n.BR #{path}"
           end
