@@ -1,7 +1,8 @@
-### 0.1.9 / 2023-11-30
+### 0.1.9 / 2023-12-01
 
 * Allow markdown `man:file.ext` style links, since man pages can be named after
   file names (ex: `shard.yml`).
+* Use the `.PP` roff macro instead of the deprecated `.HP` macro.
 
 ### 0.1.8 / 2020-12-26
 
