@@ -20,7 +20,7 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
     into man page references.
 * Provides Rake task for converting `man/*.md` into man pages.
 * Uses the pure-Ruby [Kramdown][kramdown] markdown parser.
-* Supports [Ruby] 2.0 and [JRuby].
+* Supports [Ruby] 3.x, [JRuby], and [TruffleRuby].
 
 ## Synopsis
 
@@ -177,3 +177,4 @@ See {file:LICENSE.txt} for details.
 
 [Ruby]: http://www.ruby-lang.org/
 [JRuby]: http://jruby.org/
+[TruffleRuby]: https://github.com/oracle/truffleruby#readme
