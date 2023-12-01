@@ -1,3 +1,8 @@
+### 0.1.9 / 2023-11-30
+
+* Allow markdown `man:file.ext` style links, since man pages can be named after
+  file names (ex: `shard.yml`).
+
 ### 0.1.8 / 2020-12-26
 
 * Upgrade to kramdown 2.x.
