@@ -763,13 +763,13 @@ module Kramdown
         text = convert_children(a.children)
 
         case href
-        when /^mailto:/
+        when /\Amailto:/
           email = href[7..-1]
 
           unless text == email then "#{text}\n.MT #{email}\n.ME"
           else                      "\n.MT #{email}\n.ME"
           end
-        when /^man:/
+        when /\Aman:/
           match = href.match(/man:([A-Za-z0-9_-]+)(?:\((\d[a-z]?)\))?/)
 
           if match[2] then "\n.BR #{match[1]} (#{match[2]})"
