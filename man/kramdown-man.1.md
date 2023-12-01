@@ -30,6 +30,14 @@ A [Kramdown][kramdown] plugin for converting Markdown files into man pages.
     File.write('man/kramdown-man.1',doc.to_man)
     system 'man', 'man/kramdown-man.1'
 
+### RAKE TASK
+
+Define a `man` and files tasks which render all `*.md` files within the
+`man/` directory:
+
+    require 'kramdown/man/task'
+    Kramdown::Man::Task.new
+
 ## SYNTAX
 
 ### Code

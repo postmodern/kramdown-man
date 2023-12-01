@@ -41,6 +41,17 @@ File\.write(\(aqman\[sl]kramdown\-man\.1\(aq,doc\.to\[ru]man)
 system \(aqman\(aq, \(aqman\[sl]kramdown\-man\.1\(aq
 .fi
 .LP
+.SS RAKE TASK
+.LP
+.PP
+Define a \fBman\fR and files tasks which render all \fB*.md\fR files within the
+\fBman/\fR directory:
+.LP
+.nf
+require \(aqkramdown\[sl]man\[sl]task\(aq
+Kramdown::Man::Task\.new
+.fi
+.LP
 .SH SYNTAX
 .LP
 .SS Code
