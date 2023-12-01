@@ -6,5 +6,6 @@ group :development do
   gem 'rake'
   gem 'rubygems-tasks', '~> 0.2'
   gem 'rspec', '~> 3.0'
+  gem 'redcarpet',       platform: :mri
   gem 'yard', '~> 0.9'
 end
