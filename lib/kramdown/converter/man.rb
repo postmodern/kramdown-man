@@ -760,20 +760,22 @@ module Kramdown
       #
       def convert_a(a)
         href = escape(a.attr['href'])
+        scheme, path = href.split(':',2)
+
         text = convert_children(a.children)
 
-        case href
-        when /\Amailto:/
-          email = href[7..-1]
+        case scheme
+        when 'mailto'
+          email = path
 
           unless text == email then "#{text}\n.MT #{email}\n.ME"
           else                      "\n.MT #{email}\n.ME"
           end
-        when /\Aman:/
-          match = href.match(/man:([A-Za-z0-9_-]+)(?:\((\d[a-z]?)\))?/)
-
-          if match[2] then "\n.BR #{match[1]} (#{match[2]})"
-          else             "\n.BR #{match[1]}"
+        when 'man'
+          if (match = path.match(/\A([A-Za-z0-9_-]+)(?:\((\d[a-z]?)\))\z/))
+            "\n.BR #{match[1]} (#{match[2]})"
+          else
+            "\n.BR #{path}"
           end
         else
           "#{text}\n.UR #{href}\n.UE"

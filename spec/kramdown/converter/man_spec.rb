@@ -547,6 +547,15 @@ Hello world.
           expect(subject.convert_a(link)).to eq("\n.BR #{man} (#{section})")
         end
       end
+
+      context "when the path ends with a file extension" do
+        let(:file) { 'shard.yml' }
+        let(:doc)  { Kramdown::Document.new("[#{man}](man:#{file})") }
+
+        it "should convert the link elements into '.BR file'" do
+          expect(subject.convert_a(link)).to eq("\n.BR #{file.gsub('.','\\.')}")
+        end
+      end
     end
   end
 
