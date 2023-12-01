@@ -81,27 +81,18 @@ Email <bob@example.com>
     * one
     * two
     * three
-    
-      extra paragraph
-    
 
 * one
 * two
 * three
 
-  extra paragraph
-
     1. one
     2. two
     3. three
     
-       extra paragraph
-    
 1. one
 2. two
 3. three
-
-   extra paragraph
 
 ### HORIZONTAL RULE
 
@@ -121,13 +112,17 @@ Email <bob@example.com>
 
 ### CODE BLOCKS
 
+    Source code:
+
         #include <stdio.h>
-    
+
         int main()
         {
-    	    printf("hello world\n");
-    	    return 0;
+            printf("hello world\n");
+            return 0;
         }
+
+Source code:
 
     #include <stdio.h>
 

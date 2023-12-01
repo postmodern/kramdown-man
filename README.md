@@ -26,78 +26,104 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 
 Render a man page from markdown:
 
-    $ kramdown-man <man/myprog.1.md >man/myprog.1
+```shell
+kramdown-man <man/myprog.1.md >man/myprog.1
+```
 
 ## Examples
 
 Render a man page from a markdown file:
 
-    require 'kramdown/man'
+```ruby
+require 'kramdown/man'
 
-    doc = Kramdown::Document.new(File.read('man/kramdown-man.1.md'))
-    File.write('man/kramdown-man.1',doc.to_man)
+doc = Kramdown::Document.new(File.read('man/kramdown-man.1.md'))
+File.write('man/kramdown-man.1',doc.to_man)
 
-    system 'man', 'man/kramdown-man.1'
+system 'man', 'man/kramdown-man.1'
+```
 
 Define a `man` and file tasks which render all `*.md` files within the
 `man/` directory:
 
-    require 'kramdown/man/task'
-    Kramdown::Man::Task.new
+```ruby
+require 'kramdown/man/task'
+Kramdown::Man::Task.new
+```
 
 ## Syntax
 
 ### Formatting
 
-    `code`
+```markdown
+`code`
+```
 
 `code`
 
-    *emphasis*
+```markdown
+*emphasis*
+```
 
 *emphasis*
 
-    **strong**
+```markdown
+**strong**
+```
 
 **strong**
 
 ### Paragraphs
 
-    Normal paragraph.
+```markdown
+Normal paragraph.
+```
 
 Normal paragraph.
 
-    `command` [`--foo`] **FILE**
+```markdown
+`command` [`--foo`] **FILE**
+```
 
 `command` [`--foo`] **FILE**
 
-    `--tagged`
-      Text here.
+```markdown
+`--tagged`
+  Text here.
+```
 
 `--tagged`
   Text here.
 
 ### Links
 
-    [website](http://example.com/)
+```markdown
+[website](http://example.com/)
+```
 
 [website](http://example.com/)
 
-    [bash](man:bash(1))
+```markdown
+[bash](man:bash(1))
+```
 
 [bash](man:bash(1))
 
-    Email <bob@example.com>
+```markdown
+Email <bob@example.com>
+```
 
 Email <bob@example.com>
 
 ### Lists
 
-    * one
-    * two
-    * three
-    
-      extra paragraph
+```markdown
+* one
+* two
+* three
+
+  extra paragraph
+```
     
 
 * one
@@ -106,11 +132,13 @@ Email <bob@example.com>
 
   extra paragraph
 
-    1. one
-    2. two
-    3. three
-    
-       extra paragraph
+```markdown
+1. one
+2. two
+3. three
+
+   extra paragraph
+```
     
 1. one
 2. two
@@ -120,15 +148,19 @@ Email <bob@example.com>
 
 ### Horizontal Rule
 
-    -------------------------------------------------------------------------------
+```markdown
+-------------------------------------------------------------------------------
+```
 
 -------------------------------------------------------------------------------
 
 ### Blockquotes
 
-    > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
-    >
-    > --Antoine de Saint-Exupéry
+```markdown
+> Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
+>
+> --Antoine de Saint-Exupéry
+```
 
 > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
 >
@@ -136,13 +168,8 @@ Email <bob@example.com>
 
 ### Code Blocks
 
-        #include <stdio.h>
-    
-        int main()
-        {
-    	    printf("hello world\n");
-    	    return 0;
-        }
+```markdown
+Source code:
 
     #include <stdio.h>
 
@@ -151,6 +178,18 @@ Email <bob@example.com>
 	    printf("hello world\n");
 	    return 0;
     }
+```
+
+Source code:
+
+    #include <stdio.h>
+
+    int main()
+    {
+        printf("hello world\n");
+        return 0;
+    }
+
 
 ## Requirements
 
@@ -158,7 +197,9 @@ Email <bob@example.com>
 
 ## Install
 
-    $ gem install kramdown-man
+```shell
+gem install kramdown-man
+```
 
 ## Alternatives
 

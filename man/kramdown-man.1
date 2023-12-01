@@ -124,8 +124,6 @@ Email
 * one
 * two
 * three
-
-  extra paragraph
 .fi
 .LP
 .RS
@@ -135,8 +133,6 @@ one
 two
 .IP \(bu 2
 three
-.IP \( 2
-extra paragraph
 .RE
 .LP
 .nr step1 0 1
@@ -147,8 +143,6 @@ one
 two
 .IP \n+[step1]
 three
-.IP \n
-extra paragraph
 .RE
 .LP
 .SS HORIZONTAL RULE
@@ -178,14 +172,21 @@ Perfection is achieved, not when there is nothing more to add, but when there is
 .SS CODE BLOCKS
 .LP
 .nf
+Source code:
+
     \[sh]include <stdio\.h>
 
     int main()
     \[lC]
-	    printf(\[dq]hello world\en\[dq]);
-	    return 0;
+        printf(\[dq]hello world\en\[dq]);
+        return 0;
     \[rC]
-
+.fi
+.LP
+.PP
+Source code:
+.LP
+.nf
 \[sh]include <stdio\.h>
 
 int main()
