@@ -11,6 +11,8 @@ module Kramdown
     #
     # @since 1.0.0
     #
+    # @api private
+    #
     class Converter < Kramdown::Converter::Base
 
       # Comment header
