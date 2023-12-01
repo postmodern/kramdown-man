@@ -11,6 +11,7 @@ metadata:
   source_code_uri:   https://github.com/postmodern/kramdown-man
   bug_tracker_uri:   https://github.com/postmodern/kramdown-man/issues
   changelog_uri:     https://github.com/postmodern/kramdown-man/blob/master/ChangeLog.md
+  rubygems_mfa_required: 'true'
 
 dependencies:
   kramdown: ~> 2.0
