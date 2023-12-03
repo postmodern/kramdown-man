@@ -122,11 +122,25 @@ Normal paragraph.
 
 #### Man Pages
 
+Link to other man pages in a project:
+
+```markdown
+[kramdown-man](kramdown-man.md)
+```
+
+[kramdown-man](man/kramdown-man.md)
+
+Link to other system man page:
+
 ```markdown
 [bash](man:bash(1))
 ```
 
 [bash](man:bash(1))
+
+**Note:** only works on [firefox].
+
+[firefox]: https://www.mozilla.org/en-US/firefox/new/
 
 #### Email Addresses
 

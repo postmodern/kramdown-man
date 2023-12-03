@@ -94,9 +94,21 @@ Normal paragraph.
 
 #### Man Pages
 
+Link to other man pages in a project:
+
+    [kramdown-man](kramdown-man.md)
+
+[kramdown-man](kramdown-man.md)
+
+Link to other system man page:
+
     [bash](man:bash(1))
 
 [bash](man:bash(1))
+
+**Note:** only works on [firefox].
+
+[firefox]: https://www.mozilla.org/en-US/firefox/new/
 
 #### Email Addresses
 
