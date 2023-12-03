@@ -1,3 +1,54 @@
+### 1.0.0 / 2023-12-03
+
+* Ignore `kd:blank` elements to reduce size of generated man pages.
+* No longer output `.HP` paragraphs due to cross-platform compatibility issues
+  with `groff`, `nroff`, `troff`.
+* Renamed `Kramdown::Converters::Man` to {Kramdown::Man::Converter}.
+* Override {Kramdown::Document#to_man} to use our {Kramdown::Man::Converter}.
+
+#### Syntax
+
+* Added support for definition lists.
+* Switched to using definition lists for documenting options and arguments.
+
+  ```markdown
+  ## ARGUMENTS
+
+  *ARG*
+  : Description goes here.
+
+  ...
+  ```
+
+  ```markdown
+  ## OPTIONS
+
+  `-o`, `--option` *VALUE
+  : Description goes here.
+
+  ...
+  ```
+* Added support for rendering relative links to other markdown man pages
+  as `SEE ALSO` man page references.
+
+  Example:
+
+  ```markdown
+  [foo-bar](foo-bar.1.md)
+  ```
+
+  Will be converted into:
+
+  ```
+  foo-bar(1)
+  ```
+* Ignore horizontal rule elements due to cross-platform compatibility issues
+  with `groff`, `nroff`, `troff`.
+
+#### CLI
+
+* Added a `-V`, `--version` flag.
+
 ### 0.1.9 / 2023-12-01
 
 * Allow markdown `man:file.ext` style links, since man pages can be named after
