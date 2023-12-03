@@ -929,7 +929,8 @@ module Kramdown
             ROFF
           else
             <<~ROFF
-              .MT #{email}\n.ME
+              .MT #{email}
+              .ME
             ROFF
           end
         when 'man'
