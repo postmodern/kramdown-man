@@ -555,7 +555,11 @@ module Kramdown
                      convert_ul_li(li)
                    }.join
 
-        return ".RS\n#{contents.rstrip}\n.RE\n"
+        return <<~ROFF
+          .RS
+          #{contents.chomp}
+          .RE
+        ROFF
       end
 
       #
@@ -570,10 +574,18 @@ module Kramdown
       def convert_ul_li(li)
         li.children.each_with_index.map { |child,index|
           if child.type == :p
-            contents = convert_elements(child.children).rstrip
+            contents = convert_elements(child.children).chomp
 
-            if index == 0 then ".IP \\(bu 2\n#{contents}\n"
-            else               ".IP \\( 2\n#{contents}\n"
+            if index == 0
+              <<~ROFF
+                .IP \\(bu 2
+                #{contents}
+              ROFF
+            else
+              <<~ROFF
+                .IP \\( 2
+                #{contents}
+              ROFF
             end
           end
         }.join
@@ -596,7 +608,12 @@ module Kramdown
                      convert_ol_li(li)
                    }.join
 
-        return "#{header}\n.RS\n#{contents.rstrip}\n.RE\n"
+        return <<~ROFF
+          #{header}
+          .RS
+          #{contents.chomp}
+          .RE
+        ROFF
       end
 
       #
@@ -611,10 +628,18 @@ module Kramdown
       def convert_ol_li(li)
         li.children.each_with_index.map { |child,index|
           if child.type == :p
-            contents = convert_elements(child.children).rstrip
+            contents = convert_elements(child.children).chomp
 
-            if index == 0 then ".IP \\n+[step#{@ol_index}]\n#{contents}\n"
-            else               ".IP \\n\n#{contents}\n"
+            if index == 0
+              <<~ROFF
+                .IP \\n+[step#{@ol_index}]
+                #{contents}
+              ROFF
+            else
+              <<~ROFF
+                .IP \\n
+                #{contents}
+              ROFF
             end
           end
         }.join
@@ -673,8 +698,16 @@ module Kramdown
       def convert_dt(dt, index: 0)
         text = convert_text_elements(dt.children)
 
-        if index == 0 then ".TP\n#{text}\n"
-        else               ".TQ\n#{text}\n"
+        if index == 0
+          <<~ROFF
+            .TP
+            #{text}
+          ROFF
+        else
+          <<~ROFF
+            .TQ
+            #{text}
+          ROFF
         end
       end
 
@@ -696,11 +729,15 @@ module Kramdown
         dd.children.each_with_index.map { |child,child_index|
           if index == 0 && child_index == 0 && child.type == :p
             # omit the .PP macro for the first paragraph
-            "#{convert_elements(child.children).rstrip}\n"
+            "#{convert_elements(child.children).chomp}\n"
           else
             if (contents = convert_element(child))
               # indent all other following paragraphs or other elements
-              ".RS\n#{contents.rstrip}\n.RE\n"
+              <<~ROFF
+                .RS
+                #{contents.chomp}
+                .RE
+              ROFF
             end
           end
         }.join
@@ -729,7 +766,11 @@ module Kramdown
       #   The roff output.
       #
       def convert_blockquote(blockquote)
-        ".RS\n#{convert_elements(blockquote.children).rstrip}\n.RE\n"
+        <<~ROFF
+          .RS
+          #{convert_elements(blockquote.children).chomp}
+          .RE
+        ROFF
       end
 
       #
@@ -742,7 +783,12 @@ module Kramdown
       #   The roff output.
       #
       def convert_codeblock(codeblock)
-        ".PP\n.EX\n#{escape(codeblock.value).rstrip}\n.EE\n"
+        <<~ROFF
+          .PP
+          .EX
+          #{escape(codeblock.value).chomp}
+          .EE
+        ROFF
       end
 
       #
@@ -770,7 +816,10 @@ module Kramdown
       #   The roff output.
       #
       def convert_p(p)
-        ".PP\n#{convert_text_elements(p.children)}\n"
+        <<~ROFF
+          .PP
+          #{convert_text_elements(p.children)}
+        ROFF
       end
 
       #
@@ -832,21 +881,33 @@ module Kramdown
           email = path
 
           unless text == email
-            "#{text.rstrip}\n.MT #{email}\n.ME\n"
+            <<~ROFF
+              #{text.chomp}
+              .MT #{email}
+              .ME
+            ROFF
           else
-            "\n.MT #{email}\n.ME\n"
+            ".MT #{email}\n.ME\n"
           end
         when 'man'
           if (match = path.match(/\A(?<page>[A-Za-z0-9_-]+)(?:\((?<section>\d[a-z]?)\)|\\\.(?<section>\d[a-z]?))\z/))
             page    = match[:page]
             section = match[:section]
 
-            "\n.BR #{page} (#{section})\n"
+            <<~ROFF
+              .BR #{page} (#{section})
+            ROFF
           else
-            "\n.BR #{path}\n"
+            <<~ROFF
+              .BR #{path}
+            ROFF
           end
         else
-          "#{text.rstrip}\n.UR #{href}\n.UE\n"
+          <<~ROFF
+            #{text.chomp}
+            .UR #{href}
+            .UE
+          ROFF
         end
       end
 
