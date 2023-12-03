@@ -19,7 +19,6 @@ A Kramdown
 .TP
 \fIINPUT\fP
 The input markdown file to convert\.
-.LP
 .TP
 \fIOUTPUT\fP
 The output file for the man page\.
@@ -28,7 +27,9 @@ The output file for the man page\.
 .LP
 .TP
 \fB-h\fR, \fB--help\fR
-Prints the usage for \fBkramdown-man\fR\.
+Prints the usage for 
+\fBkramdown-man\fR
+\.
 .LP
 .SH EXAMPLE
 .LP
@@ -103,7 +104,7 @@ Normal paragraph\.
 .LP
 .EX
 *ARG*
-  Description here\.
+: Description here\.
 .EE
 .LP
 .TP
@@ -113,12 +114,12 @@ Description here\.
 .SS Option Definitions
 .LP
 .EX
-\`\-\-tagged\`
-  Text here\.
+\`\-o\`, \`\-\-option\` *VALUE*
+: Description here\.
 .EE
 .LP
 .TP
-\fB--tagged\fR
+\fB-o\fR, \fB--option\fR \fIVALUE\fP
 Description here\.
 .LP
 .SS Links
@@ -139,6 +140,7 @@ website
 .EE
 .LP
 .PP
+
 .BR bash (1)
 .LP
 .SS Email Addresses
@@ -187,6 +189,25 @@ two
 three
 .RE
 .LP
+.SS Definition Lists
+.LP
+.EX
+ex\[pc]am\[pc]ple
+: a thing characteristic of its kind or illustrating a general rule\.
+
+: a person or thing regarded in terms of their fitness to be imitated or the
+  likelihood of their being imitated\.
+.EE
+.LP
+.TP
+ex\[pc]am\[pc]ple
+a thing characteristic of its kind or illustrating a general rule\.
+.RS
+.PP
+a person or thing regarded in terms of their fitness to be imitated or the
+likelihood of their being imitated\.
+.RE
+.LP
 .SS Blockquotes
 .LP
 .EX
@@ -195,10 +216,11 @@ three
 > \-\-Antoine de Saint\-Exup\['e]ry
 .EE
 .LP
-.PP
 .RS
+.PP
 Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away\.
 .LP
+.PP
 \-\-Antoine de Saint\-Exup\['e]ry
 .RE
 .LP

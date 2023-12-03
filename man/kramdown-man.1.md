@@ -11,15 +11,15 @@ A [Kramdown][kramdown] plugin for converting Markdown files into man pages.
 ## ARGUMENTS
 
 *INPUT*
-    The input markdown file to convert.
+: The input markdown file to convert.
 
 *OUTPUT*
-    The output file for the man page.
+: The output file for the man page.
 
 ## OPTIONS
 
 `-h`, `--help`
-    Prints the usage for `kramdown-man`.
+: Prints the usage for `kramdown-man`.
 
 ## EXAMPLE
 
@@ -73,18 +73,18 @@ Normal paragraph.
 #### Argument Definitions
 
     *ARG*
-      Description here.
+    : Description here.
 
 *ARG*
-  Description here.
+: Description here.
 
 #### Option Definitions
 
-    `--tagged`
-      Text here.
+    `-o`, `--option` *VALUE*
+    : Description here.
 
-`--tagged`
-  Description here.
+`-o`, `--option` *VALUE*
+: Description here.
 
 ### Links
 
@@ -123,6 +123,20 @@ Email <bob@example.com>
 1. one
 2. two
 3. three
+
+#### Definition Lists
+
+    ex·am·ple
+    : a thing characteristic of its kind or illustrating a general rule.
+
+    : a person or thing regarded in terms of their fitness to be imitated or the
+      likelihood of their being imitated.
+
+ex·am·ple
+: a thing characteristic of its kind or illustrating a general rule.
+
+: a person or thing regarded in terms of their fitness to be imitated or the
+  likelihood of their being imitated.
 
 ### Blockquotes
 
