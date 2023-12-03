@@ -965,7 +965,7 @@ module Kramdown
       #   The escaped text.
       #
       def escape(text)
-        text.gsub(GLYPH_REGEXP) { |char| GLYPHS[char] }
+        text.gsub(GLYPH_REGEXP,GLYPHS)
       end
 
     end
