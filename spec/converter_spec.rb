@@ -76,22 +76,6 @@ Hello world.
     it "should convert text elements" do
       expect(subject.convert_text(text)).to eq(content)
     end
-
-    context "when the text has two-space indentation" do
-      let(:content) { "Foo\n  bar\n  baz" }
-
-      it "should strip leading whitespace from each line" do
-        expect(subject.convert_text(text)).to eq(content.gsub("\n  ","\n"))
-      end
-    end
-
-    context "when the text has tab indentation" do
-      let(:content) { "Foo\n\tbar\n\tbaz" }
-
-      it "should strip leading whitespace from each line" do
-        expect(subject.convert_text(text)).to eq(content.gsub("\n\t","\n"))
-      end
-    end
   end
 
   describe "#convert_typographic_sym" do
@@ -331,6 +315,139 @@ Hello world.
     end
   end
 
+  describe "#convert_dl" do
+    let(:term)       { "foo bar" }
+    let(:definition) { "baz qux" }
+    let(:text) do
+      <<~MARKDOWN
+        #{term}
+        : #{definition}
+      MARKDOWN
+    end
+
+    let(:doc) { Kramdown::Document.new(text) }
+    let(:dl)  { doc.root.children[0] }
+
+    it "must convert dl elements into '.TP\n...\n...'" do
+      expect(subject.convert_dl(dl)).to eq(".TP\n#{term}\n#{definition}")
+    end
+
+    context "when there are multiple term lines" do
+      let(:term1) { "foo" }
+      let(:term2) { "bar" }
+      let(:text) do
+        <<~MARKDOWN
+          #{term1}
+          #{term2}
+          : #{definition}
+        MARKDOWN
+      end
+
+      it "must convert the multi-term dl element into '.TP\\nterm1\\n.TQ\\nterm2\\n...'" do
+        expect(subject.convert_dl(dl)).to eq(".TP\n#{term1}\n.TQ\n#{term2}\n#{definition}")
+      end
+    end
+  end
+
+  describe "#convert_dt" do
+    let(:word1)      { "foo" }
+    let(:word2)      { "bar" }
+    let(:word3)      { "baz" }
+    let(:term)       { "#{word1} `#{word2}` *#{word3}*" }
+    let(:definition) { "abc xyz" }
+    let(:text) do
+      <<~MARKDOWN
+        #{term}
+        : #{definition}
+      MARKDOWN
+    end
+
+    let(:doc) { Kramdown::Document.new(text) }
+    let(:dt)  { doc.root.children[0].children[0] }
+
+    it "must convert the dt element into '.TP\n...'" do
+      expect(subject.convert_dt(dt)).to eq(".TP\n#{word1} \\fB#{word2}\\fR \\fI#{word3}\\fP")
+    end
+
+    context "when given the index: keyword" do
+      context "and it's greater than 1" do
+        it "must convert the dt element into '.TQ\n...'" do
+          expect(subject.convert_dt(dt, index: 1)).to eq(".TQ\n#{word1} \\fB#{word2}\\fR \\fI#{word3}\\fP")
+        end
+      end
+    end
+  end
+
+  describe "#convert_dd" do
+    let(:term)       { "abc xyz" }
+    let(:word1)      { "foo" }
+    let(:word2)      { "bar" }
+    let(:word3)      { "baz" }
+    let(:definition) { "#{word1} `#{word2}` *#{word3}*" }
+    let(:text) do
+      <<~MARKDOWN
+        #{term}
+        : #{definition}
+      MARKDOWN
+    end
+
+    let(:doc) { Kramdown::Document.new(text) }
+    let(:dd)  { doc.root.children[0].children[1] }
+
+    it "must convert the children p element within the dd element" do
+      expect(subject.convert_dd(dd)).to eq("#{word1} \n\\fB#{word2}\\fR\n \n\\fI#{word3}\\fP")
+    end
+
+    context "when the dd element is the first dd element following a dt element" do
+      context "and when the dd element contains multiple p children" do
+        let(:word1)       { "foo" }
+        let(:word2)       { "bar" }
+        let(:word3)       { "baz" }
+        let(:word4)       { "qux" }
+        let(:definition1) { "#{word1} #{word2}" }
+        let(:definition2) { "`#{word3}` *#{word4}*" }
+        let(:text) do
+          <<~MARKDOWN
+        #{term}
+        : #{definition1}
+
+          #{definition2}
+          MARKDOWN
+        end
+
+        it "must convert the following p children into '.RS\\n.PP\\n...\\n.RE'" do
+          expect(subject.convert_dd(dd)).to eq("#{word1} #{word2}\n.RS\n.LP\n.RE\n.RS\n.PP\n\\fB#{word3}\\fR \\fI#{word4}\\fP\n.RE")
+        end
+      end
+
+      context "and when the dd element contains multiple p children" do
+        let(:word1)       { "foo" }
+        let(:word2)       { "bar" }
+        let(:word3)       { "baz" }
+        let(:word4)       { "qux" }
+        let(:definition1) { "#{word1} #{word2}" }
+        let(:definition2) { "`#{word3}` *#{word4}*" }
+        let(:text) do
+          <<~MARKDOWN
+            #{term}
+            : #{definition1}
+
+            : #{definition2}
+          MARKDOWN
+        end
+
+        let(:dd)  { doc.root.children[0].children[2] }
+
+        it "must convert the following p children into '.RS\\n.PP\\n...\\n.RE'" do
+          expect(subject.convert_dd(dd, index: 1)).to eq(".RS\n.PP\n\\fB#{word3}\\fR \\fI#{word4}\\fP\n.RE")
+        end
+      end
+    end
+
+    context "when the dd element follows a previous dd element" do
+    end
+  end
+
   describe "#convert_abbreviation" do
     let(:acronym)      { 'HTML' }
     let(:definition)   { 'Hyper Text Markup Language' }
@@ -348,8 +465,8 @@ Hello world.
     let(:doc)          { Kramdown::Document.new("> #{text}") }
     let(:blockquote)   { doc.root.children[0] }
 
-    it "should convert blockquote elements into '.PP\\n.RS\\ntext...\\n.RE'" do
-      expect(subject.convert_blockquote(blockquote)).to eq(".PP\n.RS\n#{escaped_text}\n.RE")
+    it "should convert blockquote elements into '.RS\\n.PP\\ntext...\\n.RE'" do
+      expect(subject.convert_blockquote(blockquote)).to eq(".RS\n.PP\n#{escaped_text}\n.RE")
     end
   end
 
@@ -382,89 +499,6 @@ Hello world.
 
     it "should convert p elements into '.PP\\ntext'" do
       expect(subject.convert_p(p)).to eq(".PP\n#{escaped_text}")
-    end
-
-    context "when the paragraph starts with a codespan element" do
-      let(:option) { '--foo' }
-      let(:text)   { 'Foo bar baz' }
-      let(:doc)    { Kramdown::Document.new("`#{option}`\n\t#{text}") }
-
-      it "should convert p elements into '.TP\\n\\fB--option\\fR\\ntext...'" do
-        expect(subject.convert_p(p)).to eq(".TP\n\\fB#{option}\\fR\n#{text}")
-      end
-
-      context "when there is only one codespan element" do
-        let(:code) { 'code' }
-        let(:doc)  { Kramdown::Document.new("`#{code}`") }
-
-        it "should convert p elements into '.PP\\n\\fB...\\fR'" do
-          expect(subject.convert_p(p)).to eq(".PP\n\\fB#{code}\\fR")
-        end
-      end
-
-      context "when there are more than one codespan element" do
-        let(:flag)   { '-f'    }
-        let(:option) { '--foo' }
-        let(:text)   { 'Foo bar baz' }
-        let(:doc)    { Kramdown::Document.new("`#{flag}`, `#{option}`\n\t#{text}") }
-
-        it "should convert p elements into '.TP\\n\\fB-o\\fR, \\fB--option\\fR\\ntext...'" do
-          expect(subject.convert_p(p)).to eq(".TP\n\\fB#{flag}\\fR, \\fB#{option}\\fR\n#{text}")
-        end
-
-        context "when there is no newline" do
-          let(:doc) { Kramdown::Document.new("`#{flag}` `#{option}`") }
-
-          it "should convert the p element into a '.PP\\n...'" do
-            expect(subject.convert_p(p)).to eq(".PP\n\\fB#{flag}\\fR \\fB#{option}\\fR")
-          end
-        end
-      end
-    end
-
-    context "when the paragraph starts with a em element" do
-      let(:option)         { '--foo'       }
-      let(:escaped_option) { "\\-\\-foo"   }
-      let(:text)           { 'Foo bar baz' }
-
-      let(:doc) do
-        Kramdown::Document.new("*#{option}*\n\t#{text}")
-      end
-
-      it "should convert p elements into '.TP\\n\\fI--option\\fP\\ntext...'" do
-        expect(subject.convert_p(p)).to eq(".TP\n\\fI#{escaped_option}\\fP\n#{text}")
-      end
-
-      context "when there is only one em element" do
-        let(:text)   { 'foo' }
-        let(:doc)    { Kramdown::Document.new("*#{text}*") }
-
-        it "should convert p elements into '.PP\\n\\fI...\\fP'" do
-          expect(subject.convert_p(p)).to eq(".PP\n\\fI#{text}\\fP")
-        end
-      end
-
-      context "when there are more than one em element" do
-        let(:flag)           { '-f'          }
-        let(:escaped_flag)   { "\\-f"        }
-        let(:text)           { 'Foo bar baz' }
-
-        let(:doc) do
-          Kramdown::Document.new("*#{flag}*, *#{option}*\n\t#{text}")
-        end
-
-        it "should convert p elements into '.TP\\n\\fI-o\\fP, \\fI\\-\\-option\\fP\\ntext...'" do
-          expect(subject.convert_p(p)).to eq(".TP\n\\fI#{escaped_flag}\\fP, \\fI#{escaped_option}\\fP\n#{text}")
-        end
-
-        context "when there is no newline" do
-          let(:doc) { Kramdown::Document.new("*#{flag}* *#{option}*") }
-
-          it "should convert the p element into a '.PP\\n...'" do
-            expect(subject.convert_p(p)).to eq(".PP\n\\fI#{escaped_flag}\\fP \\fI#{escaped_option}\\fP")
-          end
-        end
-      end
     end
   end
 

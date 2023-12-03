@@ -444,9 +444,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_root(root)
-        root.children.map { |child|
-          convert_element(child)
-        }.compact.join("\n")
+        convert_elements(root.children)
       end
 
       #
@@ -462,7 +460,7 @@ module Kramdown
         method = "convert_#{element.type}"
         send(method,element) if respond_to?(method)
       end
-
+      
       #
       # Converts a `kd:blank` element.
       #
@@ -486,7 +484,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_text(text)
-        escape(text.value.gsub(/^(  +|\t)/,''))
+        escape(text.value)
       end
 
       #
@@ -572,7 +570,7 @@ module Kramdown
       def convert_ul_li(li)
         li.children.each_with_index.map { |child,index|
           if child.type == :p
-            content = convert_children(child.children)
+            content = convert_elements(child.children).rstrip
 
             if index == 0 then ".IP \\(bu 2\n#{content}"
             else               ".IP \\( 2\n#{content}"
@@ -611,11 +609,95 @@ module Kramdown
       def convert_ol_li(li)
         li.children.each_with_index.map { |child,index|
           if child.type == :p
-            content = convert_children(child.children)
+            content = convert_elements(child.children).rstrip
 
             if index == 0 then ".IP \\n+[step#{@ol_index}]\n#{content}"
             else               ".IP \\n\n#{content}"
             end
+          end
+        }.compact.join("\n")
+      end
+
+      #
+      # Converts a `kd:dl` element.
+      #
+      # @param [Kramdown::Element] dl
+      #   A `kd:dl` element.
+      #
+      # @return [String]
+      #   The roff output.
+      #
+      def convert_dl(dl)
+        dt_index = 0
+        dd_index = 0
+
+        dl.children.map { |element|
+          case element.type
+          when :dt
+            roff = convert_dt(element, index: dt_index)
+
+            dt_index += 1 # increment the dt count
+            dd_index  = 0 # reset the dd count
+          when :dd
+            roff = convert_dd(element, index: dd_index)
+
+            dd_index += 1 # increment the dd count
+            dt_index  = 0 # reset the dt count
+          else
+            roff = convert(element)
+
+            # reset both the dt_index and dd_index counters
+            dt_index = 0
+            dd_index = 0
+          end
+
+          roff
+        }.compact.join("\n")
+      end
+
+      #
+      # Converts a `kd:dt` element within a `kd:dl`.
+      #
+      # @param [Kramdown::Element] dt
+      #   A `kd:dt` element.
+      #
+      # @param [Integer] index
+      #   The index of the `kd:dt` element. Used to indicate whether this is the
+      #   first `kd:dt` element or additional `kd:dt` elements.
+      #
+      # @return [String]
+      #   The roff output.
+      #
+      def convert_dt(dt, index: 0)
+        text = convert_text_elements(dt.children)
+
+        if index == 0 then ".TP\n#{text}"
+        else               ".TQ\n#{text}"
+        end
+      end
+
+      #
+      # Converts a `kd:dd` element within a `kd:dd`.
+      #
+      # @param [Kramdown::Element] dd
+      #   A `kd:dd` element.
+      #
+      # @param [Integer] index
+      #   The index of the `kd:dd` element. Used to indicate whether this is the
+      #   first `kd:dd` element following a `kd;dt` element or additional
+      #   `kd:dt` elements.
+      #
+      # @return [String]
+      #   The roff output.
+      #
+      def convert_dd(dd, index: 0)
+        dd.children.each_with_index.map { |child,child_index|
+          if index == 0 && child_index == 0 && child.type == :p
+            # omit the .PP macro for the first paragraph
+            convert_elements(child.children).rstrip
+          else
+            # indent all other following paragraphs or other elements
+            ".RS\n#{convert_element(child)}\n.RE"
           end
         }.compact.join("\n")
       end
@@ -644,13 +726,10 @@ module Kramdown
       #
       def convert_blockquote(blockquote)
         content = blockquote.children.map { |child|
-          case child.type
-          when :p then convert_children(child.children)
-          else         convert_element(child)
-          end
-        }.join("\n")
+                    convert_element(child)
+                  }.compact.join("\n")
 
-        return ".PP\n.RS\n#{content}\n.RE"
+        return ".RS\n#{content}\n.RE"
       end
 
       #
@@ -691,26 +770,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_p(p)
-        children = p.children
-
-        if ((children.length >= 2) && (children.first.type == :codespan ||
-                                       children.first.type == :em       ||
-                                       children.first.type == :strong))
-          newline = children.find_index { |el|
-            el.type == :text && el.value.start_with?("\n")
-          }
-
-          if newline
-            first_line = convert_children(children[0...newline])
-            rest       = convert_children(children[newline..-1]).strip
-
-            ".TP\n#{first_line}\n#{rest}"
-          else
-            ".PP\n#{convert_children(children)}"
-          end
-        else
-          ".PP\n#{convert_children(children)}"
-        end
+        ".PP\n#{convert_text_elements(p.children)}"
       end
 
       #
@@ -723,7 +783,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_em(em)
-        "\\fI#{convert_children(em.children)}\\fP"
+        "\\fI#{convert_text_elements(em.children)}\\fP"
       end
 
       #
@@ -736,7 +796,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_strong(strong)
-        "\\fB#{convert_children(strong.children)}\\fP"
+        "\\fB#{convert_text_elements(strong.children)}\\fP"
       end
 
       #
@@ -765,7 +825,7 @@ module Kramdown
         href = escape(a.attr['href'])
         scheme, path = href.split(':',2)
 
-        text = convert_children(a.children)
+        text = convert_text_elements(a.children)
 
         case scheme
         when 'mailto'
@@ -791,16 +851,31 @@ module Kramdown
       end
 
       #
+      # Converts multiple elements.
+      #
+      # @param [Array<Kramdown::Element>] elements
+      #   The elements to convert.
+      #
+      # @return [String]
+      #   The combined roff output.
+      #
+      def convert_elements(elements)
+        elements.map { |element|
+          convert_element(element)
+        }.compact.join("\n")
+      end
+
+      #
       # Converts the children of an element.
       #
-      # @param [Array<Kramdown::Element>] children
-      #   The children of an element.
+      # @param [Array<Kramdown::Element>] elements
+      #   The text elements to convert.
       #
       # @return [String]
       #   The roff output.
       #
-      def convert_children(children)
-        children.map { |child| convert_element(child) }.join.strip
+      def convert_text_elements(elements)
+        elements.map { |element| convert_element(element) }.join
       end
 
       #

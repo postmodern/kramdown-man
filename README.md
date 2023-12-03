@@ -96,21 +96,21 @@ Normal paragraph.
 
 ```markdown
 *ARG*
-  Description here.
+: Description here.
 ```
 
 *ARG*
-  Description here.
+: Description here.
 
 #### Option Definitions
 
 ```markdown
-`--tagged`
-  Description here.
+`-o`, `--option` *VALUE*
+: Description here.
 ```
 
-`--tagged`
-  Text here.
+`-o`, `--option` *VALUE*
+: Description here.
 
 ### Links
 
@@ -159,6 +159,20 @@ Email <bob@example.com>
 1. one
 2. two
 3. three
+
+#### Definition Lists
+
+```mardkwon
+ex·am·ple
+: a thing characteristic of its kind or illustrating a general rule.
+
+: a person or thing regarded in terms of their fitness to be imitated or the likelihood of their being imitated.
+```
+
+ex·am·ple
+: a thing characteristic of its kind or illustrating a general rule.
+
+: a person or thing regarded in terms of their fitness to be imitated or the likelihood of their being imitated.
 
 ### Blockquotes
 
