@@ -612,13 +612,12 @@ module Kramdown
       def convert_ol(ol)
         @ol_index += 1
 
-        header   = ".nr step#{@ol_index} 0 1"
         contents = ol.children.map { |li|
                      convert_ol_li(li)
                    }.join
 
         return <<~ROFF
-          #{header}
+          .nr step#{@ol_index} 0 1
           .RS
           #{contents.chomp}
           .RE
