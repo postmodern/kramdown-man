@@ -458,6 +458,7 @@ module Kramdown
       #
       def convert_element(element)
         method = "convert_#{element.type}"
+
         send(method,element) if respond_to?(method)
       end
       
