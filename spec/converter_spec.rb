@@ -795,7 +795,7 @@ describe Kramdown::Man::Converter do
     end
   end
 
-  describe "#convert_elements" do
+  describe "#convert_children_of" do
     let(:markdown) do
       <<~MARKDOWN
         A paragraph
@@ -804,13 +804,13 @@ describe Kramdown::Man::Converter do
       MARKDOWN
     end
 
-    let(:elements) { doc.root.children }
+    let(:element) { doc.root }
 
     it "must convert each element and join them into a String" do
-      expect(subject.convert_elements(elements)).to eq(
+      expect(subject.convert_children_of(element)).to eq(
         [
-          subject.convert_element(elements[0]),
-          subject.convert_element(elements[2])
+          subject.convert_element(element.children[0]),
+          subject.convert_element(element.children[2])
         ].join
       )
     end
@@ -827,10 +827,10 @@ describe Kramdown::Man::Converter do
       end
 
       it "must omit the non-convertable elements" do
-        expect(subject.convert_elements(elements)).to eq(
+        expect(subject.convert_children_of(element)).to eq(
           [
-            subject.convert_element(elements[0]),
-            subject.convert_element(elements[4])
+            subject.convert_element(element.children[0]),
+            subject.convert_element(element.children[4])
           ].join
         )
       end

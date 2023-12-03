@@ -444,7 +444,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_root(root)
-        convert_elements(root.children)
+        convert_children_of(root)
       end
 
       #
@@ -588,7 +588,7 @@ module Kramdown
 
         li.children.each_with_index do |child,index|
           if child.type == :p
-            contents = convert_elements(child.children)
+            contents = convert_children_of(child)
 
             roff << if index == 0
                       <<~ROFF
@@ -647,7 +647,7 @@ module Kramdown
 
         li.children.each_with_index do |child,index|
           if child.type == :p
-            contents = convert_elements(child.children)
+            contents = convert_children_of(child)
 
             roff << if index == 0
                       <<~ROFF
@@ -753,7 +753,7 @@ module Kramdown
 
         dd.children.each_with_index do |child,child_index|
           if index == 0 && child_index == 0 && child.type == :p
-            contents = convert_elements(child.children)
+            contents = convert_children_of(child)
 
             # omit the .PP macro for the first paragraph
             roff << "#{contents.chomp}\n"
@@ -795,7 +795,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_blockquote(blockquote)
-        contents = convert_elements(blockquote.children)
+        contents = convert_children_of(blockquote)
 
         return <<~ROFF
           .RS
@@ -955,7 +955,7 @@ module Kramdown
       end
 
       #
-      # Converts multiple elements.
+      # Converts the children of an element.
       #
       # @param [Array<Kramdown::Element>] elements
       #   The elements to convert.
@@ -963,11 +963,11 @@ module Kramdown
       # @return [String]
       #   The combined roff output.
       #
-      def convert_elements(elements)
+      def convert_children_of(element)
         roff = String.new(encoding: Encoding::UTF_8)
 
-        elements.each do |element|
-          if (contents = convert_element(element))
+        element.children.each do |child|
+          if (contents = convert_element(child))
             roff << contents
           end
         end
