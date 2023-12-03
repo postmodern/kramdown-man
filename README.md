@@ -28,6 +28,7 @@ Render a man page from markdown:
 
 ```shell
 kramdown-man <man/myprog.1.md >man/myprog.1
+man ./man/myprog.1
 ```
 
 ## Examples
