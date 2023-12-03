@@ -524,9 +524,18 @@ module Kramdown
         text = header.options[:raw_text]
 
         case header.options[:level]
-        when 1 then ".TH #{text}\n"
-        when 2 then ".SH #{text}\n"
-        else        ".SS #{text}\n"
+        when 1
+          <<~ROFF
+            .TH #{text}
+          ROFF
+        when 2
+          <<~ROFF
+            .SH #{text}
+          ROFF
+        else
+          <<~ROFF
+            .SS #{text}
+          ROFF
         end
       end
 
@@ -802,7 +811,9 @@ module Kramdown
       #
       def convert_comment(comment)
         comment.value.lines.map { |line|
-          ".\\\" #{line}\n"
+          <<~ROFF
+            .\\" #{line}
+          ROFF
         }.join
       end
 
@@ -887,7 +898,9 @@ module Kramdown
               .ME
             ROFF
           else
-            ".MT #{email}\n.ME\n"
+            <<~ROFF
+              .MT #{email}\n.ME
+            ROFF
           end
         when 'man'
           if (match = path.match(/\A(?<page>[A-Za-z0-9_-]+)(?:\((?<section>\d[a-z]?)\)|\\\.(?<section>\d[a-z]?))\z/))
