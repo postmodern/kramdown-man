@@ -11,7 +11,7 @@ when '-V', '--version'
   puts "kramdown-man #{Kramdown::Man::VERSION}"
   exit
 when '-h', '--help'
-  warn "usage: #{File.dirname($0)} <INPUT.md >OUTPUT"
+  warn "usage: #{File.basename($0)} <INPUT.md >OUTPUT"
   exit
 end
 
