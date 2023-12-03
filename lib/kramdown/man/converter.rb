@@ -854,9 +854,11 @@ module Kramdown
       #   The roff output.
       #
       def convert_p(p)
-        <<~ROFF
+        contents = convert_text_elements(p.children)
+
+        return <<~ROFF
           .PP
-          #{convert_text_elements(p.children)}
+          #{contents.chomp}
         ROFF
       end
 
