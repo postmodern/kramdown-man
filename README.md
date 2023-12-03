@@ -128,7 +128,7 @@ Link to other man pages in a project:
 [kramdown-man](kramdown-man.md)
 ```
 
-[kramdown-man](man/kramdown-man.md)
+[kramdown-man](https://github.com/postmodern/kramdown-man/blob/main/man/kramdown-man.md)
 
 Link to other system man page:
 
