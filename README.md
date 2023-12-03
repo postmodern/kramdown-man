@@ -13,6 +13,7 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 * Converts markdown to [roff]:
   * Supports codespans, emphasis, and strong fonts.
   * Supports normal and tagged paragraphs.
+  * Supports codeblocks and blockquotes.
   * Supports bullet, numbered, and definition lists.
   * Supports multi-paragraph list items and blockquotes.
   * Supports converting `[foo-bar](foo-bar.1.md)` and `[bash](man:bash(1))`
