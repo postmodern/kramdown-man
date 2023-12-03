@@ -21,10 +21,10 @@ Hello world.
     it "should add the header" do
       expect(subject.convert(root)).to eq([
         described_class::HEADER,
-        ".TH Header",
-        ".PP",
-        'Hello world\.'
-      ].join("\n"))
+        ".TH Header\n",
+        ".PP\n",
+        "Hello world\\.\n"
+      ].join)
     end
   end
 
@@ -41,10 +41,10 @@ Hello world.
 
     it "should convert every element" do
       expect(subject.convert_root(root)).to eq([
-        ".TH Header",
-        ".PP",
-        'Hello world\.'
-      ].join("\n"))
+        ".TH Header\n",
+        ".PP\n",
+        "Hello world\\.\n"
+      ].join)
     end
   end
 
@@ -185,7 +185,7 @@ Hello world.
       let(:header) { doc.root.children[0] }
 
       it "should convert level 1 headers into '.TH text'" do
-        expect(subject.convert_header(header)).to eq(".TH Header")
+        expect(subject.convert_header(header)).to eq(".TH Header\n")
       end
     end
 
@@ -194,7 +194,7 @@ Hello world.
       let(:header) { doc.root.children[0] }
 
       it "should convert level 2 headers into '.SH text'" do
-        expect(subject.convert_header(header)).to eq(".SH Header")
+        expect(subject.convert_header(header)).to eq(".SH Header\n")
       end
     end
 
@@ -203,7 +203,7 @@ Hello world.
       let(:header) { doc.root.children[0] }
 
       it "should convert level 2 headers into '.SS text'" do
-        expect(subject.convert_header(header)).to eq(".SS Header")
+        expect(subject.convert_header(header)).to eq(".SS Header\n")
       end
     end
 
@@ -212,7 +212,7 @@ Hello world.
       let(:header) { doc.root.children[0] }
 
       it "should convert level 2 headers into '.SS text'" do
-        expect(subject.convert_header(header)).to eq(".SS Header")
+        expect(subject.convert_header(header)).to eq(".SS Header\n")
       end
     end
   end
@@ -232,15 +232,15 @@ Hello world.
     let(:doc)   { Kramdown::Document.new("* #{text1}\n* #{text2}") }
     let(:ul)    { doc.root.children[0] }
 
-    it "should convert ul elements into '.RS\\n...\\n.RE'" do
+    it "should convert ul elements into '.RS\\n...\\n.RE\\n'" do
       expect(subject.convert_ul(ul)).to eq([
-        ".RS",
-        ".IP \\(bu 2",
-        text1,
-        ".IP \\(bu 2",
-        text2,
-        ".RE"
-      ].join("\n"))
+        ".RS\n",
+        ".IP \\(bu 2\n",
+        "#{text1}\n",
+        ".IP \\(bu 2\n",
+        "#{text2}\n",
+        ".RE\n"
+      ].join)
     end
   end
 
@@ -250,7 +250,7 @@ Hello world.
     let(:li)   { doc.root.children[0].children[0]    }
 
     it "should convert the first p element to '.IP \\\\(bu 2\\n...'" do
-      expect(subject.convert_ul_li(li)).to eq(".IP \\(bu 2\n#{text}")
+      expect(subject.convert_ul_li(li)).to eq(".IP \\(bu 2\n#{text}\n")
     end
 
     context "with multiple multiple paragraphs" do
@@ -260,11 +260,11 @@ Hello world.
 
       it "should convert the other p elements to '.IP \\\\( 2\\n...'" do
         expect(subject.convert_ul_li(li)).to eq([
-          ".IP \\(bu 2",
-          text1,
-          ".IP \\( 2",
-          text2
-        ].join("\n"))
+          ".IP \\(bu 2\n",
+          "#{text1}\n",
+          ".IP \\( 2\n",
+          "#{text2}\n"
+        ].join)
       end
     end
   end
@@ -277,14 +277,14 @@ Hello world.
 
     it "should convert ol elements into '.RS\\n...\\n.RE'" do
       expect(subject.convert_ol(ol)).to eq([
-        ".nr step1 0 1",
-        ".RS",
-        ".IP \\n+[step1]",
-        text1,
-        ".IP \\n+[step1]",
-        text2,
-        ".RE"
-      ].join("\n"))
+        ".nr step1 0 1\n",
+        ".RS\n",
+        ".IP \\n+[step1]\n",
+        "#{text1}\n",
+        ".IP \\n+[step1]\n",
+        "#{text2}\n",
+        ".RE\n"
+      ].join)
     end
   end
 
@@ -294,7 +294,7 @@ Hello world.
     let(:li)   { doc.root.children[0].children[0]     }
 
     it "should convert the first p element to '.IP \\\\n+[step0]\\n...'" do
-      expect(subject.convert_ol_li(li)).to eq(".IP \\n+[step0]\n#{text}")
+      expect(subject.convert_ol_li(li)).to eq(".IP \\n+[step0]\n#{text}\n")
     end
 
     context "with multiple multiple paragraphs" do
@@ -304,11 +304,11 @@ Hello world.
 
       it "should convert the other p elements to '.IP \\\\n\\n...'" do
         expect(subject.convert_ol_li(li)).to eq([
-          ".IP \\n+[step0]",
-          text1,
-          ".IP \\n",
-          text2
-        ].join("\n"))
+          ".IP \\n+[step0]\n",
+          "#{text1}\n",
+          ".IP \\n\n",
+          "#{text2}\n"
+        ].join)
       end
     end
   end
@@ -327,7 +327,7 @@ Hello world.
     let(:dl)  { doc.root.children[0] }
 
     it "must convert dl elements into '.TP\n...\n...'" do
-      expect(subject.convert_dl(dl)).to eq(".TP\n#{term}\n#{definition}")
+      expect(subject.convert_dl(dl)).to eq(".TP\n#{term}\n#{definition}\n")
     end
 
     context "when there are multiple term lines" do
@@ -342,7 +342,7 @@ Hello world.
       end
 
       it "must convert the multi-term dl element into '.TP\\nterm1\\n.TQ\\nterm2\\n...'" do
-        expect(subject.convert_dl(dl)).to eq(".TP\n#{term1}\n.TQ\n#{term2}\n#{definition}")
+        expect(subject.convert_dl(dl)).to eq(".TP\n#{term1}\n.TQ\n#{term2}\n#{definition}\n")
       end
     end
   end
@@ -364,13 +364,13 @@ Hello world.
     let(:dt)  { doc.root.children[0].children[0] }
 
     it "must convert the dt element into '.TP\n...'" do
-      expect(subject.convert_dt(dt)).to eq(".TP\n#{word1} \\fB#{word2}\\fR \\fI#{word3}\\fP")
+      expect(subject.convert_dt(dt)).to eq(".TP\n#{word1} \\fB#{word2}\\fR \\fI#{word3}\\fP\n")
     end
 
     context "when given the index: keyword" do
       context "and it's greater than 1" do
         it "must convert the dt element into '.TQ\n...'" do
-          expect(subject.convert_dt(dt, index: 1)).to eq(".TQ\n#{word1} \\fB#{word2}\\fR \\fI#{word3}\\fP")
+          expect(subject.convert_dt(dt, index: 1)).to eq(".TQ\n#{word1} \\fB#{word2}\\fR \\fI#{word3}\\fP\n")
         end
       end
     end
@@ -393,7 +393,7 @@ Hello world.
     let(:dd)  { doc.root.children[0].children[1] }
 
     it "must convert the children p element within the dd element" do
-      expect(subject.convert_dd(dd)).to eq("#{word1} \n\\fB#{word2}\\fR\n \n\\fI#{word3}\\fP")
+      expect(subject.convert_dd(dd)).to eq("#{word1} \\fB#{word2}\\fR \\fI#{word3}\\fP\n")
     end
 
     context "when the dd element is the first dd element following a dt element" do
@@ -414,7 +414,7 @@ Hello world.
         end
 
         it "must convert the following p children into '.RS\\n.PP\\n...\\n.RE'" do
-          expect(subject.convert_dd(dd)).to eq("#{word1} #{word2}\n.RS\n.PP\n\\fB#{word3}\\fR \\fI#{word4}\\fP\n.RE")
+          expect(subject.convert_dd(dd)).to eq("#{word1} #{word2}\n.RS\n.PP\n\\fB#{word3}\\fR \\fI#{word4}\\fP\n.RE\n")
         end
       end
 
@@ -437,7 +437,7 @@ Hello world.
         let(:dd)  { doc.root.children[0].children[2] }
 
         it "must convert the following p children into '.RS\\n.PP\\n...\\n.RE'" do
-          expect(subject.convert_dd(dd, index: 1)).to eq(".RS\n.PP\n\\fB#{word3}\\fR \\fI#{word4}\\fP\n.RE")
+          expect(subject.convert_dd(dd, index: 1)).to eq(".RS\n.PP\n\\fB#{word3}\\fR \\fI#{word4}\\fP\n.RE\n")
         end
       end
     end
@@ -464,7 +464,7 @@ Hello world.
     let(:blockquote)   { doc.root.children[0] }
 
     it "should convert blockquote elements into '.RS\\n.PP\\ntext...\\n.RE'" do
-      expect(subject.convert_blockquote(blockquote)).to eq(".RS\n.PP\n#{escaped_text}\n.RE")
+      expect(subject.convert_blockquote(blockquote)).to eq(".RS\n.PP\n#{escaped_text}\n.RE\n")
     end
   end
 
@@ -475,7 +475,7 @@ Hello world.
     let(:codeblock)    { doc.root.children[0] }
 
     it "should convert codeblock elements into '.PP\\n.EX\\ntext...\\n.EE'" do
-      expect(subject.convert_codeblock(codeblock)).to eq(".PP\n.EX\n#{escaped_code}\n.EE")
+      expect(subject.convert_codeblock(codeblock)).to eq(".PP\n.EX\n#{escaped_code}\n.EE\n")
     end
   end
 
@@ -485,7 +485,7 @@ Hello world.
     let(:comment) { doc.root.children[0] }
 
     it "should convert comment elements into '.\\\" text...'" do
-      expect(subject.convert_comment(comment)).to eq(".\\\" #{text}")
+      expect(subject.convert_comment(comment)).to eq(".\\\" #{text}\n")
     end
   end
 
@@ -496,7 +496,7 @@ Hello world.
     let(:p)            { doc.root.children[0] }
 
     it "should convert p elements into '.PP\\ntext'" do
-      expect(subject.convert_p(p)).to eq(".PP\n#{escaped_text}")
+      expect(subject.convert_p(p)).to eq(".PP\n#{escaped_text}\n")
     end
   end
 
@@ -538,7 +538,7 @@ Hello world.
     let(:link)         { doc.root.children[0].children[0] }
 
     it "should convert a link elements into 'text\\n.UR href\\n.UE'" do
-      expect(subject.convert_a(link)).to eq("#{text}\n.UR #{escaped_href}\n.UE")
+      expect(subject.convert_a(link)).to eq("#{text}\n.UR #{escaped_href}\n.UE\n")
     end
 
     context "when the href begins with mailto:" do
@@ -548,14 +548,14 @@ Hello world.
       let(:doc)           { Kramdown::Document.new("[#{text}](mailto:#{email})") }
 
       it "should convert the link elements into '.MT email\\n.ME'" do
-        expect(subject.convert_a(link)).to eq("#{text}\n.MT #{escaped_email}\n.ME")
+        expect(subject.convert_a(link)).to eq("#{text}\n.MT #{escaped_email}\n.ME\n")
       end
 
       context "when link is <email>" do
         let(:doc) { Kramdown::Document.new("<#{email}>") }
 
         it "should convert the link elements into '.MT email\\n.ME'" do
-          expect(subject.convert_a(link)).to eq("\n.MT #{escaped_email}\n.ME")
+          expect(subject.convert_a(link)).to eq("\n.MT #{escaped_email}\n.ME\n")
         end
       end
     end
@@ -565,7 +565,7 @@ Hello world.
       let(:doc)  { Kramdown::Document.new("[#{man}](man:#{man})") }
 
       it "should convert the link elements into '.BR man'" do
-        expect(subject.convert_a(link)).to eq("\n.BR #{man}")
+        expect(subject.convert_a(link)).to eq("\n.BR #{man}\n")
       end
 
       context "and when the path is of the form 'page(section)'" do
@@ -573,7 +573,7 @@ Hello world.
         let(:doc)     { Kramdown::Document.new("[#{man}](man:#{man}(#{section}))") }
 
         it "should convert the link elements into '.BR page (section)'" do
-          expect(subject.convert_a(link)).to eq("\n.BR #{man} (#{section})")
+          expect(subject.convert_a(link)).to eq("\n.BR #{man} (#{section})\n")
         end
       end
 
@@ -582,7 +582,7 @@ Hello world.
         let(:doc)     { Kramdown::Document.new("[#{man}](man:#{man}.#{section})") }
 
         it "should convert the link elements into '.BR page (section)'" do
-          expect(subject.convert_a(link)).to eq("\n.BR #{man} (#{section})")
+          expect(subject.convert_a(link)).to eq("\n.BR #{man} (#{section})\n")
         end
       end
 
@@ -591,7 +591,7 @@ Hello world.
         let(:doc)  { Kramdown::Document.new("[#{man}](man:#{file})") }
 
         it "should convert the link elements into '.BR file'" do
-          expect(subject.convert_a(link)).to eq("\n.BR #{file.gsub('.','\\.')}")
+          expect(subject.convert_a(link)).to eq("\n.BR #{file.gsub('.','\\.')}\n")
         end
       end
     end
@@ -608,12 +608,12 @@ Hello world.
     let(:doc)      { Kramdown::Document.new(text) }
     let(:elements) { doc.root.children }
 
-    it "must convert each element and join them with newlines" do
+    it "must convert each element and join them into a String" do
       expect(subject.convert_elements(elements)).to eq(
         [
           subject.convert_element(elements[0]),
           subject.convert_element(elements[2])
-        ].join("\n")
+        ].join
       )
     end
 
@@ -633,7 +633,7 @@ Hello world.
           [
             subject.convert_element(elements[0]),
             subject.convert_element(elements[4])
-          ].join("\n")
+          ].join
         )
       end
     end
@@ -659,6 +659,18 @@ Hello world.
           subject.convert_element(elements[5])
         ].join
       )
+    end
+
+    context "when the text elements contain a 'a' type element" do
+      let(:text) do
+        <<~MARKDOWN
+          Word1 [link](https://example.com) word2.
+        MARKDOWN
+      end
+
+      it "must remove leading spaces from each line" do
+        expect(subject.convert_text_elements(elements)).to_not match(/^ /)
+      end
     end
   end
 
