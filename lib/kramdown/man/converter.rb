@@ -560,9 +560,11 @@ module Kramdown
       #   The roff output.
       #
       def convert_ul(ul)
-        contents = ul.children.map { |li|
-                     convert_ul_li(li)
-                   }.join
+        contents = String.new(encoding: Encoding::UTF_8)
+
+        ul.children.each do |li|
+          contents << convert_ul_li(li)
+        end
 
         return <<~ROFF
           .RS
@@ -581,23 +583,27 @@ module Kramdown
       #   The roff output.
       #
       def convert_ul_li(li)
-        li.children.each_with_index.map { |child,index|
+        roff = String.new(encoding: Encoding::UTF_8)
+
+        li.children.each_with_index do |child,index|
           if child.type == :p
             contents = convert_elements(child.children).chomp
 
-            if index == 0
-              <<~ROFF
-                .IP \\(bu 2
-                #{contents}
-              ROFF
-            else
-              <<~ROFF
-                .IP \\( 2
-                #{contents}
-              ROFF
-            end
+            roff << if index == 0
+                      <<~ROFF
+                        .IP \\(bu 2
+                        #{contents}
+                      ROFF
+                    else
+                      <<~ROFF
+                       .IP \\( 2
+                       #{contents}
+                      ROFF
+                    end
           end
-        }.join
+        end
+
+        return roff
       end
 
       #
@@ -612,9 +618,11 @@ module Kramdown
       def convert_ol(ol)
         @ol_index += 1
 
-        contents = ol.children.map { |li|
-                     convert_ol_li(li)
-                   }.join
+        contents = String.new(encoding: Encoding::UTF_8)
+
+        ol.children.each do |li|
+          contents << convert_ol_li(li)
+        end
 
         return <<~ROFF
           .nr step#{@ol_index} 0 1
@@ -634,23 +642,27 @@ module Kramdown
       #   The roff output.
       #
       def convert_ol_li(li)
-        li.children.each_with_index.map { |child,index|
+        roff = String.new(encoding: Encoding::UTF_8)
+
+        li.children.each_with_index do |child,index|
           if child.type == :p
             contents = convert_elements(child.children).chomp
 
-            if index == 0
-              <<~ROFF
-                .IP \\n+[step#{@ol_index}]
-                #{contents}
-              ROFF
-            else
-              <<~ROFF
-                .IP \\n
-                #{contents}
-              ROFF
-            end
+            roff << if index == 0
+                      <<~ROFF
+                        .IP \\n+[step#{@ol_index}]
+                        #{contents}
+                      ROFF
+                    else
+                      <<~ROFF
+                        .IP \\n
+                        #{contents}
+                      ROFF
+                    end
           end
-        }.join
+        end
+
+        return roff
       end
 
       #
@@ -663,31 +675,33 @@ module Kramdown
       #   The roff output.
       #
       def convert_dl(dl)
+        roff = String.new(encoding: Encoding::UTF_8)
+
         dt_index = 0
         dd_index = 0
 
-        dl.children.map { |element|
+        dl.children.each do |element|
           case element.type
           when :dt
-            roff = convert_dt(element, index: dt_index)
+            roff << convert_dt(element, index: dt_index)
 
             dt_index += 1 # increment the dt count
             dd_index  = 0 # reset the dd count
           when :dd
-            roff = convert_dd(element, index: dd_index)
+            roff << convert_dd(element, index: dd_index)
 
             dd_index += 1 # increment the dd count
             dt_index  = 0 # reset the dt count
           else
-            roff = convert(element)
+            roff << convert(element)
 
             # reset both the dt_index and dd_index counters
             dt_index = 0
             dd_index = 0
           end
+        end
 
-          roff
-        }.join
+        return roff
       end
 
       #
@@ -734,21 +748,25 @@ module Kramdown
       #   The roff output.
       #
       def convert_dd(dd, index: 0)
-        dd.children.each_with_index.map { |child,child_index|
+        roff = String.new(encoding: Encoding::UTF_8)
+
+        dd.children.each_with_index do |child,child_index|
           if index == 0 && child_index == 0 && child.type == :p
             # omit the .PP macro for the first paragraph
-            "#{convert_elements(child.children).chomp}\n"
+            roff << "#{convert_elements(child.children).chomp}\n"
           else
             if (contents = convert_element(child))
               # indent all other following paragraphs or other elements
-              <<~ROFF
-                .RS
-                #{contents.chomp}
-                .RE
-              ROFF
+              roff << <<~ROFF
+                        .RS
+                        #{contents.chomp}
+                        .RE
+                      ROFF
             end
           end
-        }.join
+        end
+
+        return roff
       end
 
       #
@@ -809,11 +827,15 @@ module Kramdown
       #   The roff output.
       #
       def convert_comment(comment)
-        comment.value.lines.map { |line|
-          <<~ROFF
-            .\\" #{line}
-          ROFF
-        }.join
+        roff = String.new(encoding: Encoding::UTF_8)
+
+        comment.value.lines.each do |line|
+          roff << <<~ROFF
+                    .\\" #{line}
+                  ROFF
+        end
+
+        return roff
       end
 
       #
@@ -933,9 +955,15 @@ module Kramdown
       #   The combined roff output.
       #
       def convert_elements(elements)
-        elements.map { |element|
-          convert_element(element)
-        }.join
+        roff = String.new(encoding: Encoding::UTF_8)
+
+        elements.each do |element|
+          if (contents = convert_element(element))
+            roff << contents
+          end
+        end
+
+        return roff
       end
 
       #
