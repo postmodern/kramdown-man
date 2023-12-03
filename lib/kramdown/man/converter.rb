@@ -984,23 +984,23 @@ module Kramdown
       #   The roff output.
       #
       def convert_text_elements(elements)
-        contents = String.new(encoding: Encoding::UTF_8)
+        roff = String.new(encoding: Encoding::UTF_8)
 
         elements.each do |element|
-          if (roff = convert_element(element))
-            if roff.start_with?('.') && !contents.empty?
+          if (contents = convert_element(element))
+            if contents.start_with?('.') && !roff.empty?
               # roff macross must exist on their own line
-              contents << "\n#{roff}"
-            elsif roff.start_with?(' ') && contents.end_with?("\n")
+              roff << "\n#{contents}"
+            elsif contents.start_with?(' ') && roff.end_with?("\n")
               # remove leadning whitespace following a newline
-              contents << roff.lstrip
+              roff << contents.lstrip
             else
-              contents << roff
+              roff << contents
             end
           end
         end
 
-        return contents
+        return roff
       end
 
       #
