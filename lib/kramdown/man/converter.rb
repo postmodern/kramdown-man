@@ -983,7 +983,7 @@ module Kramdown
       #
       # Converts the children of an element.
       #
-      # @param [Array<Kramdown::Element>] elements
+      # @param [Array<Kramdown::Element>] element
       #   The elements to convert.
       #
       # @return [String]
