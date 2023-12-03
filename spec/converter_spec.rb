@@ -22,7 +22,6 @@ Hello world.
       expect(subject.convert(root)).to eq([
         described_class::HEADER,
         ".TH Header",
-        ".LP",
         ".PP",
         'Hello world\.'
       ].join("\n"))
@@ -43,7 +42,6 @@ Hello world.
     it "should convert every element" do
       expect(subject.convert_root(root)).to eq([
         ".TH Header",
-        ".LP",
         ".PP",
         'Hello world\.'
       ].join("\n"))
@@ -63,8 +61,8 @@ Hello world.
     let(:doc)   { Kramdown::Document.new("foo\n\nbar") }
     let(:blank) { doc.root.children[0].children[1] }
 
-    it "should convert blank elements to '.LP'" do
-      expect(subject.convert_blank(blank)).to eq('.LP')
+    it "must return nil" do
+      expect(subject.convert_blank(blank)).to be(nil)
     end
   end
 
@@ -416,7 +414,7 @@ Hello world.
         end
 
         it "must convert the following p children into '.RS\\n.PP\\n...\\n.RE'" do
-          expect(subject.convert_dd(dd)).to eq("#{word1} #{word2}\n.RS\n.LP\n.RE\n.RS\n.PP\n\\fB#{word3}\\fR \\fI#{word4}\\fP\n.RE")
+          expect(subject.convert_dd(dd)).to eq("#{word1} #{word2}\n.RS\n.PP\n\\fB#{word3}\\fR \\fI#{word4}\\fP\n.RE")
         end
       end
 
@@ -476,8 +474,8 @@ Hello world.
     let(:doc)          { Kramdown::Document.new("    #{code}\n") }
     let(:codeblock)    { doc.root.children[0] }
 
-    it "should convert codeblock elements into '.EX\\ntext...\\n.EE'" do
-      expect(subject.convert_codeblock(codeblock)).to eq(".EX\n#{escaped_code}\n.EE")
+    it "should convert codeblock elements into '.PP\\n.EX\\ntext...\\n.EE'" do
+      expect(subject.convert_codeblock(codeblock)).to eq(".PP\n.EX\n#{escaped_code}\n.EE")
     end
   end
 
@@ -614,7 +612,6 @@ Hello world.
       expect(subject.convert_elements(elements)).to eq(
         [
           subject.convert_element(elements[0]),
-          subject.convert_element(elements[1]),
           subject.convert_element(elements[2])
         ].join("\n")
       )
@@ -635,8 +632,6 @@ Hello world.
         expect(subject.convert_elements(elements)).to eq(
           [
             subject.convert_element(elements[0]),
-            subject.convert_element(elements[1]),
-            subject.convert_element(elements[3]),
             subject.convert_element(elements[4])
           ].join("\n")
         )

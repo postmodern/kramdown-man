@@ -467,11 +467,9 @@ module Kramdown
       # @param [Kramdown::Element] blank
       #   A `kd:blank` element.
       #
-      # @return [String]
-      #   The roff output.
+      # @return [nil]
       #
       def convert_blank(blank)
-        '.LP'
       end
 
       #
@@ -744,7 +742,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_codeblock(codeblock)
-        ".EX\n#{escape(codeblock.value).rstrip}\n.EE"
+        ".PP\n.EX\n#{escape(codeblock.value).rstrip}\n.EE"
       end
 
       #
@@ -877,7 +875,7 @@ module Kramdown
       #   The roff output.
       #
       def convert_text_elements(elements)
-        elements.map { |element| convert_element(element) }.join
+        elements.map { |element| convert_element(element) }.compact.join
       end
 
       #
