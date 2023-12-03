@@ -8,4 +8,5 @@ group :development do
   gem 'rspec',           '~> 3.0'
   gem 'redcarpet',       platform: :mri
   gem 'yard',            '~> 0.9'
+  gem 'dead_end',        require: false
 end
