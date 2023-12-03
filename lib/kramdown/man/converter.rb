@@ -989,7 +989,7 @@ module Kramdown
 
         elements.each do |element|
           if (contents = convert_element(element))
-            if contents.start_with?('.') && !roff.empty?
+            if contents.start_with?('.') && !roff.empty? && !roff.end_with?("\n")
               # roff macross must exist on their own line
               roff << "\n#{contents}"
             elsif contents.start_with?(' ') && roff.end_with?("\n")

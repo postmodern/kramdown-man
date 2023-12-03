@@ -869,6 +869,24 @@ describe Kramdown::Man::Converter do
         expect(subject.convert_text_elements(elements)).to_not match(/^ /)
       end
     end
+
+    context "when the text elements contain consecutive 'a' elements" do
+      let(:markdown) do
+        <<~MARKDOWN
+          [link1](link1.html) [link2](link2.html) [link3](link3.html)
+        MARKDOWN
+      end
+
+      it "must avoid adding duplicate newlines" do
+        expect(subject.convert_text_elements(elements)).to eq(
+          [
+            subject.convert_element(elements[0]),
+            subject.convert_element(elements[2]),
+            subject.convert_element(elements[4]),
+          ].join
+        )
+      end
+    end
   end
 
   describe "#escape" do
