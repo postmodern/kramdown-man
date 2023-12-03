@@ -875,9 +875,23 @@ module Kramdown
       #   The roff output.
       #
       def convert_text_elements(elements)
-        elements.map { |element|
-          convert_element(element)
-        }.join.gsub(/^ /,'')
+        contents = String.new(encoding: Encoding::UTF_8)
+
+        elements.each do |element|
+          if (roff = convert_element(element))
+            if roff.start_with?('.') && !contents.empty?
+              # roff macross must exist on their own line
+              contents << "\n#{roff}"
+            elsif roff.start_with?(' ') && contents.end_with?("\n")
+              # remove leadning whitespace following a newline
+              contents << roff.lstrip
+            else
+              contents << roff
+            end
+          end
+        end
+
+        return contents
       end
 
       #
