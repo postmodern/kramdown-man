@@ -912,14 +912,14 @@ module Kramdown
       #   The roff output.
       #
       def convert_a(a)
-        href = escape(a.attr['href'])
+        href = a.attr['href']
         scheme, path = href.split(':',2)
 
         text = convert_text_elements(a.children)
 
         case scheme
         when 'mailto'
-          email = path
+          email = escape(path)
 
           unless text == email
             <<~ROFF
@@ -933,22 +933,24 @@ module Kramdown
             ROFF
           end
         when 'man'
-          if (match = path.match(/\A(?<page>[A-Za-z0-9_-]+)(?:\((?<section>\d[a-z]?)\)|\\\.(?<section>\d[a-z]?))\z/))
-            page    = match[:page]
-            section = match[:section]
+          if (match = path.match(/\A(?<page>[A-Za-z0-9_-]+)(?:\((?<section>\d[a-z]?)\)|\.(?<section>\d[a-z]?))\z/))
+            page    = escape(match[:page])
+            section = escape(match[:section])
 
             <<~ROFF
               .BR #{page} (#{section})
             ROFF
           else
+            page = escape(path)
+
             <<~ROFF
-              .BR #{path}
+              .BR #{page}
             ROFF
           end
         else
           <<~ROFF
             #{text.chomp}
-            .UR #{href}
+            .UR #{escape(href)}
             .UE
           ROFF
         end
