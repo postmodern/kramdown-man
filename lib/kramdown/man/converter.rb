@@ -818,9 +818,11 @@ module Kramdown
 
         return <<~ROFF
           .PP
+          .RS 4
           .EX
           #{contents.chomp}
           .EE
+          .RE
         ROFF
       end
 

@@ -613,9 +613,11 @@ describe Kramdown::Man::Converter do
       expect(subject.convert_codeblock(codeblock)).to eq(
         <<~ROFF
           .PP
+          .RS 4
           .EX
           #{escaped_code}
           .EE
+          .RE
         ROFF
       )
     end

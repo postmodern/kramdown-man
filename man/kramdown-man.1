@@ -26,12 +26,15 @@ Prints the \fBkramdown-man\fR version\.
 Prints the usage for \fBkramdown-man\fR\.
 .SH EXAMPLE
 .PP
+.RS 4
 .EX
 \[Do] kramdown\-man <man\[sl]myprog\.1\.md >man\[sl]myprog\.1
 \[Do] man \.\[sl]man\[sl]myprog\.1
 .EE
+.RE
 .SS RUBY
 .PP
+.RS 4
 .EX
 require \(aqkramdown\(aq
 require \(aqkramdown\[sl]man\(aq
@@ -40,74 +43,93 @@ doc \[eq] Kramdown::Document\.new(File\.read(\(aqman\[sl]kramdown\-man\.1\.md\(a
 File\.write(\(aqman\[sl]kramdown\-man\.1\(aq,doc\.to\[ru]man)
 system \(aqman\(aq, \(aqman\[sl]kramdown\-man\.1\(aq
 .EE
+.RE
 .SS RAKE TASK
 .PP
 Define a \fBman\fR and files tasks which render all \fB*.md\fR files within the
 \fBman/\fR directory:
 .PP
+.RS 4
 .EX
 require \(aqkramdown\[sl]man\[sl]task\(aq
 Kramdown::Man::Task\.new
 .EE
+.RE
 .SH SYNTAX
 .SS Code
 .PP
+.RS 4
 .EX
 \`code\`
 .EE
+.RE
 .PP
 \fBcode\fR
 .SS Emphasis
 .PP
+.RS 4
 .EX
 *emphasis*
 .EE
+.RE
 .PP
 \fIemphasis\fP
 .SS Strong
 .PP
+.RS 4
 .EX
 **strong**
 .EE
+.RE
 .PP
 \fBstrong\fP
 .SS Paragraph
 .PP
+.RS 4
 .EX
 Normal paragraph\.
 .EE
+.RE
 .PP
 Normal paragraph\.
 .SS Usage String
 .PP
+.RS 4
 .EX
 \`command\` \[lB]\`\-\-foo\`\[rB] **FILE**
 .EE
+.RE
 .PP
 \fBcommand\fR \[lB]\fB--foo\fR\[rB] \fBFILE\fP
 .SS Argument Definitions
 .PP
+.RS 4
 .EX
 *ARG*
 : Description here\.
 .EE
+.RE
 .TP
 \fIARG\fP
 Description here\.
 .SS Option Definitions
 .PP
+.RS 4
 .EX
 \`\-o\`, \`\-\-option\` *VALUE*
 : Description here\.
 .EE
+.RE
 .TP
 \fB-o\fR, \fB--option\fR \fIVALUE\fP
 Description here\.
 .SS Links
 .PP
+.RS 4
 .EX
 \[lB]website\[rB](http:\[sl]\[sl]example\.com\[sl])
 .EE
+.RE
 .PP
 website
 .UR http:\[sl]\[sl]example\.com\[sl]
@@ -116,9 +138,11 @@ website
 .PP
 Link to other man pages in a project:
 .PP
+.RS 4
 .EX
 \[lB]kramdown\-man\[rB](kramdown\-man\.md)
 .EE
+.RE
 .PP
 kramdown\-man
 .UR kramdown\-man\.md
@@ -126,9 +150,11 @@ kramdown\-man
 .PP
 Link to other system man page:
 .PP
+.RS 4
 .EX
 \[lB]bash\[rB](man:bash(1))
 .EE
+.RE
 .PP
 .BR bash (1)
 .PP
@@ -138,20 +164,24 @@ Link to other system man page:
 \.
 .SS Email Addresses
 .PP
+.RS 4
 .EX
 Email <bob\[at]example\.com>
 .EE
+.RE
 .PP
 Email 
 .MT bob\[at]example\.com
 .ME
 .SS Lists
 .PP
+.RS 4
 .EX
 * one
 * two
 * three
 .EE
+.RE
 .RS
 .IP \(bu 2
 one
@@ -162,11 +192,13 @@ three
 .RE
 .SS Numbered Lists
 .PP
+.RS 4
 .EX
 1\. one
 2\. two
 3\. three
 .EE
+.RE
 .nr step1 0 1
 .RS
 .IP \n+[step1]
@@ -178,6 +210,7 @@ three
 .RE
 .SS Definition Lists
 .PP
+.RS 4
 .EX
 ex\[pc]am\[pc]ple
 : a thing characteristic of its kind or illustrating a general rule\.
@@ -185,6 +218,7 @@ ex\[pc]am\[pc]ple
 : a person or thing regarded in terms of their fitness to be imitated or the
   likelihood of their being imitated\.
 .EE
+.RE
 .TP
 ex\[pc]am\[pc]ple
 a thing characteristic of its kind or illustrating a general rule\.
@@ -195,11 +229,13 @@ likelihood of their being imitated\.
 .RE
 .SS Blockquotes
 .PP
+.RS 4
 .EX
 > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away\.
 >
 > \-\-Antoine de Saint\-Exup\['e]ry
 .EE
+.RE
 .RS
 .PP
 Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away\.
@@ -208,6 +244,7 @@ Perfection is achieved, not when there is nothing more to add, but when there is
 .RE
 .SS Code Blocks
 .PP
+.RS 4
 .EX
 Source code:
 
@@ -219,9 +256,11 @@ Source code:
         return 0;
     \[rC]
 .EE
+.RE
 .PP
 Source code:
 .PP
+.RS 4
 .EX
 \[sh]include <stdio\.h>
 
@@ -231,6 +270,7 @@ int main()
     return 0;
 \[rC]
 .EE
+.RE
 .SH AUTHOR
 .PP
 Postmodern 
