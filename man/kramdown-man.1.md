@@ -23,6 +23,11 @@ A [Kramdown][kramdown] plugin for converting Markdown files into man pages.
 
 ## EXAMPLE
 
+    $ kramdown-man <man/myprog.1.md >man/myprog.1
+    $ man ./man/myprog.1
+
+### RUBY
+
     require 'kramdown'
     require 'kramdown/man'
 
