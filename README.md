@@ -15,8 +15,8 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
   * Supports normal and tagged paragraphs.
   * Supports bullet lists.
   * Supports multi-paragraph list items and blockquotes.
-  * Supports converting `[bash](man:bash(1))` and `[bash](man:bash.1)` links
-    into man page references.
+  * Supports converting `[foo-bar](foo-bar.1.md)` and `[bash](man:bash(1))`
+    links into `SEE ALSO` man page references.
 * Provides Rake task for converting `man/*.md` into man pages.
 * Uses the pure-Ruby [Kramdown][kramdown] markdown parser.
 * Supports [Ruby] 3.x, [JRuby], and [TruffleRuby].
