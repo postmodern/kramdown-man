@@ -587,17 +587,17 @@ module Kramdown
 
         li.children.each_with_index do |child,index|
           if child.type == :p
-            contents = convert_elements(child.children).chomp
+            contents = convert_elements(child.children)
 
             roff << if index == 0
                       <<~ROFF
                         .IP \\(bu 2
-                        #{contents}
+                        #{contents.chomp}
                       ROFF
                     else
                       <<~ROFF
                        .IP \\( 2
-                       #{contents}
+                       #{contents.chomp}
                       ROFF
                     end
           end
@@ -646,17 +646,17 @@ module Kramdown
 
         li.children.each_with_index do |child,index|
           if child.type == :p
-            contents = convert_elements(child.children).chomp
+            contents = convert_elements(child.children)
 
             roff << if index == 0
                       <<~ROFF
                         .IP \\n+[step#{@ol_index}]
-                        #{contents}
+                        #{contents.chomp}
                       ROFF
                     else
                       <<~ROFF
                         .IP \\n
-                        #{contents}
+                        #{contents.chomp}
                       ROFF
                     end
           end
@@ -752,8 +752,10 @@ module Kramdown
 
         dd.children.each_with_index do |child,child_index|
           if index == 0 && child_index == 0 && child.type == :p
+            contents = convert_elements(child.children)
+
             # omit the .PP macro for the first paragraph
-            roff << "#{convert_elements(child.children).chomp}\n"
+            roff << "#{contents.chomp}\n"
           else
             if (contents = convert_element(child))
               # indent all other following paragraphs or other elements
@@ -792,9 +794,11 @@ module Kramdown
       #   The roff output.
       #
       def convert_blockquote(blockquote)
-        <<~ROFF
+        contents = convert_elements(blockquote.children)
+
+        return <<~ROFF
           .RS
-          #{convert_elements(blockquote.children).chomp}
+          #{contents.chomp}
           .RE
         ROFF
       end
@@ -809,10 +813,12 @@ module Kramdown
       #   The roff output.
       #
       def convert_codeblock(codeblock)
-        <<~ROFF
+        contents = escape(codeblock.value)
+
+        return <<~ROFF
           .PP
           .EX
-          #{escape(codeblock.value).chomp}
+          #{contents.chomp}
           .EE
         ROFF
       end
