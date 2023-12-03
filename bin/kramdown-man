@@ -7,6 +7,9 @@ require 'kramdown'
 require 'kramdown/man'
 
 case ARGV[0]
+when '-V', '--version'
+  puts "kramdown-man #{Kramdown::Man::VERSION}"
+  exit
 when '-h', '--help'
   warn "usage: #{File.dirname($0)} <INPUT.md >OUTPUT"
   exit

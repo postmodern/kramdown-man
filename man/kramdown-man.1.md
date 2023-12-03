@@ -18,6 +18,9 @@ A [Kramdown][kramdown] plugin for converting Markdown files into man pages.
 
 ## OPTIONS
 
+`-V`, `--version`
+: Prints the `kramdown-man` version.
+
 `-h`, `--help`
 : Prints the usage for `kramdown-man`.
 
