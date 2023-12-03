@@ -935,12 +935,7 @@ module Kramdown
           end
         when 'man'
           if (match = path.match(/\A(?<page>[A-Za-z0-9_-]+)(?:\((?<section>\d[a-z]?)\)|\.(?<section>\d[a-z]?))\z/))
-            page    = escape(match[:page])
-            section = escape(match[:section])
-
-            <<~ROFF
-              .BR #{page} (#{section})
-            ROFF
+            man_page_link(match[:page],match[:section])
           else
             page = escape(path)
 
@@ -949,10 +944,38 @@ module Kramdown
             ROFF
           end
         else
+          if (match = href.match(/(?<page>[A-Za-z0-9_-]+)\.(?<section>\d[a-z]?)\.md\z/))
+            man_page_link(match[:page],match[:section])
+          else
+            <<~ROFF
+              #{text.chomp}
+              .UR #{escape(href)}
+              .UE
+            ROFF
+          end
+        end
+      end
+
+      #
+      # Outputs a man page link.
+      #
+      # @param [String] page
+      #   The man page name.
+      #
+      # @param [String, nil] section
+      #   The optional section of the man page.
+      #
+      # @return [String]
+      #   The roff output.
+      #
+      def man_page_link(page,section=nil)
+        if section
           <<~ROFF
-            #{text.chomp}
-            .UR #{escape(href)}
-            .UE
+            .BR #{escape(page)} (#{escape(section)})
+          ROFF
+        else
+          <<~ROFF
+            .BR #{escape(page)}
           ROFF
         end
       end

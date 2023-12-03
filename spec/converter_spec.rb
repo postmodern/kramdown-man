@@ -710,6 +710,22 @@ describe Kramdown::Man::Converter do
       )
     end
 
+    context "when the href is to another .1.md file" do
+      let(:man)      { 'foo-bar' }
+      let(:section)  { '1' }
+      let(:markdown) { "[#{man}](#{man}.#{section}.md)" }
+
+      let(:escaped_man) { man.gsub('-','\\-') }
+
+      it "should convert the link elements into '.BR page (section)'" do
+        expect(subject.convert_a(link)).to eq(
+          <<~ROFF
+            .BR #{escaped_man} (#{section})
+          ROFF
+        )
+      end
+    end
+
     context "when the href begins with mailto:" do
       let(:text)     { 'Bob'             }
       let(:email)    { 'bob@example.com' }
@@ -791,6 +807,32 @@ describe Kramdown::Man::Converter do
             ROFF
           )
         end
+      end
+    end
+  end
+
+  describe "#man_page_link" do
+    let(:man) { 'foo-bar' }
+
+    let(:escaped_man) { man.gsub('-','\\-') }
+
+    it "should convert the link elements into '.BR man'" do
+      expect(subject.man_page_link(man)).to eq(
+        <<~ROFF
+          .BR #{escaped_man}
+        ROFF
+      )
+    end
+
+    context "when a section argument is given" do
+      let(:section) { '1' }
+
+      it "should convert the link elements into '.BR page (section)'" do
+        expect(subject.man_page_link(man,section)).to eq(
+          <<~ROFF
+            .BR #{escaped_man} (#{section})
+          ROFF
+        )
       end
     end
   end
