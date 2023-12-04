@@ -148,10 +148,10 @@ Normal paragraph.
 Link to other man pages in a project:
 
 ```markdown
-[kramdown-man](kramdown-man.md)
+[kramdown-man](kramdown-man.1.md)
 ```
 
-[kramdown-man](https://github.com/postmodern/kramdown-man/blob/main/man/kramdown-man.md)
+[kramdown-man](https://github.com/postmodern/kramdown-man/blob/main/man/kramdown-man.1.md)
 
 Link to other system man page:
 

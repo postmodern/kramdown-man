@@ -109,9 +109,9 @@ Normal paragraph.
 
 Link to other man pages in a project:
 
-    [kramdown-man](kramdown-man.md)
+    [kramdown-man](kramdown-man.1.md)
 
-[kramdown-man](kramdown-man.md)
+[kramdown-man](kramdown-man.1.md)
 
 Link to other system man page:
 
