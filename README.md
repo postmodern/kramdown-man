@@ -6,7 +6,7 @@
 
 * [Homepage](https://github.com/postmodern/kramdown-man#readme)
 * [Issues](https://github.com/postmodern/kramdown-man/issues)
-* [Documentation](http://rubydoc.info/gems/kramdown-man/frames)
+* [Documentation](https://rubydoc.info/gems/kramdown-man/frames)
 
 ## Description
 
@@ -263,7 +263,7 @@ gem install kramdown-man
 
 ## Alternatives
 
-* [Redcarpet::Render::ManPage](http://rubydoc.info/gems/redcarpet/Redcarpet/Render/ManPage)
+* [Redcarpet::Render::ManPage](https://rubydoc.info/gems/redcarpet/Redcarpet/Render/ManPage)
 * [ronn](https://github.com/rtomayko/ronn#readme)
 * [md2man](https://github.com/sunaku/md2man#readme)
 
@@ -273,9 +273,9 @@ Copyright (c) 2013-2023 Hal Brodigan
 
 See {file:LICENSE.txt} for details.
 
-[kramdown]: http://kramdown.gettalong.org/
-[roff]: http://en.wikipedia.org/wiki/Roff
+[kramdown]: https://kramdown.gettalong.org/
+[roff]: https://en.wikipedia.org/wiki/Roff
 
-[Ruby]: http://www.ruby-lang.org/
-[JRuby]: http://jruby.org/
+[Ruby]: https://www.ruby-lang.org/
+[JRuby]: https://jruby.org/
 [TruffleRuby]: https://github.com/oracle/truffleruby#readme
