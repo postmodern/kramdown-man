@@ -145,7 +145,7 @@ module Kramdown
         OptionParser.new do |opts|
           opts.banner = "usage: #{PROGRAM_NAME} [options] MARKDOWN_FILE"
 
-          opts.on('-o','--output FILE','Write man page output to the file') do |file|
+          opts.on('-o','--output FILE','Write the man page output to the file') do |file|
             @output = file
           end
 

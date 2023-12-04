@@ -30,7 +30,7 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 
 ```
 usage: kramdown-man [options] MARKDOWN_FILE
-    -o, --output FILE                Write man page output to the file
+    -o, --output FILE                Write the man page output to the file
     -V, --version                    Print the version
     -h, --help                       Print the help output
 
