@@ -47,7 +47,7 @@
 
 #### CLI
 
-* Added a `-V`, `--version` flag.
+* Added the `-V`, `--version` option.
 
 ### 0.1.9 / 2023-12-01
 
