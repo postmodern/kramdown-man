@@ -68,12 +68,20 @@ File.write('man/kramdown-man.1',doc.to_man)
 system 'man', 'man/kramdown-man.1'
 ```
 
+### Rake Task
+
 Define a `man` and file tasks which render all `*.md` files within the
 `man/` directory:
 
 ```ruby
 require 'kramdown/man/task'
 Kramdown::Man::Task.new
+```
+
+Then you can generate man pages for all `*.md` in the `man/` directory:
+
+```shell
+$ rake man
 ```
 
 ## Syntax
