@@ -199,7 +199,7 @@ Email <bob@example.com>
 
 #### Definition Lists
 
-```mardkwon
+```markdown
 ex·am·ple
 : a thing characteristic of its kind or illustrating a general rule.
 
