@@ -271,7 +271,7 @@ Copyright (c) 2013-2023 Hal Brodigan
 See {file:LICENSE.txt} for details.
 
 [kramdown]: http://kramdown.gettalong.org/
-[roff]: https://en.wikipedia.org/wiki/Roff_(software)
+[roff]: http://en.wikipedia.org/wiki/Roff_(software)
 
 [Ruby]: http://www.ruby-lang.org/
 [JRuby]: http://jruby.org/
