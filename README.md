@@ -6,11 +6,12 @@
 
 * [Homepage](https://github.com/postmodern/kramdown-man#readme)
 * [Issues](https://github.com/postmodern/kramdown-man/issues)
-* [Documentation](http://rubydoc.info/gems/kramdown-man/frames)
+* [Documentation](https://rubydoc.info/gems/kramdown-man)
 
 ## Description
 
-A [Kramdown][kramdown] convert for converting Markdown files into man pages.
+Allows you to write man pages for commands in pure Markdown and convert them to
+roff using [Kramdown][kramdown].
 
 ## Features
 
@@ -22,7 +23,9 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
   * Supports multi-paragraph list items and blockquotes.
   * Supports converting `[foo-bar](foo-bar.1.md)` and `[bash](man:bash(1))`
     links into `SEE ALSO` man page references.
-* Provides Rake task for converting `man/*.md` into man pages.
+* Provides a handy `kramdown-man` command for converting or previewing
+  markdown man pages.
+* Provides a rake task for converting `man/*.md` into man pages.
 * Uses the pure-Ruby [Kramdown][kramdown] markdown parser.
 * Supports [Ruby] 3.x, [JRuby], and [TruffleRuby].
 
@@ -260,7 +263,7 @@ gem install kramdown-man
 
 ## Alternatives
 
-* [Redcarpet::Render::ManPage](http://rubydoc.info/gems/redcarpet/Redcarpet/Render/ManPage)
+* [Redcarpet::Render::ManPage](https://rubydoc.info/gems/redcarpet/Redcarpet/Render/ManPage)
 * [ronn](https://github.com/rtomayko/ronn#readme)
 * [md2man](https://github.com/sunaku/md2man#readme)
 
@@ -270,9 +273,9 @@ Copyright (c) 2013-2023 Hal Brodigan
 
 See {file:LICENSE.txt} for details.
 
-[kramdown]: http://kramdown.gettalong.org/
+[kramdown]: https://kramdown.gettalong.org/
 [roff]: https://en.wikipedia.org/wiki/Roff_(software)
 
-[Ruby]: http://www.ruby-lang.org/
-[JRuby]: http://jruby.org/
+[Ruby]: https://www.ruby-lang.org/
+[JRuby]: https://jruby.org/
 [TruffleRuby]: https://github.com/oracle/truffleruby#readme
