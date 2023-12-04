@@ -2,7 +2,7 @@
 
 ## SYNOPSIS
 
-`kramdown-man` [*options*] \<*INPUT* \>*OUTPUT*
+`kramdown-man` [*options*] *MARKDOWN_FILE*
 
 ## DESCRIPTION
 
@@ -10,13 +10,13 @@ A [Kramdown][kramdown] plugin for converting Markdown files into man pages.
 
 ## ARGUMENTS
 
-*INPUT*
+*MARKDOWN_FILE*
 : The input markdown file to convert.
 
-*OUTPUT*
-: The output file for the man page.
-
 ## OPTIONS
+
+`-o`, `--output` *OUTPUT*
+: The file to write the man page output to.
 
 `-V`, `--version`
 : Prints the `kramdown-man` version.
@@ -26,8 +26,13 @@ A [Kramdown][kramdown] plugin for converting Markdown files into man pages.
 
 ## EXAMPLE
 
-    $ kramdown-man <man/myprog.1.md >man/myprog.1
-    $ man ./man/myprog.1
+Render a man page from markdown:
+
+    $ kramdown-man -o man/myprogram.1 man/myprogram.1.md
+
+Preview the rendered man page:
+
+    $ kramdown-man man/myprogram.1.md
 
 ### RUBY
 

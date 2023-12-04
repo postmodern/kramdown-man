@@ -3,7 +3,7 @@
 .TH kramdown-man 1 "April 2013" kramdown-man "User Manuals"
 .SH SYNOPSIS
 .PP
-\fBkramdown-man\fR \[lB]\fIoptions\fP\[rB] <\fIINPUT\fP >\fIOUTPUT\fP
+\fBkramdown-man\fR \[lB]\fIoptions\fP\[rB] \fIMARKDOWN\[ru]FILE\fP
 .SH DESCRIPTION
 .PP
 A Kramdown
@@ -12,12 +12,12 @@ A Kramdown
 plugin for converting Markdown files into man pages\.
 .SH ARGUMENTS
 .TP
-\fIINPUT\fP
+\fIMARKDOWN\[ru]FILE\fP
 The input markdown file to convert\.
-.TP
-\fIOUTPUT\fP
-The output file for the man page\.
 .SH OPTIONS
+.TP
+\fB-o\fR, \fB--output\fR \fIOUTPUT\fP
+The file to write the man page output to\.
 .TP
 \fB-V\fR, \fB--version\fR
 Prints the \fBkramdown-man\fR version\.
@@ -26,10 +26,19 @@ Prints the \fBkramdown-man\fR version\.
 Prints the usage for \fBkramdown-man\fR\.
 .SH EXAMPLE
 .PP
+Render a man page from markdown:
+.PP
 .RS 4
 .EX
-\[Do] kramdown\-man <man\[sl]myprog\.1\.md >man\[sl]myprog\.1
-\[Do] man \.\[sl]man\[sl]myprog\.1
+\[Do] kramdown\-man \-o man\[sl]myprogram\.1 man\[sl]myprogram\.1\.md
+.EE
+.RE
+.PP
+Preview the rendered man page:
+.PP
+.RS 4
+.EX
+\[Do] kramdown\-man man\[sl]myprogram\.1\.md
 .EE
 .RE
 .SS RUBY
