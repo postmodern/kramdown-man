@@ -10,7 +10,8 @@
 
 ## Description
 
-A [Kramdown][kramdown] convert for converting Markdown files into man pages.
+Allows you to write man pages for commands in pure Markdown and convert them to
+roff using [Kramdown][kramdown].
 
 ## Features
 
