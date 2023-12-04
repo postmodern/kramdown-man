@@ -49,6 +49,9 @@
 
 * Added the `-o`, `--output FILE` option.
 * Added the `-V`, `--version` option.
+* Display the `kramdown-man.1` man page when `--help` is given, if STDOUT is
+  a TTY. If STDOUT is not a TTY, then the usual `--help` information will be
+  printed.
 
 ### 0.1.9 / 2023-12-01
 
