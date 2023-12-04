@@ -23,7 +23,7 @@ roff using [Kramdown][kramdown].
   * Supports multi-paragraph list items and blockquotes.
   * Supports converting `[foo-bar](foo-bar.1.md)` and `[bash](man:bash(1))`
     links into `SEE ALSO` man page references.
-* Provides Rake task for converting `man/*.md` into man pages.
+* Provides a rake task for converting `man/*.md` into man pages.
 * Uses the pure-Ruby [Kramdown][kramdown] markdown parser.
 * Supports [Ruby] 3.x, [JRuby], and [TruffleRuby].
 
