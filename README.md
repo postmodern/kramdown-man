@@ -6,7 +6,7 @@
 
 * [Homepage](https://github.com/postmodern/kramdown-man#readme)
 * [Issues](https://github.com/postmodern/kramdown-man/issues)
-* [Documentation](https://rubydoc.info/gems/kramdown-man/frames)
+* [Documentation](https://rubydoc.info/gems/kramdown-man)
 
 ## Description
 
