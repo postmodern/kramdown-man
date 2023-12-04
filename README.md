@@ -1,5 +1,9 @@
 # kramdown-man
 
+[![CI](https://github.com/postmodern/kramdown-man/actions/workflows/ruby.yml/badge.svg)](https://github.com/postmodern/kramdown-man/actions/workflows/ruby.yml)
+[![Code Climate](https://codeclimate.com/github/postmodern/kramdown-man.svg)](https://codeclimate.com/github/postmodern/kramdown-man)
+[![Gem Version](https://badge.fury.io/rb/kramdown-man.svg)](https://badge.fury.io/rb/kramdown-man)
+
 * [Homepage](https://github.com/postmodern/kramdown-man#readme)
 * [Issues](https://github.com/postmodern/kramdown-man/issues)
 * [Documentation](http://rubydoc.info/gems/kramdown-man/frames)
