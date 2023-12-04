@@ -47,6 +47,7 @@
 
 #### CLI
 
+* Added the `-o`, `--output FILE` option.
 * Added the `-V`, `--version` option.
 
 ### 0.1.9 / 2023-12-01
