@@ -24,11 +24,28 @@ A [Kramdown][kramdown] convert for converting Markdown files into man pages.
 
 ## Synopsis
 
+```
+usage: kramdown-man [options] MARKDOWN_FILE
+    -o, --output FILE                Write man page output to the file
+    -V, --version                    Print the version
+    -h, --help                       Print the help output
+
+Examples:
+    kramdown-man -o man/myprogram.1 man/myprogram.1.md
+    kramdown-man man/myprogram.1.md
+
+```
+
 Render a man page from markdown:
 
 ```shell
-kramdown-man <man/myprog.1.md >man/myprog.1
-man ./man/myprog.1
+kramdown-man -o man/myprogram.1 man/myprogram.1.md
+```
+
+Preview the rendered man page:
+
+```shell
+kramdown-man man/myprogram.1.md
 ```
 
 ## Examples
