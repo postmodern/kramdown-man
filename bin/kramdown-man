@@ -3,24 +3,5 @@
 lib_dir = File.expand_path('../lib',__dir__)
 $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 
-require 'kramdown'
-require 'kramdown/man'
-
-case ARGV[0]
-when '-V', '--version'
-  puts "kramdown-man #{Kramdown::Man::VERSION}"
-  exit
-when '-h', '--help'
-  if $stdout.tty?
-    man_page = File.join(__dir__,'..','man','kramdown-man.1')
-
-    system('man',man_page)
-  else
-    puts "usage: #{File.basename($0)} <INPUT.md >OUTPUT"
-  end
-
-  exit
-end
-
-doc = Kramdown::Document.new(ARGF.read)
-puts doc.to_man
+require 'kramdown/man/cli'
+exit Kramdown::Man::CLI.run(ARGV)
