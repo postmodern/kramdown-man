@@ -161,7 +161,7 @@ Link to other system man page:
 
 [bash](man:bash(1))
 
-**Note:** only works on [firefox].
+**Note:** only works on [firefox] on Linux.
 
 [firefox]: https://www.mozilla.org/en-US/firefox/new/
 
