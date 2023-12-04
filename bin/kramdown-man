@@ -11,7 +11,14 @@ when '-V', '--version'
   puts "kramdown-man #{Kramdown::Man::VERSION}"
   exit
 when '-h', '--help'
-  warn "usage: #{File.basename($0)} <INPUT.md >OUTPUT"
+  if $stdout.tty?
+    man_page = File.join(__dir__,'..','man','kramdown-man.1')
+
+    system('man',man_page)
+  else
+    puts "usage: #{File.basename($0)} <INPUT.md >OUTPUT"
+  end
+
   exit
 end
 
