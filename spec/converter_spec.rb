@@ -432,6 +432,39 @@ describe Kramdown::Man::Converter do
         )
       end
     end
+
+    context "when there are multiple definitions for a term" do
+      let(:term)        { "foo" }
+      let(:definition1) { "Foo bar." }
+      let(:definition2) { "Baz qux." }
+      let(:markdown) do
+        <<~MARKDOWN
+          #{term}
+          : #{definition1}
+
+          : #{definition2}
+        MARKDOWN
+      end
+
+      let(:dl) { doc.root.children[0] }
+
+      let(:escaped_definition1) { definition1.gsub('.',"\\.") }
+      let(:escaped_definition2) { definition2.gsub('.',"\\.") }
+
+      it "must convert the following p children into '.RS\\n.PP\\n...\\n.RE'" do
+        expect(subject.convert_dl(dl)).to eq(
+          <<~ROFF
+              .TP
+              #{term}
+              #{escaped_definition1}
+              .RS
+              .PP
+              #{escaped_definition2}
+              .RE
+          ROFF
+        )
+      end
+    end
   end
 
   describe "#convert_dt" do
@@ -495,11 +528,8 @@ describe Kramdown::Man::Converter do
       )
     end
 
-    context "when the dd element is the first dd element following a dt element" do
+    context "when the given index: is 0" do
       context "and when the dd element contains multiple p children" do
-        let(:word1)       { "foo" }
-        let(:word2)       { "bar" }
-        let(:word3)       { "baz" }
         let(:word4)       { "qux" }
         let(:definition1) { "#{word1} #{word2}" }
         let(:definition2) { "`#{word3}` *#{word4}*" }
@@ -524,39 +554,33 @@ describe Kramdown::Man::Converter do
           )
         end
       end
-
-      context "and when the dd element contains multiple p children" do
-        let(:word1)       { "foo" }
-        let(:word2)       { "bar" }
-        let(:word3)       { "baz" }
-        let(:word4)       { "qux" }
-        let(:definition1) { "#{word1} #{word2}" }
-        let(:definition2) { "`#{word3}` *#{word4}*" }
-        let(:markdown) do
-          <<~MARKDOWN
-            #{term}
-            : #{definition1}
-
-            : #{definition2}
-          MARKDOWN
-        end
-
-        let(:dd) { doc.root.children[0].children[2] }
-
-        it "must convert the following p children into '.RS\\n.PP\\n...\\n.RE'" do
-          expect(subject.convert_dd(dd, index: 1)).to eq(
-            <<~ROFF
-              .RS
-              .PP
-              \\fB#{word3}\\fR \\fI#{word4}\\fP
-              .RE
-            ROFF
-          )
-        end
-      end
     end
 
-    context "when the dd element follows a previous dd element" do
+    context "when the given index: is greater than 0" do
+      let(:word4)       { "qux" }
+      let(:definition1) { "#{word1} #{word2}" }
+      let(:definition2) { "`#{word3}` *#{word4}*" }
+      let(:markdown) do
+        <<~MARKDOWN
+          #{term}
+          : #{definition1}
+
+          : #{definition2}
+        MARKDOWN
+      end
+
+      let(:dd) { doc.root.children[0].children[2] }
+
+      it "must convert the child elements into '.RS\\n...\\n.RE'" do
+        expect(subject.convert_dd(dd, index: 1)).to eq(
+          <<~ROFF
+            .RS
+            .PP
+            \\fB#{word3}\\fR \\fI#{word4}\\fP
+            .RE
+          ROFF
+        )
+      end
     end
   end
 
