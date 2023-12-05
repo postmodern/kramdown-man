@@ -6,7 +6,7 @@
 kramdown\-man \- generates man pages from markdown files
 .SH SYNOPSIS
 .PP
-\fBkramdown-man\fR \[lB]\fIoptions\fP\[rB] \fIMARKDOWN\[ru]FILE\fP
+\fBkramdown\-man\fR \[lB]\fIoptions\fP\[rB] \fIMARKDOWN\[ru]FILE\fP
 .SH DESCRIPTION
 .PP
 A Kramdown
@@ -19,14 +19,14 @@ plugin for converting Markdown files into man pages\.
 The input markdown file to convert\.
 .SH OPTIONS
 .TP
-\fB-o\fR, \fB--output\fR \fIOUTPUT\fP
+\fB\-o\fR, \fB\-\-output\fR \fIOUTPUT\fP
 The file to write the man page output to\.
 .TP
-\fB-V\fR, \fB--version\fR
-Prints the \fBkramdown-man\fR version\.
+\fB\-V\fR, \fB\-\-version\fR
+Prints the \fBkramdown\-man\fR version\.
 .TP
-\fB-h\fR, \fB--help\fR
-Prints the usage for \fBkramdown-man\fR\.
+\fB\-h\fR, \fB\-\-help\fR
+Prints the usage for \fBkramdown\-man\fR\.
 .SH EXAMPLE
 .PP
 Render a man page from markdown:
@@ -58,8 +58,8 @@ system \(aqman\(aq, \(aqman\[sl]kramdown\-man\.1\(aq
 .RE
 .SS RAKE TASK
 .PP
-Define a \fBman\fR and files tasks which render all \fB*.md\fR files within the
-\fBman/\fR directory:
+Define a \fBman\fR and files tasks which render all \fB*\.md\fR files within the
+\fBman\[sl]\fR directory:
 .PP
 .RS 4
 .EX
@@ -112,7 +112,7 @@ Normal paragraph\.
 .EE
 .RE
 .PP
-\fBcommand\fR \[lB]\fB--foo\fR\[rB] \fBFILE\fP
+\fBcommand\fR \[lB]\fB\-\-foo\fR\[rB] \fBFILE\fP
 .SS Argument Definitions
 .PP
 .RS 4
@@ -133,7 +133,7 @@ Description here\.
 .EE
 .RE
 .TP
-\fB-o\fR, \fB--option\fR \fIVALUE\fP
+\fB\-o\fR, \fB\-\-option\fR \fIVALUE\fP
 Description here\.
 .SS Links
 .PP

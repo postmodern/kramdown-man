@@ -715,7 +715,7 @@ describe Kramdown::Man::Converter do
     let(:codespan) { doc.root.children[0].children[0] }
 
     it "should convert codespan elements into '\\fBcode\\fR'" do
-      expect(subject.convert_codespan(codespan)).to eq("\\fB#{code}\\fR")
+      expect(subject.convert_codespan(codespan)).to eq("\\fB#{escaped_code}\\fR")
     end
 
     context "when given a ``` codespan" do

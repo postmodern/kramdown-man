@@ -915,7 +915,7 @@ module Kramdown
             .RE
           ROFF
         else
-          "\\fB#{codespan.value}\\fR"
+          "\\fB#{escape(codespan.value)}\\fR"
         end
       end
 
