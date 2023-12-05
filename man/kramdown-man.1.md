@@ -1,5 +1,9 @@
 # kramdown-man 1 "April 2013" kramdown-man "User Manuals"
 
+## NAME
+
+kramdown-man - generates man pages from markdown files
+
 ## SYNOPSIS
 
 `kramdown-man` [*options*] *MARKDOWN_FILE*
