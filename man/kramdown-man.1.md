@@ -179,8 +179,6 @@ ex·am·ple
 
 ### Code Blocks
 
-    Source code:
-
         #include <stdio.h>
 
         int main()
@@ -189,8 +187,6 @@ ex·am·ple
             return 0;
         }
 
-Source code:
-
     #include <stdio.h>
 
     int main()
@@ -198,6 +194,16 @@ Source code:
 	    printf("hello world\n");
 	    return 0;
     }
+
+#### Code Fences
+
+    ```
+    puts "hello world"
+    ```
+
+```
+puts "hello world"
+```
 
 ## AUTHOR
 

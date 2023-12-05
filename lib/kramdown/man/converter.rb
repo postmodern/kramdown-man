@@ -901,7 +901,22 @@ module Kramdown
       #   The roff output.
       #
       def convert_codespan(codespan)
-        "\\fB#{codespan.value}\\fR"
+        # ``` code fence blocks are parsed as kd:codespans
+        if codespan.options[:codespan_delimiter] == '```'
+          # ignore the first and last newlines
+          contents = escape(codespan.value[1..-2])
+
+          <<~ROFF
+            .PP
+            .RS 4
+            .EX
+            #{contents}
+            .EE
+            .RE
+          ROFF
+        else
+          "\\fB#{codespan.value}\\fR"
+        end
       end
 
       #

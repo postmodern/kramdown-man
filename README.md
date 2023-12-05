@@ -237,8 +237,6 @@ ex·am·ple
 ### Code Blocks
 
 ```markdown
-Source code:
-
     #include <stdio.h>
 
     int main()
@@ -246,10 +244,7 @@ Source code:
         printf("hello world\n");
         return 0;
     }
-
 ```
-
-Source code:
 
     #include <stdio.h>
 
@@ -258,6 +253,16 @@ Source code:
 	    printf("hello world\n");
 	    return 0;
     }
+
+#### Code Fences
+
+    ```
+    puts "hello world"
+    ```
+
+```
+puts "hello world"
+```
 
 ## Requirements
 

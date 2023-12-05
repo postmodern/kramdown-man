@@ -708,13 +708,37 @@ describe Kramdown::Man::Converter do
   end
 
   describe "#convert_codespan" do
-    let(:code)     { "puts 'hello world'" }
-    let(:markdown) { "`#{code}`" }
+    let(:code)         { "puts 'hello world'" }
+    let(:escaped_code) { 'puts \(aqhello world\(aq' }
+    let(:markdown)     { "`#{code}`" }
 
     let(:codespan) { doc.root.children[0].children[0] }
 
     it "should convert codespan elements into '\\fBcode\\fR'" do
       expect(subject.convert_codespan(codespan)).to eq("\\fB#{code}\\fR")
+    end
+
+    context "when given a ``` codespan" do
+      let(:markdown) do
+        <<~MARKDOWN
+        ```
+        #{code}
+        ```
+        MARKDOWN
+      end
+
+      it "must treat the codespan element as a codeblock" do
+        expect(subject.convert_codespan(codespan)).to eq(
+          <<~ROFF
+            .PP
+            .RS 4
+            .EX
+            #{escaped_code}
+            .EE
+            .RE
+          ROFF
+        )
+      end
     end
   end
 
