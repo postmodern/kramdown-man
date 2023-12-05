@@ -1,3 +1,14 @@
+### 1.0.1 / 2023-12-05
+
+* Treat markdown code-fence `kd:codespan`s the same as `kd:codeblock`s.
+
+        ```
+        puts "hello world"
+        ```
+  ```
+  puts "hello world"
+  ```
+
 ### 1.0.0 / 2023-12-03
 
 * Ignore `kd:blank` elements to reduce size of generated man pages.
