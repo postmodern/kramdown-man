@@ -20,4 +20,4 @@ dependencies:
   kramdown: ~> 2.0
 
 development_dependencies:
-  bundler: ~> 2.0
+  bundler: ">= 2.0.0"
